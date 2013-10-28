@@ -32,8 +32,14 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-# Including the D3 Visualization Library
+# D3 Visualization Library
 gem "d3-rails"
+
+# Charting library with native crossfilter support
+gem 'dcjs-rails'
+
+# Crossfilter for coordinated views
+gem 'crossfilter-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

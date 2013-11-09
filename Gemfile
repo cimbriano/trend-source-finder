@@ -44,6 +44,8 @@ gem 'dcjs-rails'
 # Crossfilter for coordinated views
 gem 'crossfilter-rails'
 
+gem 'annotate', group: :development
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

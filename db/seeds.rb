@@ -5,5 +5,5 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-Tweet.create!([ {tweet_id: 12345, text: "Hello World, here is my tweet"},
-                {tweet_id: 78910, text: "Anoter tweet from me" } ])
+Tweet.create!([ { id: 12345, text: "Hello World, here is my tweet" },
+                { id: 78910, text: "Anoter tweet from me" } ])

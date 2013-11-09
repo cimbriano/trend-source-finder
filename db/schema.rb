@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20131108152723) do
 
   create_table "tweets", force: true do |t|
     t.string   "text"
-    t.integer  "tweet_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

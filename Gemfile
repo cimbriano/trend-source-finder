@@ -44,6 +44,12 @@ gem 'dcjs-rails'
 # Crossfilter for coordinated views
 gem 'crossfilter-rails'
 
+group :test, :development do
+  gem 'rspec-rails', '~> 2.14.0'
+  gem 'shoulda'
+  gem 'factory_girl_rails'
+end
+
 gem 'annotate', group: :development
 
 # Use ActiveModel has_secure_password

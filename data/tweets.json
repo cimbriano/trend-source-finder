@@ -1,0 +1,1448 @@
+{
+  "396698065504972800": {
+    "created_at": "Sat Nov 02 17:59:23 +0000 2013",
+    "id": 396698065504972800,
+    "id_str": "396698065504972800",
+    "text": "RT @TheDemocrats: 25,000 Washingtonians have already signed up for #Obamacare. WATCH: http://t.co/qaPz81wTwF #ThisIsObamacare",
+    "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 75200889,
+      "id_str": "75200889",
+      "name": "lori santos",
+      "screen_name": "soshaljustic",
+      "location": "",
+      "url": null,
+      "description": null,
+      "protected": false,
+      "followers_count": 12,
+      "friends_count": 84,
+      "listed_count": 1,
+      "created_at": "Fri Sep 18 04:38:19 +0000 2009",
+      "favourites_count": 1,
+      "utc_offset": null,
+      "time_zone": null,
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 677,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "profile_background_color": "C0DEED",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile": false,
+      "profile_image_url": "http://abs.twimg.com/sticky/default_profile_images/default_profile_1_normal.png",
+      "profile_image_url_https": "https://abs.twimg.com/sticky/default_profile_images/default_profile_1_normal.png",
+      "profile_link_color": "0084B4",
+      "profile_sidebar_border_color": "C0DEED",
+      "profile_sidebar_fill_color": "DDEEF6",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "default_profile": true,
+      "default_profile_image": true,
+      "following": null,
+      "follow_request_sent": null,
+      "notifications": null
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweeted_status": {
+      "created_at": "Thu Oct 24 17:18:58 +0000 2013",
+      "id": 393426402273656832,
+      "id_str": "393426402273656832",
+      "text": "25,000 Washingtonians have already signed up for #Obamacare. WATCH: http://t.co/qaPz81wTwF #ThisIsObamacare",
+      "source": "<a href=\"http://www.tweetdeck.com\" rel=\"nofollow\">TweetDeck</a>",
+      "truncated": false,
+      "in_reply_to_status_id": null,
+      "in_reply_to_status_id_str": null,
+      "in_reply_to_user_id": null,
+      "in_reply_to_user_id_str": null,
+      "in_reply_to_screen_name": null,
+      "user": {
+        "id": 14377605,
+        "id_str": "14377605",
+        "name": "The Democrats",
+        "screen_name": "TheDemocrats",
+        "location": "Washington, D.C.",
+        "url": "http://www.democrats.org/",
+        "description": "This is the official Twitter account of the Democratic Party. Follow our tweets to get the latest info on Democratic news, issues, and events.",
+        "protected": false,
+        "followers_count": 264376,
+        "friends_count": 1060,
+        "listed_count": 5767,
+        "created_at": "Sun Apr 13 20:23:13 +0000 2008",
+        "favourites_count": 2,
+        "utc_offset": -14400,
+        "time_zone": "Eastern Time (US & Canada)",
+        "geo_enabled": false,
+        "verified": true,
+        "statuses_count": 10294,
+        "lang": "en",
+        "contributors_enabled": false,
+        "is_translator": false,
+        "profile_background_color": "00AEF3",
+        "profile_background_image_url": "http://a0.twimg.com/profile_background_images/172797255/democrats-twitter-comp.jpg",
+        "profile_background_image_url_https": "https://si0.twimg.com/profile_background_images/172797255/democrats-twitter-comp.jpg",
+        "profile_background_tile": false,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/378800000637739446/bc89b52707f07633b950a8e78427a23f_normal.png",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/378800000637739446/bc89b52707f07633b950a8e78427a23f_normal.png",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/14377605/1349458487",
+        "profile_link_color": "016FD0",
+        "profile_sidebar_border_color": "A6A6A6",
+        "profile_sidebar_fill_color": "EFF0F1",
+        "profile_text_color": "333333",
+        "profile_use_background_image": true,
+        "default_profile": false,
+        "default_profile_image": false,
+        "following": null,
+        "follow_request_sent": null,
+        "notifications": null
+      },
+      "geo": null,
+      "coordinates": null,
+      "place": null,
+      "contributors": null,
+      "retweet_count": 31,
+      "favorite_count": 10,
+      "entities": {
+        "hashtags": [
+          {
+            "text": "Obamacare",
+            "indices": [
+              49,
+              59
+            ]
+          },
+          {
+            "text": "ThisIsObamacare",
+            "indices": [
+              91,
+              107
+            ]
+          }
+        ],
+        "symbols": [
+
+        ],
+        "urls": [
+          {
+            "url": "http://t.co/qaPz81wTwF",
+            "expanded_url": "http://youtu.be/mcLi44Wdnm8",
+            "display_url": "youtu.be/mcLi44Wdnm8",
+            "indices": [
+              68,
+              90
+            ]
+          }
+        ],
+        "user_mentions": [
+
+        ]
+      },
+      "favorited": false,
+      "retweeted": false,
+      "possibly_sensitive": false,
+      "lang": "en"
+    },
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [
+        {
+          "text": "Obamacare",
+          "indices": [
+            67,
+            77
+          ]
+        },
+        {
+          "text": "ThisIsObamacare",
+          "indices": [
+            109,
+            125
+          ]
+        }
+      ],
+      "symbols": [
+
+      ],
+      "urls": [
+        {
+          "url": "http://t.co/qaPz81wTwF",
+          "expanded_url": "http://youtu.be/mcLi44Wdnm8",
+          "display_url": "youtu.be/mcLi44Wdnm8",
+          "indices": [
+            86,
+            108
+          ]
+        }
+      ],
+      "user_mentions": [
+        {
+          "screen_name": "TheDemocrats",
+          "name": "The Democrats",
+          "id": 14377605,
+          "id_str": "14377605",
+          "indices": [
+            3,
+            16
+          ]
+        }
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "filter_level": "medium",
+    "lang": "en"
+  },
+  "396698068952698880": {
+    "created_at": "Sat Nov 02 17:59:24 +0000 2013",
+    "id": 396698068952698880,
+    "id_str": "396698068952698880",
+    "text": "RT @TheWeek: ObamaCare, son of RomneyCare. http://t.co/jmZywumdq9",
+    "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 237565446,
+      "id_str": "237565446",
+      "name": "Smiley ",
+      "screen_name": "smileyt22",
+      "location": "Missouri",
+      "url": null,
+      "description": "St.Louis Cardinals,Rams, and Blues fan! Fight the Good Fight Everybody!",
+      "protected": false,
+      "followers_count": 2640,
+      "friends_count": 2726,
+      "listed_count": 55,
+      "created_at": "Thu Jan 13 03:35:50 +0000 2011",
+      "favourites_count": 850,
+      "utc_offset": -18000,
+      "time_zone": "Central Time (US & Canada)",
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 82027,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "profile_background_color": "131516",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme14/bg.gif",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme14/bg.gif",
+      "profile_background_tile": true,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/378800000672754905/41248fd3105fed72248fdd3779afc7f8_normal.jpeg",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/378800000672754905/41248fd3105fed72248fdd3779afc7f8_normal.jpeg",
+      "profile_banner_url": "https://pbs.twimg.com/profile_banners/237565446/1365864359",
+      "profile_link_color": "009999",
+      "profile_sidebar_border_color": "EEEEEE",
+      "profile_sidebar_fill_color": "EFEFEF",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "default_profile": false,
+      "default_profile_image": false,
+      "following": null,
+      "follow_request_sent": null,
+      "notifications": null
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweeted_status": {
+      "created_at": "Sat Nov 02 17:52:00 +0000 2013",
+      "id": 396696206438440960,
+      "id_str": "396696206438440960",
+      "text": "ObamaCare, son of RomneyCare. http://t.co/jmZywumdq9",
+      "source": "<a href=\"http://sproutsocial.com\" rel=\"nofollow\">Sprout Social</a>",
+      "truncated": false,
+      "in_reply_to_status_id": null,
+      "in_reply_to_status_id_str": null,
+      "in_reply_to_user_id": null,
+      "in_reply_to_user_id_str": null,
+      "in_reply_to_screen_name": null,
+      "user": {
+        "id": 16439471,
+        "id_str": "16439471",
+        "name": "The Week",
+        "screen_name": "TheWeek",
+        "location": "New York, NY",
+        "url": "http://www.theweek.com",
+        "description": "Official Twitter account for The Week Magazine. Tweets by @chrisgayomali.",
+        "protected": false,
+        "followers_count": 81483,
+        "friends_count": 628,
+        "listed_count": 2821,
+        "created_at": "Wed Sep 24 19:33:22 +0000 2008",
+        "favourites_count": 1388,
+        "utc_offset": -14400,
+        "time_zone": "Eastern Time (US & Canada)",
+        "geo_enabled": false,
+        "verified": true,
+        "statuses_count": 27428,
+        "lang": "en",
+        "contributors_enabled": false,
+        "is_translator": false,
+        "profile_background_color": "FFFFFF",
+        "profile_background_image_url": "http://a0.twimg.com/profile_background_images/94258953/twitter_skin.gif",
+        "profile_background_image_url_https": "https://si0.twimg.com/profile_background_images/94258953/twitter_skin.gif",
+        "profile_background_tile": false,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/2415551941/7xovi0piho9p41pq81zr_normal.jpeg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/2415551941/7xovi0piho9p41pq81zr_normal.jpeg",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/16439471/1381355060",
+        "profile_link_color": "0084B4",
+        "profile_sidebar_border_color": "000000",
+        "profile_sidebar_fill_color": "EEEEEE",
+        "profile_text_color": "333333",
+        "profile_use_background_image": false,
+        "default_profile": false,
+        "default_profile_image": false,
+        "following": null,
+        "follow_request_sent": null,
+        "notifications": null
+      },
+      "geo": null,
+      "coordinates": null,
+      "place": null,
+      "contributors": null,
+      "retweet_count": 2,
+      "favorite_count": 0,
+      "entities": {
+        "hashtags": [
+
+        ],
+        "symbols": [
+
+        ],
+        "urls": [
+          {
+            "url": "http://t.co/jmZywumdq9",
+            "expanded_url": "http://bit.ly/19n4buX",
+            "display_url": "bit.ly/19n4buX",
+            "indices": [
+              30,
+              52
+            ]
+          }
+        ],
+        "user_mentions": [
+
+        ]
+      },
+      "favorited": false,
+      "retweeted": false,
+      "possibly_sensitive": false,
+      "lang": "en"
+    },
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [
+
+      ],
+      "symbols": [
+
+      ],
+      "urls": [
+        {
+          "url": "http://t.co/jmZywumdq9",
+          "expanded_url": "http://bit.ly/19n4buX",
+          "display_url": "bit.ly/19n4buX",
+          "indices": [
+            43,
+            65
+          ]
+        }
+      ],
+      "user_mentions": [
+        {
+          "screen_name": "TheWeek",
+          "name": "The Week",
+          "id": 16439471,
+          "id_str": "16439471",
+          "indices": [
+            3,
+            11
+          ]
+        }
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "filter_level": "medium",
+    "lang": "en"
+  },
+  "396698072282963968": {
+    "created_at": "Sat Nov 02 17:59:25 +0000 2013",
+    "id": 396698072282963968,
+    "id_str": "396698072282963968",
+    "text": "@JayCostTWS How could he? He was utterly unmanned when talking about Obamacare b/c of his MA debacle he dressed in pretty clothes.",
+    "source": "<a href=\"http://www.tweetdeck.com\" rel=\"nofollow\">TweetDeck</a>",
+    "truncated": false,
+    "in_reply_to_status_id": 396697485474660352,
+    "in_reply_to_status_id_str": "396697485474660352",
+    "in_reply_to_user_id": 550708707,
+    "in_reply_to_user_id_str": "550708707",
+    "in_reply_to_screen_name": "JayCostTWS",
+    "user": {
+      "id": 14728168,
+      "id_str": "14728168",
+      "name": "Melissa Clouthier",
+      "screen_name": "MelissaTweets",
+      "location": "Houston, Texas",
+      "url": "http://melissablogs.com",
+      "description": "Digital media. Classical liberal aka conservative. Blogger. Doctor. Sci-Fi/Fantasy geek. American. Texan. Christian. Mom.",
+      "protected": false,
+      "followers_count": 39138,
+      "friends_count": 5041,
+      "listed_count": 2626,
+      "created_at": "Sat May 10 21:38:43 +0000 2008",
+      "favourites_count": 58,
+      "utc_offset": -18000,
+      "time_zone": "Central Time (US & Canada)",
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 192836,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "profile_background_color": "000000",
+      "profile_background_image_url": "http://a0.twimg.com/profile_background_images/378800000082441628/45f40cf471233b896ca286b6a7c3a264.jpeg",
+      "profile_background_image_url_https": "https://si0.twimg.com/profile_background_images/378800000082441628/45f40cf471233b896ca286b6a7c3a264.jpeg",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/378800000410295990/6756294949d8eebeb9c16385d7a618d4_normal.jpeg",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/378800000410295990/6756294949d8eebeb9c16385d7a618d4_normal.jpeg",
+      "profile_banner_url": "https://pbs.twimg.com/profile_banners/14728168/1380146921",
+      "profile_link_color": "9A5718",
+      "profile_sidebar_border_color": "FFFFFF",
+      "profile_sidebar_fill_color": "0C0500",
+      "profile_text_color": "5A3B21",
+      "profile_use_background_image": true,
+      "default_profile": false,
+      "default_profile_image": false,
+      "following": null,
+      "follow_request_sent": null,
+      "notifications": null
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [
+
+      ],
+      "symbols": [
+
+      ],
+      "urls": [
+
+      ],
+      "user_mentions": [
+        {
+          "screen_name": "JayCostTWS",
+          "name": "Jay Cost",
+          "id": 550708707,
+          "id_str": "550708707",
+          "indices": [
+            0,
+            11
+          ]
+        }
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "filter_level": "medium",
+    "lang": "en"
+  },
+  "396698072954052608": {
+    "created_at": "Sat Nov 02 17:59:25 +0000 2013",
+    "id": 396698072954052608,
+    "id_str": "396698072954052608",
+    "text": "#tcot Obamacare website will be down for 'extended maintenance' overnight: Problematic healthcare.go... http://t.co/KU4NR30DXG #teaparty",
+    "source": "<a href=\"http://twitterfeed.com\" rel=\"nofollow\">twitterfeed</a>",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 30096408,
+      "id_str": "30096408",
+      "name": "† Lex B †",
+      "screen_name": "Mr_Lexington",
+      "location": "New York City",
+      "url": "http://www.usdebtclock.org/",
+      "description": "Conservative Voice-Actor: After 9/11, I made the decision to be informed about what goes on in the greatest country in the world. God Bless America #TCOT",
+      "protected": false,
+      "followers_count": 5381,
+      "friends_count": 5122,
+      "listed_count": 171,
+      "created_at": "Thu Apr 09 23:28:48 +0000 2009",
+      "favourites_count": 3,
+      "utc_offset": -14400,
+      "time_zone": "Eastern Time (US & Canada)",
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 96898,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "profile_background_color": "373638",
+      "profile_background_image_url": "http://a0.twimg.com/profile_background_images/75937349/mqstatuenyc.br.jpg",
+      "profile_background_image_url_https": "https://si0.twimg.com/profile_background_images/75937349/mqstatuenyc.br.jpg",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/378800000494977449/4ebe0dd6aca2465b5b598a05bf0bfc74_normal.jpeg",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/378800000494977449/4ebe0dd6aca2465b5b598a05bf0bfc74_normal.jpeg",
+      "profile_banner_url": "https://pbs.twimg.com/profile_banners/30096408/1348353246",
+      "profile_link_color": "850808",
+      "profile_sidebar_border_color": "051640",
+      "profile_sidebar_fill_color": "9E9E9E",
+      "profile_text_color": "02010D",
+      "profile_use_background_image": true,
+      "default_profile": false,
+      "default_profile_image": false,
+      "following": null,
+      "follow_request_sent": null,
+      "notifications": null
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [
+        {
+          "text": "tcot",
+          "indices": [
+            0,
+            5
+          ]
+        },
+        {
+          "text": "teaparty",
+          "indices": [
+            127,
+            136
+          ]
+        }
+      ],
+      "symbols": [
+
+      ],
+      "urls": [
+        {
+          "url": "http://t.co/KU4NR30DXG",
+          "expanded_url": "http://bit.ly/16VZHgk",
+          "display_url": "bit.ly/16VZHgk",
+          "indices": [
+            104,
+            126
+          ]
+        }
+      ],
+      "user_mentions": [
+
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "filter_level": "medium",
+    "lang": "en"
+  },
+  "396698075772645376": {
+    "created_at": "Sat Nov 02 17:59:26 +0000 2013",
+    "id": 396698075772645376,
+    "id_str": "396698075772645376",
+    "text": "@TheMorningSpew What happens when a theological divide occurs that somehow correlates to ObamaCare plans? Spend zillions. #OnePlanFitsAll",
+    "source": "web",
+    "truncated": false,
+    "in_reply_to_status_id": 396696512689737728,
+    "in_reply_to_status_id_str": "396696512689737728",
+    "in_reply_to_user_id": 369249722,
+    "in_reply_to_user_id_str": "369249722",
+    "in_reply_to_screen_name": "TheMorningSpew",
+    "user": {
+      "id": 173835301,
+      "id_str": "173835301",
+      "name": "Obama's Gadfly",
+      "screen_name": "BACFA",
+      "location": "Obamapocalypso, North Mexico",
+      "url": "http://breadandcircusesforamerica.blogspot.com/",
+      "description": "Bread and Circuses for America: dedicated to the documentation of the period of American history known as the Fundamental Transformation (ΜΟΛΩΝ ΛΑΒΕ)",
+      "protected": false,
+      "followers_count": 2294,
+      "friends_count": 2150,
+      "listed_count": 162,
+      "created_at": "Mon Aug 02 13:42:53 +0000 2010",
+      "favourites_count": 71,
+      "utc_offset": -14400,
+      "time_zone": "Eastern Time (US & Canada)",
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 58170,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "profile_background_color": "022330",
+      "profile_background_image_url": "http://a0.twimg.com/profile_background_images/165298845/6a00e5523026f588340111689e1c2c970c-800wi.jpg",
+      "profile_background_image_url_https": "https://si0.twimg.com/profile_background_images/165298845/6a00e5523026f588340111689e1c2c970c-800wi.jpg",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/2817698374/6adbba09a45b8351db376a9a34fcb1c3_normal.jpeg",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/2817698374/6adbba09a45b8351db376a9a34fcb1c3_normal.jpeg",
+      "profile_banner_url": "https://pbs.twimg.com/profile_banners/173835301/1354287508",
+      "profile_link_color": "0084B4",
+      "profile_sidebar_border_color": "A8C7F7",
+      "profile_sidebar_fill_color": "C0DFEC",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "default_profile": false,
+      "default_profile_image": false,
+      "following": null,
+      "follow_request_sent": null,
+      "notifications": null
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [
+        {
+          "text": "OnePlanFitsAll",
+          "indices": [
+            122,
+            137
+          ]
+        }
+      ],
+      "symbols": [
+
+      ],
+      "urls": [
+
+      ],
+      "user_mentions": [
+        {
+          "screen_name": "TheMorningSpew",
+          "name": "The Morning Spew",
+          "id": 369249722,
+          "id_str": "369249722",
+          "indices": [
+            0,
+            15
+          ]
+        }
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "filter_level": "medium",
+    "lang": "en"
+  },
+  "396698078519898113": {
+    "created_at": "Sat Nov 02 17:59:26 +0000 2013",
+    "id": 396698078519898113,
+    "id_str": "396698078519898113",
+    "text": "Ed Schultz challenges Sean Hannity to #Obamacare debate, but Hannity declines after fact-checkers promise to cover the event",
+    "source": "web",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 179732982,
+      "id_str": "179732982",
+      "name": "The Daily Edge",
+      "screen_name": "TheDailyEdge",
+      "location": "facebook.com/TheDailyEdge",
+      "url": "http://www.winkprogress.com",
+      "description": "A convivial place where progressives on Twitter may gather. Part of the vast left-wing comedy conspiracy known as @winkprogress",
+      "protected": false,
+      "followers_count": 62178,
+      "friends_count": 52337,
+      "listed_count": 1666,
+      "created_at": "Wed Aug 18 00:29:10 +0000 2010",
+      "favourites_count": 8345,
+      "utc_offset": -14400,
+      "time_zone": "Eastern Time (US & Canada)",
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 30213,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "profile_background_color": "811A8A",
+      "profile_background_image_url": "http://a0.twimg.com/profile_background_images/136790900/newspaper3.gif",
+      "profile_background_image_url_https": "https://si0.twimg.com/profile_background_images/136790900/newspaper3.gif",
+      "profile_background_tile": true,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/1109247307/DE-logo.aspx_normal.png",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/1109247307/DE-logo.aspx_normal.png",
+      "profile_banner_url": "https://pbs.twimg.com/profile_banners/179732982/1353613714",
+      "profile_link_color": "CC3366",
+      "profile_sidebar_border_color": "DBE9ED",
+      "profile_sidebar_fill_color": "E6F6F9",
+      "profile_text_color": "333333",
+      "profile_use_background_image": false,
+      "default_profile": false,
+      "default_profile_image": false,
+      "following": null,
+      "follow_request_sent": null,
+      "notifications": null
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [
+        {
+          "text": "Obamacare",
+          "indices": [
+            38,
+            48
+          ]
+        }
+      ],
+      "symbols": [
+
+      ],
+      "urls": [
+
+      ],
+      "user_mentions": [
+
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "filter_level": "medium",
+    "lang": "en"
+  },
+  "396698079115882497": {
+    "created_at": "Sat Nov 02 17:59:27 +0000 2013",
+    "id": 396698079115882497,
+    "id_str": "396698079115882497",
+    "text": "RT @JGalt9: #ObamacareFAQs Where can I collect my $2,500 reduction in annual premium that Obama promised me over and over? #Obamacare #tcot",
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 182147949,
+      "id_str": "182147949",
+      "name": "A2P",
+      "screen_name": "AndyAPelham",
+      "location": "Murfreesboro TN",
+      "url": null,
+      "description": "Husband, Father, Conservitave.\nTitans, Braves and BIG ORANGE fan.\nGO VOLS!!!",
+      "protected": false,
+      "followers_count": 56,
+      "friends_count": 314,
+      "listed_count": 0,
+      "created_at": "Mon Aug 23 23:15:12 +0000 2010",
+      "favourites_count": 50,
+      "utc_offset": null,
+      "time_zone": null,
+      "geo_enabled": true,
+      "verified": false,
+      "statuses_count": 944,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "profile_background_color": "131516",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme14/bg.gif",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme14/bg.gif",
+      "profile_background_tile": true,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/378800000101277240/2bd8ce50efabe5b0a9a53faaa19b8a94_normal.jpeg",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/378800000101277240/2bd8ce50efabe5b0a9a53faaa19b8a94_normal.jpeg",
+      "profile_banner_url": "https://pbs.twimg.com/profile_banners/182147949/1357432135",
+      "profile_link_color": "009999",
+      "profile_sidebar_border_color": "EEEEEE",
+      "profile_sidebar_fill_color": "EFEFEF",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "default_profile": false,
+      "default_profile_image": false,
+      "following": null,
+      "follow_request_sent": null,
+      "notifications": null
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweeted_status": {
+      "created_at": "Sat Nov 02 17:42:28 +0000 2013",
+      "id": 396693808714227713,
+      "id_str": "396693808714227713",
+      "text": "#ObamacareFAQs Where can I collect my $2,500 reduction in annual premium that Obama promised me over and over? #Obamacare #tcot",
+      "source": "web",
+      "truncated": false,
+      "in_reply_to_status_id": null,
+      "in_reply_to_status_id_str": null,
+      "in_reply_to_user_id": null,
+      "in_reply_to_user_id_str": null,
+      "in_reply_to_screen_name": null,
+      "user": {
+        "id": 292519466,
+        "id_str": "292519466",
+        "name": "Jane Galt",
+        "screen_name": "JGalt9",
+        "location": "Texas",
+        "url": null,
+        "description": "It's time to stuff the evil genie of big government back into the bottle of the Constitution #prolife #tcot #teaparty #CruzToVictory #CrushRove #RedNationRising",
+        "protected": false,
+        "followers_count": 5807,
+        "friends_count": 3047,
+        "listed_count": 136,
+        "created_at": "Tue May 03 19:44:44 +0000 2011",
+        "favourites_count": 121,
+        "utc_offset": null,
+        "time_zone": null,
+        "geo_enabled": false,
+        "verified": false,
+        "statuses_count": 26497,
+        "lang": "en",
+        "contributors_enabled": false,
+        "is_translator": false,
+        "profile_background_color": "352726",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme5/bg.gif",
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme5/bg.gif",
+        "profile_background_tile": false,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/378800000638100250/a75b0343497a8ac8187438fb19ef05e1_normal.jpeg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/378800000638100250/a75b0343497a8ac8187438fb19ef05e1_normal.jpeg",
+        "profile_link_color": "D02B55",
+        "profile_sidebar_border_color": "829D5E",
+        "profile_sidebar_fill_color": "99CC33",
+        "profile_text_color": "3E4415",
+        "profile_use_background_image": true,
+        "default_profile": false,
+        "default_profile_image": false,
+        "following": null,
+        "follow_request_sent": null,
+        "notifications": null
+      },
+      "geo": null,
+      "coordinates": null,
+      "place": null,
+      "contributors": null,
+      "retweet_count": 7,
+      "favorite_count": 2,
+      "entities": {
+        "hashtags": [
+          {
+            "text": "ObamacareFAQs",
+            "indices": [
+              0,
+              14
+            ]
+          },
+          {
+            "text": "Obamacare",
+            "indices": [
+              111,
+              121
+            ]
+          },
+          {
+            "text": "tcot",
+            "indices": [
+              122,
+              127
+            ]
+          }
+        ],
+        "symbols": [
+
+        ],
+        "urls": [
+
+        ],
+        "user_mentions": [
+
+        ]
+      },
+      "favorited": false,
+      "retweeted": false,
+      "lang": "en"
+    },
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [
+        {
+          "text": "ObamacareFAQs",
+          "indices": [
+            12,
+            26
+          ]
+        },
+        {
+          "text": "Obamacare",
+          "indices": [
+            123,
+            133
+          ]
+        },
+        {
+          "text": "tcot",
+          "indices": [
+            134,
+            139
+          ]
+        }
+      ],
+      "symbols": [
+
+      ],
+      "urls": [
+
+      ],
+      "user_mentions": [
+        {
+          "screen_name": "JGalt9",
+          "name": "Jane Galt",
+          "id": 292519466,
+          "id_str": "292519466",
+          "indices": [
+            3,
+            10
+          ]
+        }
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "filter_level": "medium",
+    "lang": "en"
+  },
+  "396698079606620160": {
+    "created_at": "Sat Nov 02 17:59:27 +0000 2013",
+    "id": 396698079606620160,
+    "id_str": "396698079606620160",
+    "text": "Obamacare Website Going Down Again For Maintenance - http://t.co/GJHY6rkJJD",
+    "source": "<a href=\"http://www.placeholder.com\" rel=\"nofollow\">banKIngLoveLy</a>",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 869939479,
+      "id_str": "869939479",
+      "name": "Steve",
+      "screen_name": "ClockExy",
+      "location": "Vermont",
+      "url": null,
+      "description": "Hunter, Father, Trader, occasional Hobo.",
+      "protected": false,
+      "followers_count": 1110,
+      "friends_count": 1821,
+      "listed_count": 4,
+      "created_at": "Tue Oct 09 13:56:35 +0000 2012",
+      "favourites_count": 0,
+      "utc_offset": null,
+      "time_zone": null,
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 2720,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "profile_background_color": "C0DEED",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/3240960112/f62c36b90ada7dc1ce954c583d743e6c_normal.jpeg",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/3240960112/f62c36b90ada7dc1ce954c583d743e6c_normal.jpeg",
+      "profile_link_color": "0084B4",
+      "profile_sidebar_border_color": "C0DEED",
+      "profile_sidebar_fill_color": "DDEEF6",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "default_profile": true,
+      "default_profile_image": false,
+      "following": null,
+      "follow_request_sent": null,
+      "notifications": null
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [
+
+      ],
+      "symbols": [
+
+      ],
+      "urls": [
+        {
+          "url": "http://t.co/GJHY6rkJJD",
+          "expanded_url": "http://www.huffingtonpost.com/2013/11/02/obamacare-website-maintenance_n_4203138.html?utm_hp_ref=bus",
+          "display_url": "huffingtonpost.com/2013/11/02/oba…",
+          "indices": [
+            53,
+            75
+          ]
+        }
+      ],
+      "user_mentions": [
+
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "filter_level": "medium",
+    "lang": "en"
+  },
+  "396698079425884160": {
+    "created_at": "Sat Nov 02 17:59:27 +0000 2013",
+    "id": 396698079425884160,
+    "id_str": "396698079425884160",
+    "text": "RT @YoImTrillBama: Bet Michelle wont walk right tomorrow after I give her this OBAMAcare tonight #realtalk",
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 1337692116,
+      "id_str": "1337692116",
+      "name": "Michelle",
+      "screen_name": "meshellayyy",
+      "location": "",
+      "url": null,
+      "description": null,
+      "protected": false,
+      "followers_count": 144,
+      "friends_count": 118,
+      "listed_count": 0,
+      "created_at": "Mon Apr 08 21:50:17 +0000 2013",
+      "favourites_count": 2546,
+      "utc_offset": null,
+      "time_zone": null,
+      "geo_enabled": true,
+      "verified": false,
+      "statuses_count": 8791,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "profile_background_color": "C0DEED",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/378800000614035376/ea8d8b3ea1a160f1fb56d748527c7de4_normal.jpeg",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/378800000614035376/ea8d8b3ea1a160f1fb56d748527c7de4_normal.jpeg",
+      "profile_banner_url": "https://pbs.twimg.com/profile_banners/1337692116/1380073339",
+      "profile_link_color": "0084B4",
+      "profile_sidebar_border_color": "C0DEED",
+      "profile_sidebar_fill_color": "DDEEF6",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "default_profile": true,
+      "default_profile_image": false,
+      "following": null,
+      "follow_request_sent": null,
+      "notifications": null
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweeted_status": {
+      "created_at": "Sat Nov 02 16:07:29 +0000 2013",
+      "id": 396669905199968257,
+      "id_str": "396669905199968257",
+      "text": "Bet Michelle wont walk right tomorrow after I give her this OBAMAcare tonight #realtalk",
+      "source": "<a href=\"http://tweetadder.com\" rel=\"nofollow\">TweetAdder v4</a>",
+      "truncated": false,
+      "in_reply_to_status_id": null,
+      "in_reply_to_status_id_str": null,
+      "in_reply_to_user_id": null,
+      "in_reply_to_user_id_str": null,
+      "in_reply_to_screen_name": null,
+      "user": {
+        "id": 1915789304,
+        "id_str": "1915789304",
+        "name": "Yo I'm Obama",
+        "screen_name": "YoImTrillBama",
+        "location": "1600 Pennsylvania avenue",
+        "url": null,
+        "description": "I'm so Presidential with this Roley on my wrist",
+        "protected": false,
+        "followers_count": 13376,
+        "friends_count": 442,
+        "listed_count": 0,
+        "created_at": "Sun Sep 29 01:11:34 +0000 2013",
+        "favourites_count": 29,
+        "utc_offset": null,
+        "time_zone": null,
+        "geo_enabled": false,
+        "verified": false,
+        "statuses_count": 284,
+        "lang": "en",
+        "contributors_enabled": false,
+        "is_translator": false,
+        "profile_background_color": "C0DEED",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_tile": false,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/378800000531190021/2f0628927284d2259ce97cb73f217ea3_normal.jpeg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/378800000531190021/2f0628927284d2259ce97cb73f217ea3_normal.jpeg",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/1915789304/1380581560",
+        "profile_link_color": "0084B4",
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_use_background_image": true,
+        "default_profile": true,
+        "default_profile_image": false,
+        "following": null,
+        "follow_request_sent": null,
+        "notifications": null
+      },
+      "geo": null,
+      "coordinates": null,
+      "place": null,
+      "contributors": null,
+      "retweet_count": 2,
+      "favorite_count": 2,
+      "entities": {
+        "hashtags": [
+          {
+            "text": "realtalk",
+            "indices": [
+              78,
+              87
+            ]
+          }
+        ],
+        "symbols": [
+
+        ],
+        "urls": [
+
+        ],
+        "user_mentions": [
+
+        ]
+      },
+      "favorited": false,
+      "retweeted": false,
+      "lang": "en"
+    },
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [
+        {
+          "text": "realtalk",
+          "indices": [
+            97,
+            106
+          ]
+        }
+      ],
+      "symbols": [
+
+      ],
+      "urls": [
+
+      ],
+      "user_mentions": [
+        {
+          "screen_name": "YoImTrillBama",
+          "name": "Yo I'm Obama",
+          "id": 1915789304,
+          "id_str": "1915789304",
+          "indices": [
+            3,
+            17
+          ]
+        }
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "filter_level": "medium",
+    "lang": "en"
+  },
+  "396698085503422464": {
+    "created_at": "Sat Nov 02 17:59:28 +0000 2013",
+    "id": 396698085503422464,
+    "id_str": "396698085503422464",
+    "text": "RT @jonfavs: Most important Obamacare chart of the week, maybe ever, thanks to @JustinWolfers, @RyanLizza, and Jon Gruber: http://t.co/Lm8o…",
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 150793265,
+      "id_str": "150793265",
+      "name": "Greg Jones",
+      "screen_name": "SGregoryJ",
+      "location": "Phoenix",
+      "url": null,
+      "description": null,
+      "protected": false,
+      "followers_count": 69,
+      "friends_count": 204,
+      "listed_count": 0,
+      "created_at": "Tue Jun 01 21:06:09 +0000 2010",
+      "favourites_count": 27,
+      "utc_offset": -25200,
+      "time_zone": "Arizona",
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 327,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "profile_background_color": "C0DEED",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/2837161094/670afa107546e1642906381aa24a8f23_normal.jpeg",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/2837161094/670afa107546e1642906381aa24a8f23_normal.jpeg",
+      "profile_link_color": "0084B4",
+      "profile_sidebar_border_color": "C0DEED",
+      "profile_sidebar_fill_color": "DDEEF6",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "default_profile": true,
+      "default_profile_image": false,
+      "following": null,
+      "follow_request_sent": null,
+      "notifications": null
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweeted_status": {
+      "created_at": "Thu Oct 31 19:27:41 +0000 2013",
+      "id": 395995511913975808,
+      "id_str": "395995511913975808",
+      "text": "Most important Obamacare chart of the week, maybe ever, thanks to @JustinWolfers, @RyanLizza, and Jon Gruber: http://t.co/Lm8oTLz6C8",
+      "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+      "truncated": false,
+      "in_reply_to_status_id": null,
+      "in_reply_to_status_id_str": null,
+      "in_reply_to_user_id": null,
+      "in_reply_to_user_id_str": null,
+      "in_reply_to_screen_name": null,
+      "user": {
+        "id": 130496027,
+        "id_str": "130496027",
+        "name": "Jon Favreau",
+        "screen_name": "jonfavs",
+        "location": "Washington, DC",
+        "url": null,
+        "description": "The Other One. Former Director of Speechwriting for President Obama. Founding Partner at http://www.fenwaystrategies.com. Daily Beast Columnist.",
+        "protected": false,
+        "followers_count": 25934,
+        "friends_count": 664,
+        "listed_count": 422,
+        "created_at": "Wed Apr 07 13:10:43 +0000 2010",
+        "favourites_count": 87,
+        "utc_offset": null,
+        "time_zone": null,
+        "geo_enabled": false,
+        "verified": false,
+        "statuses_count": 1337,
+        "lang": "en",
+        "contributors_enabled": false,
+        "is_translator": false,
+        "profile_background_color": "C0DEED",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_tile": false,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/378800000547995131/52fe5c5d072ef0ab33dc2c40bc94e9dd_normal.jpeg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/378800000547995131/52fe5c5d072ef0ab33dc2c40bc94e9dd_normal.jpeg",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/130496027/1376072067",
+        "profile_link_color": "0084B4",
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_use_background_image": true,
+        "default_profile": true,
+        "default_profile_image": false,
+        "following": null,
+        "follow_request_sent": null,
+        "notifications": null
+      },
+      "geo": null,
+      "coordinates": null,
+      "place": null,
+      "contributors": null,
+      "retweet_count": 320,
+      "favorite_count": 110,
+      "entities": {
+        "hashtags": [
+
+        ],
+        "symbols": [
+
+        ],
+        "urls": [
+
+        ],
+        "user_mentions": [
+          {
+            "screen_name": "JustinWolfers",
+            "name": "Justin Wolfers",
+            "id": 327577091,
+            "id_str": "327577091",
+            "indices": [
+              66,
+              80
+            ]
+          },
+          {
+            "screen_name": "RyanLizza",
+            "name": "Ryan Lizza",
+            "id": 80617430,
+            "id_str": "80617430",
+            "indices": [
+              82,
+              92
+            ]
+          }
+        ],
+        "media": [
+          {
+            "id": 395982657823055872,
+            "id_str": "395982657823055872",
+            "indices": [
+              110,
+              132
+            ],
+            "media_url": "http://pbs.twimg.com/media/BX7QIRjCIAAA8-4.png",
+            "media_url_https": "https://pbs.twimg.com/media/BX7QIRjCIAAA8-4.png",
+            "url": "http://t.co/Lm8oTLz6C8",
+            "display_url": "pic.twitter.com/Lm8oTLz6C8",
+            "expanded_url": "http://twitter.com/JustinWolfers/status/395982657814667264/photo/1",
+            "type": "photo",
+            "sizes": {
+              "large": {
+                "w": 912,
+                "h": 663,
+                "resize": "fit"
+              },
+              "medium": {
+                "w": 600,
+                "h": 436,
+                "resize": "fit"
+              },
+              "thumb": {
+                "w": 150,
+                "h": 150,
+                "resize": "crop"
+              },
+              "small": {
+                "w": 340,
+                "h": 247,
+                "resize": "fit"
+              }
+            },
+            "source_status_id": 395982657814667264,
+            "source_status_id_str": "395982657814667264"
+          }
+        ]
+      },
+      "favorited": false,
+      "retweeted": false,
+      "possibly_sensitive": false,
+      "lang": "en"
+    },
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [
+
+      ],
+      "symbols": [
+
+      ],
+      "urls": [
+
+      ],
+      "user_mentions": [
+        {
+          "screen_name": "jonfavs",
+          "name": "Jon Favreau",
+          "id": 130496027,
+          "id_str": "130496027",
+          "indices": [
+            3,
+            11
+          ]
+        },
+        {
+          "screen_name": "JustinWolfers",
+          "name": "Justin Wolfers",
+          "id": 327577091,
+          "id_str": "327577091",
+          "indices": [
+            79,
+            93
+          ]
+        },
+        {
+          "screen_name": "RyanLizza",
+          "name": "Ryan Lizza",
+          "id": 80617430,
+          "id_str": "80617430",
+          "indices": [
+            95,
+            105
+          ]
+        }
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "filter_level": "medium",
+    "lang": "en"
+  }
+}

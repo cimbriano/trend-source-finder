@@ -8,9 +8,9 @@ d3.json("/tweets.json", function(error, json){
 
 function visualizeit(){
     var width = 600;
-    var svgContainer = d3.select("body").append("svg")
+    var svgContainer = d3.select(".container").append("svg")
                                        .attr("width", width)
-                                       .attr("height", 600);
+                                       .attr("height", 200);
 
     var circles = svgContainer.selectAll("circle")
                              .data(tweets)
@@ -53,4 +53,21 @@ function visualizeit(){
                     .attr("fill","red");
 
 
+var G = jsnx.DiGraph();
  
+G.add_nodes_from([1,2,3,4,5,[9,{color: '#008A00'}]], {color: '#0064C7'});
+G.add_cycle([1,2,3,4,5]);
+G.add_edges_from([[1,9], [9,1]]);
+ 
+ jsnx.draw(G, {
+    element: '#canvas', 
+    with_labels: true, 
+    node_style: {
+        fill: function(d) { 
+            return d.data.color; 
+        }
+    }, 
+    label_style: {fill: 'white' }
+});
+
+}

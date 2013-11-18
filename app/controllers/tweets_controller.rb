@@ -5,10 +5,6 @@ class TweetsController < ApplicationController
   # GET /tweets.json
   def index
     @tweets = Tweet.all
-    respond_to do |format|
-      format.html {}
-      format.json { render json: @tweets }
-    end
   end
 
   # GET /tweet/1

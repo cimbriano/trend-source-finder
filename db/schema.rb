@@ -11,12 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131120223041) do
+ActiveRecord::Schema.define(version: 20131120232510) do
 
   create_table "edges", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "child_id"
+    t.integer  "parent_id"
   end
+
+  add_index "edges", ["child_id"], name: "index_edges_on_child_id"
+  add_index "edges", ["parent_id"], name: "index_edges_on_parent_id"
 
   create_table "tweets", force: true do |t|
     t.string   "text"

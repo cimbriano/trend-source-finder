@@ -14,6 +14,7 @@ tweets.each do |id, tweet|
   Tweet.create!(
     twitter_id: tweet['id_str'],
     text: tweet['text'],
-    created_at: tweet['created_at']
+    created_at: tweet['created_at'],
+    retweeted_id: if tweet.include?('retweeted_status') then tweet['retweeted_status']['id_str'] end
   )
 end

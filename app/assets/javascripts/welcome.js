@@ -6,7 +6,14 @@ d3.json("/tweets.json", function(error, json){
 	visualizeit();
 });
 
+
+
+////= require jquery_ui
+//*= require jquery.ui.slider
+//<%link{:href => "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.8/themes/ui-lightness/jquery-ui.css", :rel => "stylesheet", :type => "text/css"}>
 function visualizeit(){
+	
+	$("#slider").slider();
     var width = 600;
     var svgContainer = d3.select(".container").append("svg")
                                        .attr("width", width)
@@ -33,7 +40,7 @@ function visualizeit(){
 
     var linearScale = d3.scale.linear()
                     .domain([d3.min(initialScaleData),d3.max(initialScaleData)])
-                    .range([0,width])
+                    .range([0,width]);
 
 
     var circleAttributes = circles

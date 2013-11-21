@@ -1,16 +1,13 @@
-var tweets;
+var edges;
 
-d3.json("/tweets.json", function(error, json){
+d3.json("/edges.json", function(error, json){
 	if(error) return console.warn(error);
-	tweets = json;
+	edges = json;
 	visualizeit();
 });
 
 
 
-////= require jquery_ui
-//*= require jquery.ui.slider
-//<%link{:href => "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.8/themes/ui-lightness/jquery-ui.css", :rel => "stylesheet", :type => "text/css"}>
 function visualizeit(){
 	
 	$("#slider").slider();
@@ -19,23 +16,13 @@ function visualizeit(){
                                        .attr("width", width)
                                        .attr("height", 200);
 
-    var circles = svgContainer.selectAll("circle")
-                             .data(tweets)
-                             .enter()
-                            .append("circle");
 
-    // text element
-    var text = svgContainer.selectAll("text")
-                          .data(tweets)
-                          .enter()
-                          .append("text");
+    var isNodeInGraph = {};
 
-
-    var initialScaleData = [];
-
-    for (var i=0;i<tweets.length;i++)
+    for (var i=0;i<edges.length;i++)
     {
-      initialScaleData[i] = parseInt(tweets[i].created_at_numeric);
+      isNodeInGraph[edges[i].child_id] = 0;
+      isNodeInGraph[edges[i].parent_id] = 0;
     }
 
     var linearScale = d3.scale.linear()
@@ -61,11 +48,25 @@ function visualizeit(){
 
 
 var G = jsnx.DiGraph();
+
+for(var i=0;i<edges.length;i++)
+{
+  child_id = edges[i].child_id;
+  parent_id = edges[i].parent_id;
+  if (isNodeInGraph[child_id] == 0)//node is not in graph yet
+  {
+    G.add_nodes_from([child_id],{color:'#0064C7'});
+    isNodeInGraph[child_id] = 1;
+  }
+  if (isNodeInGraph[parent_id] == 0)//node is not in graph yet
+  {
+    G.add_nodes_from([parent_id],{color:'#0064C7'});
+    isNodeInGraph[parent_id] = 1;
+  }
+  G.add_edge(parent_id,child_id);
  
-G.add_nodes_from([1,2,3,4,5,[9,{color: '#008A00'}]], {color: '#0064C7'});
-G.add_cycle([1,2,3,4,5]);
-G.add_edges_from([[1,9], [9,1]]);
- 
+}
+
  jsnx.draw(G, {
     element: '#canvas', 
     with_labels: true, 
@@ -74,7 +75,7 @@ G.add_edges_from([[1,9], [9,1]]);
             return d.data.color; 
         }
     }, 
-    label_style: {fill: 'white' }
+    label_style: {fill: 'red' }
 });
 
 }

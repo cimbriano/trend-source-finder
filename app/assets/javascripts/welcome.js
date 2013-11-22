@@ -50,3 +50,7 @@ for(var i=0;i<edges.length;i++)
 });
 
 }
+
+$(function() {
+    $( "#slider" ).slider();
+});

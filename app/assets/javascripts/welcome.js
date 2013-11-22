@@ -61,10 +61,8 @@ function visualizeit(){
   }
 
   function nodeClick(d) {
-    console.log(d);
 
-    $(".node.selected").removeClass('selected');
-
+    d3.selectAll(".node").classed('selected', false);
     d3.select(this).classed('selected', true);
 
     // Get the specific tweet data

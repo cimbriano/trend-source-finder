@@ -1,13 +1,14 @@
 TrendSourceFinder::Application.routes.draw do
 
-  resources :edges
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
-  resources :tweets
+  resources :tweets, :edges
+  get 'graph' => 'graph#make'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

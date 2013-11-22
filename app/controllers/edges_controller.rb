@@ -4,7 +4,7 @@ class EdgesController < ApplicationController
   # GET /edges
   # GET /edges.json
   def index
-    @edges = Edge.all
+    @edges = Edge.all.includes(:child).includes(:parent)
   end
 
   # GET /edges/1

@@ -1,56 +1,81 @@
-var edges;
+var data;
 
-d3.json("/edges.json", function(error, json){
+d3.json("/tweets.json", function(error, json){
 	if(error) return console.warn(error);
-	edges = json;
+	data = json;
 	visualizeit();
 });
 
 function visualizeit(){
+  var width = 960;
+  var height = 500;
+  var padding = 20;
 
+  var force = d3.layout.force()
+                .size([width, height])
+                .charge(-400)
+                .linkDistance(40)
+                .on("tick", tick);
 
-    var isNodeInGraph = {};
+  var svg = d3.select("#canvas").append("svg")
+              .attr("width", width)
+              .attr("height", height);
 
-    for (var i=0;i<edges.length;i++)
-    {
-      isNodeInGraph[edges[i].child_id] = 0;
-      isNodeInGraph[edges[i].parent_id] = 0;
-    }
+  // var link = svg.selectAll(".link");
+  var node = svg.selectAll(".node");
 
-
-var G = jsnx.DiGraph();
-
-for(var i=0;i<edges.length;i++)
-{
-  child_id = edges[i].child_id;
-  parent_id = edges[i].parent_id;
-  if (isNodeInGraph[child_id] == 0)//node is not in graph yet
-  {
-    G.add_nodes_from([child_id],{color:'#0064C7'});
-    isNodeInGraph[child_id] = 1;
+  // Make a linear scale for the x-postion
+  var initialScaleData = [];
+  for(var i = 0; i < data.length; i++) {
+    initialScaleData[i] = data[i].created_at_numeric;
   }
-  if (isNodeInGraph[parent_id] == 0)//node is not in graph yet
-  {
-    G.add_nodes_from([parent_id],{color:'#0064C7'});
-    isNodeInGraph[parent_id] = 1;
-  }
-  G.add_edge(parent_id,child_id);
- 
-}
 
- jsnx.draw(G, {
-    element: '#canvas', 
-    with_labels: true, 
-    node_style: {
-        fill: function(d) { 
-            return d.data.color; 
-        }
-    }, 
-    label_style: {fill: 'red' }
-});
+  var linearScale = d3.scale.linear()
+                      .domain([d3.min(initialScaleData), d3.max(initialScaleData)])
+                      .range([padding, width - padding])
+
+
+  force
+    .nodes(data)
+    // .links(graph.links)
+    .start();
+
+  // link = 
+
+  node = node.data(data)
+             .enter().append("circle")
+                .attr("class", "node")
+                .attr("cx", function(d) { x = linearScale(d.created_at_numeric); console.log(x); return x; })
+                // .attr("cy", function(d) { return height / 2; } )
+                .attr("r", function(d) { return 12; })
+                .on("click", nodeClick);
+
+  function tick() {
+    // link.attr("x1", function(d) { return d.source.x; })
+    //     .attr("y1", function(d) { return d.source.y; })
+    //     .attr("x2", function(d) { return d.target.x; })
+    //     .attr("y2", function(d) { return d.target.y; });
+
+    node.attr("cy", function(d) { return d.y; });
+    // .attr("cx", function(d) { return d.x; })
+  }
+
+  function nodeClick(d) {
+    console.log(d);
+
+    $(".node.selected").removeClass('selected');
+
+    d3.select(this).classed('selected', true);
+
+    // Get the specific tweet data
+    d3.json(d.url, function(error, json) {
+      $("#tweet-details").text(json.created_at)
+      // $("#created-at").text(json.created_at)
+    });
+  }
 
 }
 
 $(function() {
-    $( "#slider" ).slider();
+  $( "#slider" ).slider();
 });

@@ -75,5 +75,14 @@ function visualizeit(){
 }
 
 $(function() {
-  $( "#slider" ).slider();
+    $( "#slider" ).slider({
+      range: "min",
+      value: 38,
+      min: 1,
+      max: 700,
+      slide: function(event, ui){
+        $("#amount").val("$" + ui.value);
+      }
+    });
+    $("#amount").val("$"+$("#slider-range-min").slider("value"));
 });

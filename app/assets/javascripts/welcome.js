@@ -61,15 +61,15 @@ function visualizeit(){
   node = node.data(data.tweets)
              .enter().append("circle")
                 .attr("class", "node")
-                .attr("cx", function(d) { x = linearScale(d.created_at_numeric); console.log(x); return x; })
+                .attr("cx", function(d) { x = linearScale(d.created_at_numeric); return x; })
                 // .attr("cy", function(d) { return height / 2; } )
                 .attr("r", function(d) { return 12; })
                 .on("click", nodeClick);
 
   function tick() {
-    link.attr("x1", function(d) { return d.source.x; })
+    link.attr("x1", function(d) { return linearScale(d.source.created_at_numeric); })
         .attr("y1", function(d) { return d.source.y; })
-        .attr("x2", function(d) { return d.target.x; })
+        .attr("x2", function(d) { return linearScale(d.target.created_at_numeric); })
         .attr("y2", function(d) { return d.target.y; });
 
     node.attr("cy", function(d) { return d.y; });

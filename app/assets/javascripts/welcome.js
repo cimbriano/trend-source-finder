@@ -26,20 +26,30 @@ function visualizeit(){
     
     // Make a linear scale for the x-postion
     var initialScaleData = [];
-
+    var stringDate = [];
     for(var i = 0; i < data.tweets.length; i++) {
         initialScaleData[i] = data.tweets[i].created_at_numeric;
+        stringDate[i] = data.tweets[i].created_at;
     }
 
     var linearScale = d3.scale.linear()
       .domain([d3.min(initialScaleData), d3.max(initialScaleData)])
       .range([padding, width - padding])
+
+    function getDate(d){return new Date(d.jsonDate);}
+
+
+    var minDate = new Date(stringDate[initialScaleData.indexOf(d3.min(initialScaleData))]),
+        maxDate = new Date(stringDate[initialScaleData.indexOf(d3.max(initialScaleData))]);
+
+    var timeScale = d3.time.scale()
+                  .domain([minDate,maxDate])
+                  .range([padding, width - padding]);
     
     var xAxis = d3.svg.axis()
-      .scale(linearScale)
+      .scale(timeScale)
       .orient("bottom")
-      .ticks(10)
-      .tickFormat(function(d) { var date = new Date(d*1000); return date.getFullYear() + "-" + date.getMonth() + "-" + date.getDay(); });  
+      .tickFormat(d3.time.format("%Y-%m-%d"));  
     
     svg.append("g")
       .attr("class", "axis")

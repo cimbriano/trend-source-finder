@@ -14,6 +14,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.all
+//= require jquery/layout
 //= require bootstrap
 //= require d3
 //= require crossfilter

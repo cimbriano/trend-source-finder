@@ -24,41 +24,16 @@ class TweetsController < ApplicationController
   # POST /tweet
   # POST /tweet.json
   def create
-    @tweet = Tweet.new(tweet_params)
-
-    respond_to do |format|
-      if @tweet.save
-        format.html { redirect_to @tweet, notice: 'Tweet was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @tweet }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @tweet.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /tweet/1
   # PATCH/PUT /tweet/1.json
   def update
-    respond_to do |format|
-      if @tweet.update(tweet_params)
-        format.html { redirect_to @tweet, notice: 'Tweet was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @tweet.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # DELETE /tweet/1
   # DELETE /tweet/1.json
   def destroy
-    @tweet.destroy
-    respond_to do |format|
-      format.html { redirect_to tweet_url }
-      format.json { head :no_content }
-    end
   end
 
   private

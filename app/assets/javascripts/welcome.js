@@ -3,7 +3,7 @@ var data;
 d3.json("/graph.json", function(error, json){
   if(error) return console.warn(error);
   data = json;
-  visualizeit();
+  visualizeit(100);
 });
 
 $(function () {
@@ -32,20 +32,22 @@ $(function() {
   $( "#slider" ).slider({
        range: false,
        min: 1,
-       max: 24,
+       max: 100,
        step: 1,
-       values: [ 1],
+       values: [ 100],
        slide: function( event, ui ) {
            $('#slider-value').text(ui.values[ 0 ]);
+           visualizeit(ui.values[0]);
        },
-       stop: function(event, ui) {
-           visualizeit();
-       }
+       //stop: function(event, ui) {
+       //    visualizeit(ui.values[0]);
+       //}
     });
     $('#slider-value').text(1);
 });
 
-function visualizeit(){
+//upToTime show time scale from 0 to 100. If 100, will show 100% time scale.
+function visualizeit(upToTime){
 	d3.select("svg").remove();
 	var width = $('#paneCenter').width();
   	var height = $('#paneCenter').height()-120;
@@ -74,7 +76,7 @@ function visualizeit(){
 
     var linearScale = d3.scale.linear()
       .domain([d3.min(initialScaleData), d3.max(initialScaleData)])
-      .range([padding, width - padding]);
+      .range([padding, 100/upToTime*(width - padding)]);
 
     function getDate(d){return new Date(d.jsonDate);}
 
@@ -84,7 +86,7 @@ function visualizeit(){
 
     var timeScale = d3.time.scale()
                   .domain([minDate,maxDate])
-                  .range([padding, width - padding]);
+                  .range([padding, 100/upToTime*(width - padding)]);
     
     var xAxis = d3.svg.axis()
       .scale(timeScale)

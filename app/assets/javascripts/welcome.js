@@ -1,6 +1,5 @@
 var data;
 var currentdata;
-var singletone = 0;
 var scaledvalue = 100;
 d3.json("/graph.json", function(error, json){
   if(error) return console.warn(error);
@@ -50,9 +49,9 @@ $(function() {
     $('#slider-value').text(1);
 });
 
-function filter_singletone(){
-	console.log(data.tweets.length);
-	singletnodes = new Array();
+function filter_nodes(singletone){
+	//console.log(data.tweets.length);
+	var nodes = new Array();
 	var k = 0;
 	for(var i = 0; i < data.tweets.length; i++) {
         tweetid = data.tweets[i].id;
@@ -63,30 +62,58 @@ function filter_singletone(){
         		break;
         	}
         }
-        if(found==0){
-        	singletnodes[k] = data.tweets[i];
+        if(found==0 && singletone==1){
+        	nodes[k] = data.tweets[i];
+        	k++;
+        }
+        if(found==1 && singletone==0){
+        	nodes[k] = data.tweets[i];
         	k++;
         }
     }
-    return singletnodes;
+    return nodes;
+}
+
+function check_actiontype(){
+	
+	if($('input[name=action-group]:radio:checked').val()=='show'){
+		var singletone = 1;
+		currentdata.tweets = filter_nodes(singletone);
+		currentdata.edges = new Array();
+	}
+	else if($('input[name=action-group]:radio:checked').val()=='hide'){
+		var singletone = 0;
+		currentdata.tweets = filter_nodes(singletone);
+		currentdata.edges = data.edges;
+	}
 }
 
 $(function() {
+	$("#nodetype").removeAttr('checked');
+	$("#show").attr("disabled",true);
+	$("#hide").attr("disabled",true);
 	$('#nodetype').click(function (){
+		console.log('inside checkbox');
 		if ($(this).is (':checked')){
-			singletone = 1;
-			currentdata.tweets = filter_singletone();
-			currentdata.edges = new Array();
-			visualizeit(scaledvalue);
+			console.log('checkbox clicked');
+			$("#show").removeAttr("disabled");
+			$("#hide").removeAttr("disabled");
+			check_actiontype();
 		}else{
-			singletone = 0;
-			//currentdata = data;
+			console.log('unchecked box');
+			$("#show").attr("disabled",true);
+			$("#hide").attr("disabled",true);
+			
+			singletone = -1;
 			currentdata = jQuery.extend(true, {}, data);
-			console.log(data.tweets.length);
-			console.log(currentdata.tweets.length);
-			visualizeit(scaledvalue);
 		}
+		visualizeit(scaledvalue);
 	});
+	
+	$(".action-group").click(function(){
+    	check_actiontype();
+    	visualizeit(scaledvalue);
+    });
 });
 
 //upToTime show time scale from 0 to 100. If 100, will show 100% time scale.
@@ -197,11 +224,7 @@ function visualizeit(upToTime){
       
       $("#text").text('Description: '+json.text);
       $("#time").text('Time of Tweet: '+json.created_at);
-      //console.log(isNaN(json.retweeted_id));
-      //console.log(json.retweeted_id);
-      //console.log(parseInt(json.retweeted_id));
-      //console.log(typeof(json.retweeted_id)=='string');
-      if(json.retweeted_id==null){
+      if(d.retweeted_id==null){
       //if(typeof(json.retweeted_id)=='string'){
       	$("#retweet").text('Retweet?: Yes');
       }else{

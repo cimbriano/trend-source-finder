@@ -1,27 +1,23 @@
 <div id="paneCenter" class="ui-layout-center">
-	<div class="container">
-		<div class="row">
-			<h3>
+    <div class="container">
+        <div class="row">
+            <h3>
                Make tweets visible from <span id="slider-value" class="range-value"></span>
             </h3>
-			<div id="slider" class='g-slider'></div>
-			<div id="canvas"></div>
-			<div id="scrollbar"></div>	
-		</div> <!-- end of 2nd row -->
-	</div> <!-- end of container -->
+            <div id="slider" class='g-slider'></div>
+            <div id="canvas"></div>
+            <div id="scrollbar"></div>  
+        </div> <!-- end of 2nd row -->
+    </div> <!-- end of container -->
 </div>
 
 <div id="paneEast" class="ui-layout-east"> 
-	<div id="nodecontrol">
-		<form>
-			<input type="checkbox" id="nodetype">Singletone<br>
-		</form>
-	</div>
-	<h3>Tweet Information Pane</h3>
-	<div id="tweet-details">
-		<div id="text"> </div>
-		<div id="time"> </div>
-		<div id="retweet"> </div>
-		<div id="tweetid"> </div>
-	</div>
+    <div id="nodecontrol">
+        <form>
+            <input type="checkbox" id="nodetype">Singletone<br>
+        </form>
+    </div>
+
+    <%= render 'tweet_info' %>
+
 </div>

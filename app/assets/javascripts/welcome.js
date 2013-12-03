@@ -195,17 +195,17 @@ function visualizeit(upToTime){
       	linktext = vals[i];
       }*/
       
-      $("#text").text('Description: '+json.text);
-      $("#time").text('Time of Tweet: '+json.created_at);
+      $("#text").text(json.text);
+      $("#time").text(json.created_at);
       //console.log(isNaN(json.retweeted_id));
       //console.log(json.retweeted_id);
       //console.log(parseInt(json.retweeted_id));
       //console.log(typeof(json.retweeted_id)=='string');
       if(json.retweeted_id==null){
       //if(typeof(json.retweeted_id)=='string'){
-      	$("#retweet").text('Retweet?: Yes');
+      	$("#retweet").text('Yes');
       }else{
-      	$("#retweet").text('Retweet?: No');
+      	$("#retweet").text('No');
       }
       $("#tweetid").text(json.id);
     });

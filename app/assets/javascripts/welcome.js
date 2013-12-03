@@ -1,5 +1,6 @@
 var data;
-
+var singletone = 0;
+var scaledvalue = '';
 d3.json("/graph.json", function(error, json){
   if(error) return console.warn(error);
   data = json;
@@ -37,6 +38,7 @@ $(function() {
        values: [ 100],
        slide: function( event, ui ) {
            $('#slider-value').text(ui.values[ 0 ]);
+           scaledvalue = ui.values[0];
            visualizeit(ui.values[0]);
        },
        //stop: function(event, ui) {
@@ -44,6 +46,16 @@ $(function() {
        //}
     });
     $('#slider-value').text(1);
+});
+
+$('#nodetype').click(function (){
+	if ($(this).is (':checked')){
+		singletone = 1;
+		visualizeit(scaledvalue);
+	}else{
+		singletone = 0;
+		visualizeit(scaledvalue);
+	}
 });
 
 //upToTime show time scale from 0 to 100. If 100, will show 100% time scale.

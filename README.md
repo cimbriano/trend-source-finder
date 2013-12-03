@@ -15,5 +15,7 @@ Install dependecies specified in Gemfile.
 ### Runs db/seed.rb to add data to database
 ```rake db:seed```
 
-#### ```rake db:seed dataset=small``` : Load small dataset (10 tweets)
-#### ```rake db:seed dataset=medium``` : Load medium dataset (100 tweets)
+#### Optional Dataset Parameter
+
+```rake db:seed dataset=small``` : Load small dataset (10 tweets)
+```rake db:seed dataset=medium``` : Load medium dataset (100 tweets)

@@ -141,9 +141,6 @@ function visualizeit(upToTime){
       .attr("transform", "translate(0," + (height - padding) + ")")
       .call(xAxis);
     
-    
-    // console.log("data.tweets.length: " + data.tweets.length);
-
     force
       .theta(10)  // Removes "jiggle"
       .nodes(currentdata.tweets)
@@ -180,28 +177,10 @@ function visualizeit(upToTime){
 
     // Get the specific tweet data
     d3.json(d.url, function(error, json) {
-      //$("#tweet-details").text(json.created_at);
-      /*var desc = json.text;
-      var linktext = '';
-      var vals = desc.split(' ');
-      var i = 0, found = 0;
-      for(;i<vals.length;i++){
-      	if(vals[i].indexOf('http')!=-1){
-      		found = 1;
-      		break;
-      	}
-      }
-      if(found==1){
-      	console.log(vals[i]);
-      	linktext = vals[i];
-      }*/
-      
+
       $("#text").text(json.text);
       $("#time").text(json.created_at);
-      //console.log(isNaN(json.retweeted_id));
-      //console.log(json.retweeted_id);
-      //console.log(parseInt(json.retweeted_id));
-      //console.log(typeof(json.retweeted_id)=='string');
+
       if(json.retweeted_id==null){
       //if(typeof(json.retweeted_id)=='string'){
       	$("#retweet").text('Yes');

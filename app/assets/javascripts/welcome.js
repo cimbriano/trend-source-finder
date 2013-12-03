@@ -1,9 +1,11 @@
 var data;
+var currentdata;
 var singletone = 0;
-var scaledvalue = '';
+var scaledvalue = 100;
 d3.json("/graph.json", function(error, json){
   if(error) return console.warn(error);
   data = json;
+  currentdata = jQuery.extend(true, {}, data);
   visualizeit(100);
 });
 
@@ -48,14 +50,41 @@ $(function() {
     $('#slider-value').text(1);
 });
 
-$('#nodetype').click(function (){
-	if ($(this).is (':checked')){
-		singletone = 1;
-		visualizeit(scaledvalue);
-	}else{
-		singletone = 0;
-		visualizeit(scaledvalue);
-	}
+function filter_singletone(){
+	singletnodes = new Array();
+	var k = 0;
+	for(var i = 0; i < data.tweets.length; i++) {
+        tweetid = data.tweets[i].id;
+        var found = 0;
+        for(var j = 0; j < data.edges.length; j++) {
+        	if(data.edges[j].parent_id==tweetid | data.edges[j].child_id==tweetid){
+        		found = 1;
+        		break;
+        	}
+        }
+        if(found==0){
+        	singletnodes[k] = data.tweets[i];
+        	k++;
+        }
+    }
+    return singletnodes;
+}
+
+$(function() {
+	$('#nodetype').click(function (){
+		if ($(this).is (':checked')){
+			singletone = 1;
+			currentdata.tweets = filter_singletone();
+			visualizeit(scaledvalue);
+		}else{
+			singletone = 0;
+			//currentdata = data;
+			currentdata = jQuery.extend(true, {}, data);
+			console.log(data.tweets.length);
+			console.log(currentdata.tweets.length);
+			visualizeit(scaledvalue);
+		}
+	});
 });
 
 //upToTime show time scale from 0 to 100. If 100, will show 100% time scale.
@@ -81,9 +110,9 @@ function visualizeit(upToTime){
     // Make a linear scale for the x-postion
     var initialScaleData = [];
     var stringDate = [];
-    for(var i = 0; i < data.tweets.length; i++) {
-        initialScaleData[i] = data.tweets[i].created_at_numeric;
-        stringDate[i] = data.tweets[i].created_at;
+    for(var i = 0; i < currentdata.tweets.length; i++) {
+        initialScaleData[i] = currentdata.tweets[i].created_at_numeric;
+        stringDate[i] = currentdata.tweets[i].created_at;
     }
 
     var linearScale = d3.scale.linear()
@@ -114,15 +143,15 @@ function visualizeit(upToTime){
     // console.log("data.tweets.length: " + data.tweets.length);
 
     force
-      .nodes(data.tweets)
-      .links(data.edges)
+      .nodes(currentdata.tweets)
+      .links(currentdata.edges)
       .start();
 
-  link = link.data(data.edges)
+  link = link.data(currentdata.edges)
              .enter().append("line")
              .attr("class", "link");
 
-  node = node.data(data.tweets)
+  node = node.data(currentdata.tweets)
              .enter().append("circle")
                 .attr("class", "node")
                 .attr("cx", function(d) { x = linearScale(d.created_at_numeric); return x; })

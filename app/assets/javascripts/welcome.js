@@ -145,6 +145,7 @@ function visualizeit(upToTime){
     // console.log("data.tweets.length: " + data.tweets.length);
 
     force
+      .theta(10)  // Removes "jiggle"
       .nodes(currentdata.tweets)
       .links(currentdata.edges)
       .start();

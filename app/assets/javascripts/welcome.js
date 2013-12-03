@@ -51,6 +51,7 @@ $(function() {
 });
 
 function filter_singletone(){
+	console.log(data.tweets.length);
 	singletnodes = new Array();
 	var k = 0;
 	for(var i = 0; i < data.tweets.length; i++) {
@@ -75,6 +76,7 @@ $(function() {
 		if ($(this).is (':checked')){
 			singletone = 1;
 			currentdata.tweets = filter_singletone();
+			currentdata.edges = new Array();
 			visualizeit(scaledvalue);
 		}else{
 			singletone = 0;

@@ -7,13 +7,26 @@ require 'json'
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-json = File.read('data/tweets.json')
+puts "ENV['dataset'] = #{ENV['dataset']}"
+
+if ENV['dataset'] == 'small'
+  filename = 'data/tweets.json'
+elsif ENV['dataset'] == 'medium'
+  filename = 'data/tweets_100.json'
+else
+  filename = 'data/tweets.json'
+end
+
+puts "Reading data from: #{filename}"
+
+
+json = File.read(filename)
 tweets = JSON.parse(json)
 
 tweets.each do |id, tweet_json|
 
-  puts "Making Child Tweet"
   # Child Tweet
+  puts "Making Child Tweet: #{id}"
   child = Tweet.create!(
     twitter_id: tweet_json['id_str'],
     text: tweet_json['text'],
@@ -31,7 +44,7 @@ tweets.each do |id, tweet_json|
       created_at: parent_json['created_at']
     )  
 
-    puts 'Making Edge'
+    # puts 'Making Edge'
     Edge.create!(child: child, parent: parent)
   end
 end

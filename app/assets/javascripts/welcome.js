@@ -11,7 +11,7 @@ d3.json("/graph.json", function(error, json){
 });
 
 $(function () {
-  $('body').layout({ 
+  $('body').layout({
     applyDemoStyles: true,
     east__size:    250,
       east__minSize: 250,
@@ -51,7 +51,7 @@ $(function() {
     $('#slider-value').text(1);
 });
 
-function check_actiontype(){  
+function check_actiontype(){
   if($('input[name=action-group]:radio:checked').val()=='show'){
     singleton = 1;
   }
@@ -60,7 +60,7 @@ function check_actiontype(){
   }
 }
 
-function check_tweettype(){  
+function check_tweettype(){
   if($('input[name=tweet-group]:radio:checked').val()=='reply'){
     reply = 1;
   }

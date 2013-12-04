@@ -2,6 +2,7 @@ var data;
 var currentdata;
 var scaledvalue = 100;
 var singleton = -1;
+var reply = -1;
 d3.json("/graph.json", function(error, json){
   if(error) return console.warn(error);
   data = json;
@@ -59,6 +60,15 @@ function check_actiontype(){
 	}
 }
 
+function check_tweettype(){  
+  if($('input[name=tweet-group]:radio:checked').val()=='reply'){
+    reply = 1;
+  }
+  else if($('input[name=tweet-group]:radio:checked').val()=='retweet'){
+    reply = 0;
+  }
+}
+
 $(function() {
 	$("#nodetype").removeAttr('checked');
 	$("#show").attr("disabled",true);
@@ -102,23 +112,67 @@ function get_nodetype(d){
 
 function get_radius(d){
   if(singleton==-1){
-    return 12;
+    return check_reply(d);
   }
   if(singleton==1){
     if(get_nodetype(d)=='s'){
-      return 12;
+      return check_reply(d);
     }else{
       return 0;
     }
   }
   if(singleton==0){
     if(get_nodetype(d)=='ns'){
+      return check_reply(d);
+    }else{
+      return 0;
+    }
+  }
+}
+
+function check_reply(d){
+  if(reply==-1){
+    return 12;
+  }
+  if(reply==1){
+    if(d.in_reply_to_status_str!=null){
+      return 12;
+    }else{
+      return 0;
+    }
+  }
+  if(reply==0){
+    if(d.in_reply_to_status_str!=null){
       return 12;
     }else{
       return 0;
     }
   }
 }
+
+$(function() {
+  $("#tweettype").removeAttr('checked');
+  $("#reply").attr("disabled",true);
+  $("#retweet").attr("disabled",true);
+  $('#tweettype').click(function (){
+    if ($(this).is (':checked')){
+      $("#reply").removeAttr("disabled");
+      $("#retweet").removeAttr("disabled");
+      check_tweettype();
+    }else{
+      reply = -1;
+      $("#reply").attr("disabled",true);
+      $("#retweet").attr("disabled",true);
+      currentdata = jQuery.extend(true, {}, data);
+    }
+    visualizeit(scaledvalue);
+  });
+  
+  $(".tweet-group").click(function(){
+      check_tweettype();
+      visualizeit(scaledvalue);
+   });
+});
 
 //upToTime show time scale from 0 to 100. If 100, will show 100% time scale.
 function visualizeit(upToTime){

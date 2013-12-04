@@ -12,13 +12,21 @@
 </div>
 
 <div id="paneEast" class="ui-layout-east"> 
-	<div id="nodecontrol">
+	<div id="singlecontrol">
 		<form>
 			<input type="checkbox" id="nodetype">Singleton<br>
-			<input type="radio" id="show" class="action-group" name="action-group" value="show"> Show
+			<input type="radio" id="show" class="action-group" name="action-group" value="show" checked>Show
 			<input type="radio" id="hide" class="action-group" name="action-group" value="hide">Hide
 		</form>
 	</div>
+	
+	<div id="repy-retweet">
+    <form>
+      <input type="checkbox" id="tweettype">Reply vs. Retweet<br>
+      <input type="radio" id="reply" class="tweet-group" name="tweet-group" value="reply" checked>Reply
+      <input type="radio" id="retweet" class="tweet-group" name="tweet-group" value="retweet"> Retweet
+    </form>
+  </div>
 
     <%= render 'tweet_info' %>
 

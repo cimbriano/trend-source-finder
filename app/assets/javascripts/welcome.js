@@ -258,13 +258,9 @@ function visualizeit(fromTime, upToTime){
   function mouseover_node(d){
     d3.selectAll(".node").classed('hovered', false);
     d3.select(this).classed('hovered', true);
-    var info = '';
-    d3.json(d.url, function(error, json){
-      info = info+json.id;
-    });
     
     d3.select(this).append("title")
-          .text(info);
+          .text(d.id);
   }
 
   function tick() {

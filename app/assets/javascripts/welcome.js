@@ -7,7 +7,7 @@ d3.json("/graph.json", function(error, json){
   if(error) return console.warn(error);
   data = json;
   currentdata = jQuery.extend(true, {}, data);
-  visualizeit(100);
+  visualizeit(1, 100);
 });
 
 $(function () {
@@ -34,15 +34,15 @@ $(function () {
 
 $(function() {
   $( "#slider" ).slider({
-       range: false,
+       range: true,
        min: 1,
        max: 100,
        step: 1,
-       values: [ 100],
+       values: [ 1, 100],
        slide: function( event, ui ) {
-           $('#slider-value').text(ui.values[ 0 ]);
-           scaledvalue = ui.values[0];
-           visualizeit(ui.values[0]);
+           $('#slider-value').text(ui.values[ 0 ] + " to " + ui.values[ 1 ]);
+           scaledvalue = ui.values[1];
+           visualizeit(ui.values[0], ui.values[1]);
        },
        //stop: function(event, ui) {
        //    visualizeit(ui.values[0]);
@@ -84,12 +84,12 @@ $(function() {
 			$("#hide").attr("disabled",true);
 			currentdata = jQuery.extend(true, {}, data);
 		}
-		visualizeit(scaledvalue);
+		visualizeit(1, scaledvalue);
 	});
 	
 	$(".action-group").click(function(){
     	check_actiontype();
-    	visualizeit(scaledvalue);
+    	visualizeit(1, scaledvalue);
    });
 });
 
@@ -165,17 +165,17 @@ $(function() {
       $("#retweet").attr("disabled",true);
       currentdata = jQuery.extend(true, {}, data);
     }
-    visualizeit(scaledvalue);
+    visualizeit(1, scaledvalue);
   });
   
   $(".tweet-group").click(function(){
       check_tweettype();
-      visualizeit(scaledvalue);
+      visualizeit(1, scaledvalue);
    });
 });
 
 //upToTime show time scale from 0 to 100. If 100, will show 100% time scale.
-function visualizeit(upToTime){
+function visualizeit(fromTime, upToTime){
 	d3.select("svg").remove();
 	var width = $('#paneCenter').width();
 	var height = $('#paneCenter').height()-120;
@@ -204,7 +204,7 @@ function visualizeit(upToTime){
 
   var linearScale = d3.scale.linear()
     .domain([d3.min(initialScaleData), d3.max(initialScaleData)])
-    .range([padding, 100/upToTime*(width - padding)]);
+    .range([(fromTime/10)*(padding - width), (100/upToTime)*(width - padding)]);
 
   function getDate(d){return new Date(d.jsonDate);}
 
@@ -213,11 +213,12 @@ function visualizeit(upToTime){
 
   var timeScale = d3.time.scale()
                 .domain([minDate,maxDate])
-                .range([padding, 100/upToTime*(width - padding)]);
+                .range([(fromTime/10)*(padding - width), (100/upToTime)*(width - padding)]);
   
   var xAxis = d3.svg.axis()
     .scale(timeScale)
     .orient("bottom")
+    .ticks(5)
     .tickFormat(d3.time.format("%b-%d"));  
   
   svg.append("g")

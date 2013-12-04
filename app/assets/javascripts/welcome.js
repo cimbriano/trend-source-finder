@@ -53,11 +53,9 @@ $(function() {
 function check_actiontype(){	
 	if($('input[name=action-group]:radio:checked').val()=='show'){
 		singleton = 1;
-		currentdata.edges = new Array();
 	}
 	else if($('input[name=action-group]:radio:checked').val()=='hide'){
 		singleton = 0;
-		currentdata = jQuery.extend(true, {}, data);
 	}
 }
 
@@ -66,15 +64,12 @@ $(function() {
 	$("#show").attr("disabled",true);
 	$("#hide").attr("disabled",true);
 	$('#nodetype').click(function (){
-		console.log('inside checkbox');
 		if ($(this).is (':checked')){
-			console.log('checkbox clicked');
 			$("#show").removeAttr("disabled");
 			$("#hide").removeAttr("disabled");
 			check_actiontype();
 		}else{
 		  singleton = -1;
-			console.log('unchecked box');
 			$("#show").attr("disabled",true);
 			$("#hide").attr("disabled",true);
 			currentdata = jQuery.extend(true, {}, data);
@@ -169,7 +164,7 @@ function visualizeit(upToTime){
   var xAxis = d3.svg.axis()
     .scale(timeScale)
     .orient("bottom")
-    .tickFormat(d3.time.format("%Y-%m-%d"));  
+    .tickFormat(d3.time.format("%b-%d"));  
   
   svg.append("g")
     .attr("class", "axis")
@@ -196,25 +191,29 @@ function visualizeit(upToTime){
                 .on("click", nodeClick);
 
   function tick() {
+    node.attr("cy", function(d) { return d.y; });
+    if(singleton==1){
+      return;
+    }
     link.attr("x1", function(d) { return linearScale(d.source.created_at_numeric); })
         .attr("y1", function(d) { return d.source.y; })
         .attr("x2", function(d) { return linearScale(d.target.created_at_numeric); })
         .attr("y2", function(d) { return d.target.y; });
-
-    node.attr("cy", function(d) { return d.y; });
     // .attr("cx", function(d) { return d.x; })
   }
 
   function nodeClick(d) {
-
     d3.selectAll(".node").classed('selected', false);
     d3.select(this).classed('selected', true);
 
     // Get the specific tweet data
-    d3.json(d.url, function(error, json) {
-
+    d3.json(d.url, function(error, json){
       $("#text").text(json.text);
-      $("#time").text(json.created_at);
+
+      var date = d3.time.format('%Y-%m-%dT%H:%M:%S.000Z').parse(json.created_at);
+      $("#day").text(d3.time.format('%a %b-%d, %Y')(new Date(date)));
+      $("#time").text(d3.time.format('%I:%M:%S %p')(new Date(date)));
+
       $("#replyid").text(json.in_reply_to_status_str)
 
       if(json.retweeted_id==null){

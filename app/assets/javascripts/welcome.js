@@ -50,32 +50,6 @@ $(function() {
     $('#slider-value').text(1);
 });
 
-function filter_nodes(singleton){
-	var nodes = new Array();
-	var k = 0;
-	for(var i = 0; i < data.tweets.length; i++) {
-        tweetid = data.tweets[i].id;
-        var found = 0;
-        for(var j = 0; j < data.edges.length; j++) {
-        	if(data.edges[j].parent_id==tweetid | data.edges[j].child_id==tweetid){
-        		found = 1;
-        		if(singleton==1){
-        			break;
-        		}
-        	}
-        }
-        if(found==0 && singleton==1){
-        	nodes[k] = data.tweets[i];
-        	k++;
-        }
-        if(found==1 && singleton==0){
-        	nodes[k] = data.tweets[i];
-        	k++;
-        }
-    }
-    return nodes;
-}
-
 function check_actiontype(){	
 	if($('input[name=action-group]:radio:checked').val()=='show'){
 		singleton = 1;

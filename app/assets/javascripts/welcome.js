@@ -169,7 +169,7 @@ function visualizeit(upToTime){
   var xAxis = d3.svg.axis()
     .scale(timeScale)
     .orient("bottom")
-    .tickFormat(d3.time.format("%Y-%m-%d"));  
+    .tickFormat(d3.time.format("%b-%d"));  
   
   svg.append("g")
     .attr("class", "axis")

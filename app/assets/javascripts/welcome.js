@@ -13,25 +13,25 @@ d3.json("/graph.json", function(error, json){
 });
 
 $(function () {
-	$('body').layout({ 
-		applyDemoStyles: true,
-		east__size:    250,
-	    east__minSize: 250,
-	    east__initClosed: false,
-	    east__resizable: true,
-	    east__initHidden: false,
-	    center__initClosed: false,
-	    center__resizable: true,
-	    center__initHidden: false,
-	    //south__initHidden: false,
-	    center__onresize:		$.layout.callbacks.resizePaneAccordions,
-		center__paneSelector: "#paneCenter",
-		west__paneSelector: "#paneWest",
-		north__paneSelector: "#paneNorth",
-		east__paneSelector: "#paneEast",
-		south__paneSelector: "#paneSouth"
-	});
-	
+  $('body').layout({
+    applyDemoStyles: true,
+    east__size:    250,
+      east__minSize: 250,
+      east__initClosed: false,
+      east__resizable: true,
+      east__initHidden: false,
+      center__initClosed: false,
+      center__resizable: true,
+      center__initHidden: false,
+      //south__initHidden: false,
+      center__onresize:   $.layout.callbacks.resizePaneAccordions,
+    center__paneSelector: "#paneCenter",
+    west__paneSelector: "#paneWest",
+    north__paneSelector: "#paneNorth",
+    east__paneSelector: "#paneEast",
+    south__paneSelector: "#paneSouth"
+  });
+  
 });
 
 $(function() {
@@ -54,16 +54,16 @@ $(function() {
     $('#slider-value').text(1);
 });
 
-function check_actiontype(){	
-	if($('input[name=action-group]:radio:checked').val()=='show'){
-		singleton = 1;
-	}
-	else if($('input[name=action-group]:radio:checked').val()=='hide'){
-		singleton = 0;
-	}
+function check_actiontype(){
+  if($('input[name=action-group]:radio:checked').val()=='show'){
+    singleton = 1;
+  }
+  else if($('input[name=action-group]:radio:checked').val()=='hide'){
+    singleton = 0;
+  }
 }
 
-function check_tweettype(){  
+function check_tweettype(){
   if($('input[name=tweet-group]:radio:checked').val()=='reply'){
     reply = 1;
   }
@@ -187,14 +187,14 @@ $(function() {
 
 //upToTime show time scale from 0 to 100. If 100, will show 100% time scale.
 function visualizeit(fromTime, upToTime){
-	d3.select("svg").remove();
-	var width = $('#paneCenter').width();
-	var height = $('#paneCenter').height()-120;
+  d3.select("svg").remove();
+  var width = $('#paneCenter').width();
+  var height = $('#paneCenter').height()-120;
   var padding = 20;
   
   var force = d3.layout.force()
     .size([width, height])
-    .charge(-20)
+    // .charge(-20)
     .linkDistance(40)
     .on("tick", tick);
   
@@ -293,26 +293,25 @@ function visualizeit(fromTime, upToTime){
 
     // Get the specific tweet data
     d3.json(d.url, function(error, json){
-      $("#text").text(json.text);
+      $("#tweet-details-text").text(json.text);
 
       var date = d3.time.format('%Y-%m-%dT%H:%M:%S.000Z').parse(json.created_at);
-      $("#day").text(d3.time.format('%a %b-%d, %Y')(new Date(date)));
-      $("#time").text(d3.time.format('%I:%M:%S %p')(new Date(date)));
+      $("#tweet-details-day").text(d3.time.format('%a %b-%d, %Y')(new Date(date)));
+      $("#tweet-details-time").text(d3.time.format('%I:%M:%S %p')(new Date(date)));
 
       if(json.in_reply_to_status_str==null){
-        $("#replyid").text('None');
+        $("#tweet-details-replyto-id").text('None');
       }else{
-        $("#replyid").text(json.in_reply_to_status_str);
+        $("#tweet-details-replyto-id").text(json.in_reply_to_status_str);
       }
-            
+
       if(json.retweeted_id==null){
-        console.log('no');
-      	$("#retweet").text('No');
+        $("#tweet-details-retweet").text('No');
       }else{
-        console.log('yes');
-      	$("#retweet").text('Yes');
+        $("#tweet-details-retweet").text('Yes');
       }
-      $("#tweetid").text(json.id);
+
+      $("#tweet-details-id").text(json.id);
     });
   }
 }

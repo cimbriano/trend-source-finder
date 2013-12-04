@@ -204,7 +204,13 @@ function visualizeit(fromTime, upToTime){
 
   var linearScale = d3.scale.linear()
     .domain([d3.min(initialScaleData), d3.max(initialScaleData)])
-    .range([(fromTime/10)*(padding - width), (100/upToTime)*(width - padding)]);
+    //.range([padding, (width - padding)]);
+    .range([padding - (fromTime/100)*(width), (100/upToTime)*(width - padding)]);
+    
+    var linearScaleY = d3.scale.linear()
+    .domain([d3.min(initialScaleData), d3.max(initialScaleData)])
+    //.range([padding, (width - padding)]);
+    .range([padding - (fromTime/100)*(width), (100/upToTime)*(width - padding)]);
 
   function getDate(d){return new Date(d.jsonDate);}
 
@@ -213,7 +219,8 @@ function visualizeit(fromTime, upToTime){
 
   var timeScale = d3.time.scale()
                 .domain([minDate,maxDate])
-                .range([(fromTime/10)*(padding - width), (100/upToTime)*(width - padding)]);
+                //.range([padding, (width - padding)]);
+                .range([padding - (fromTime/100)*(width), (100/upToTime)*(width - padding)]);
   
   var xAxis = d3.svg.axis()
     .scale(timeScale)
@@ -257,7 +264,7 @@ function visualizeit(fromTime, upToTime){
   }
 
   function tick() {
-    node.attr("cy", function(d) { return d.y; });
+      node.attr("cy", function(d) { return d.y; });
     
     if(singleton==1){
       return;
@@ -281,9 +288,12 @@ function visualizeit(fromTime, upToTime){
       $("#day").text(d3.time.format('%a %b-%d, %Y')(new Date(date)));
       $("#time").text(d3.time.format('%I:%M:%S %p')(new Date(date)));
 
-      $("#replyid").text(json.in_reply_to_status_str);
-  //console.log(d.retweeted_id==null);
-      
+      if(json.in_reply_to_status_str==null){
+        $("#replyid").text('None');
+      }else{
+        $("#replyid").text(json.in_reply_to_status_str);
+      }
+            
       if(json.retweeted_id==null){
         console.log('no');
       	$("#retweet").text('No');

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131120232510) do
+ActiveRecord::Schema.define(version: 20131204143757) do
 
   create_table "edges", force: true do |t|
     t.datetime "created_at"
@@ -30,8 +30,10 @@ ActiveRecord::Schema.define(version: 20131120232510) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.string   "retweeted_id"
+    t.string   "in_reply_to_status_str"
   end
 
+  add_index "tweets", ["in_reply_to_status_str"], name: "index_tweets_on_in_reply_to_status_str"
   add_index "tweets", ["user_id"], name: "index_tweets_on_user_id"
 
   create_table "users", force: true do |t|

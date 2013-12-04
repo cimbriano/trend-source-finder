@@ -28,10 +28,11 @@ tweets.each do |id, tweet_json|
   # Child Tweet
   puts "Making Child Tweet: #{id}"
   child = Tweet.create!(
-    twitter_id: tweet_json['id_str'],
+    twitter_id: tweet_json['id_str'], # Twitter's ID for this tweet
     text: tweet_json['text'],
     created_at: tweet_json['created_at'],
-    retweeted_id: if tweet_json.include?('retweeted_status') then tweet_json['retweeted_status']['id_str'] end
+    retweeted_id: if tweet_json.include?('retweeted_status') then tweet_json['retweeted_status']['id_str'] end,
+    in_reply_to_status_str: tweet_json['in_reply_to_status_id_str']
   )
 
   if tweet_json.include?('retweeted_status')

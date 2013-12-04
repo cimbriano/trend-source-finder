@@ -210,9 +210,12 @@ function visualizeit(upToTime){
     // Get the specific tweet data
     d3.json(d.url, function(error, json){
       $("#text").text(json.text);
+
       var date = d3.time.format('%Y-%m-%dT%H:%M:%S.000Z').parse(json.created_at);
       $("#day").text(d3.time.format('%a %b-%d, %Y')(new Date(date)));
       $("#time").text(d3.time.format('%I:%M:%S %p')(new Date(date)));
+
+      $("#replyid").text(json.in_reply_to_status_str);
 
       if(json.retweeted_id==null){
       	$("#retweet").text('Yes');

@@ -1,6 +1,7 @@
 var data;
 var currentdata;
 var scaledvalue = 100;
+var singleton = -1;
 d3.json("/graph.json", function(error, json){
   if(error) return console.warn(error);
   data = json;
@@ -50,7 +51,6 @@ $(function() {
 });
 
 function filter_nodes(singleton){
-	//console.log(data.tweets.length);
 	var nodes = new Array();
 	var k = 0;
 	for(var i = 0; i < data.tweets.length; i++) {
@@ -76,26 +76,14 @@ function filter_nodes(singleton){
     return nodes;
 }
 
-function take_edges(){
-	
-}
-
-function check_actiontype(){
-	
+function check_actiontype(){	
 	if($('input[name=action-group]:radio:checked').val()=='show'){
-		var singleton = 1;
-		currentdata.tweets = filter_nodes(singleton);
+		singleton = 1;
 		currentdata.edges = new Array();
 	}
 	else if($('input[name=action-group]:radio:checked').val()=='hide'){
-		var singleton = 0;
-		//currentdata.edges = take_edges();
-		currentdata.tweets = filter_nodes(singleton);
-		/*currentdata.edges = new Array();
-		for(var i=0;i<data.edges.length;i++){
-			currentdata.edges[i] = new Object(data.edges[i]);
-		}*/
-		//currentdata.edges = jQuery.extend(true, {}, data.edges);
+		singleton = 0;
+		currentdata = jQuery.extend(true, {}, data);
 	}
 }
 
@@ -111,10 +99,10 @@ $(function() {
 			$("#hide").removeAttr("disabled");
 			check_actiontype();
 		}else{
+		  singleton = -1;
 			console.log('unchecked box');
 			$("#show").attr("disabled",true);
 			$("#hide").attr("disabled",true);
-			
 			currentdata = jQuery.extend(true, {}, data);
 		}
 		visualizeit(scaledvalue);
@@ -123,79 +111,115 @@ $(function() {
 	$(".action-group").click(function(){
     	check_actiontype();
     	visualizeit(scaledvalue);
-    });
+   });
 });
+
+function get_nodetype(d){
+  var tweetid = d.id;
+  var found = 0;
+  for(var j = 0; j < data.edges.length; j++) {
+    if(data.edges[j].parent_id==tweetid | data.edges[j].child_id==tweetid){
+      found = 1;
+      break;
+    }
+  }
+  if(found==0){
+    return 's';
+  }
+  else{
+    return 'ns';
+  }
+}
+
+function get_radius(d){
+  if(singleton==-1){
+    return 12;
+  }
+  if(singleton==1){
+    if(get_nodetype(d)=='s'){
+      return 12;
+    }else{
+      return 0;
+    }
+  }
+  if(singleton==0){
+    if(get_nodetype(d)=='ns'){
+      return 12;
+    }else{
+      return 0;
+    }
+  }
+}
 
 //upToTime show time scale from 0 to 100. If 100, will show 100% time scale.
 function visualizeit(upToTime){
 	d3.select("svg").remove();
 	var width = $('#paneCenter').width();
-  	var height = $('#paneCenter').height()-120;
-    var padding = 20;
-    
-    var force = d3.layout.force()
+	var height = $('#paneCenter').height()-120;
+  var padding = 20;
+  
+  var force = d3.layout.force()
     .size([width, height])
     .charge(-400)
     .linkDistance(40)
     .on("tick", tick);
-    
-    var svg = d3.select("#canvas").append("svg")
+  
+  var svg = d3.select("#canvas").append("svg")
     .attr("width", width)
     .attr("height", height);
     
-    var link = svg.selectAll(".link");
-    var node = svg.selectAll(".node");
-    
-    // Make a linear scale for the x-postion
-    var initialScaleData = [];
-    var stringDate = [];
-    for(var i = 0; i < currentdata.tweets.length; i++) {
-        initialScaleData[i] = currentdata.tweets[i].created_at_numeric;
-        stringDate[i] = currentdata.tweets[i].created_at;
-    }
+  var link = svg.selectAll(".link");
+  var node = svg.selectAll(".node");
+  
+  // Make a linear scale for the x-postion
+  var initialScaleData = [];
+  var stringDate = [];
+  for(var i = 0; i < currentdata.tweets.length; i++) {
+      initialScaleData[i] = currentdata.tweets[i].created_at_numeric;
+      stringDate[i] = currentdata.tweets[i].created_at;
+  }
 
-    var linearScale = d3.scale.linear()
-      .domain([d3.min(initialScaleData), d3.max(initialScaleData)])
-      .range([padding, 100/upToTime*(width - padding)]);
+  var linearScale = d3.scale.linear()
+    .domain([d3.min(initialScaleData), d3.max(initialScaleData)])
+    .range([padding, 100/upToTime*(width - padding)]);
 
-    function getDate(d){return new Date(d.jsonDate);}
+  function getDate(d){return new Date(d.jsonDate);}
 
+  var minDate = new Date(stringDate[initialScaleData.indexOf(d3.min(initialScaleData))]),
+      maxDate = new Date(stringDate[initialScaleData.indexOf(d3.max(initialScaleData))]);
 
-    var minDate = new Date(stringDate[initialScaleData.indexOf(d3.min(initialScaleData))]),
-        maxDate = new Date(stringDate[initialScaleData.indexOf(d3.max(initialScaleData))]);
-
-    var timeScale = d3.time.scale()
-                  .domain([minDate,maxDate])
-                  .range([padding, 100/upToTime*(width - padding)]);
-    
-    var xAxis = d3.svg.axis()
-      .scale(timeScale)
-      .orient("bottom")
-      .tickFormat(d3.time.format("%Y-%m-%d"));  
-    
-    svg.append("g")
-      .attr("class", "axis")
-      .attr("transform", "translate(0," + (height - padding) + ")")
-      .call(xAxis);
-    
-    force
-      .theta(10)  // Removes "jiggle"
-      .nodes(currentdata.tweets)
-      .links(currentdata.edges)
-      .start();
+  var timeScale = d3.time.scale()
+                .domain([minDate,maxDate])
+                .range([padding, 100/upToTime*(width - padding)]);
+  
+  var xAxis = d3.svg.axis()
+    .scale(timeScale)
+    .orient("bottom")
+    .tickFormat(d3.time.format("%Y-%m-%d"));  
+  
+  svg.append("g")
+    .attr("class", "axis")
+    .attr("transform", "translate(0," + (height - padding) + ")")
+    .call(xAxis);
+  
+  force
+    .theta(10)  // Removes "jiggle"
+    .nodes(currentdata.tweets)
+    .links(currentdata.edges)
+    .start();
 
   link = link.data(currentdata.edges)
              .enter().append("line")
              .attr("class", "link");
 
-  node = node.data(currentdata.tweets)
-             .enter().append("circle")
+  node = node.data(currentdata.tweets);
+             
+  node = node.enter().append("circle")
                 .attr("class", "node")
                 .attr("cx", function(d) { x = linearScale(d.created_at_numeric); return x; })
                 // .attr("cy", function(d) { return height / 2; } )
-                .attr("r", function(d) { return 12; })
+                .attr("r", function(d) { return get_radius(d); })
                 .on("click", nodeClick);
-
 
   function tick() {
     link.attr("x1", function(d) { return linearScale(d.source.created_at_numeric); })

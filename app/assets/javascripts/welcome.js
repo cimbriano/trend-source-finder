@@ -215,6 +215,7 @@ function visualizeit(upToTime){
 
       $("#text").text(json.text);
       $("#time").text(json.created_at);
+      $("#replyid").text(json.in_reply_to_status_str)
 
       if(json.retweeted_id==null){
       	$("#retweet").text('Yes');

@@ -14,6 +14,8 @@
 
 class Tweet < ActiveRecord::Base
   belongs_to :user
+  has_one :edge, foreign_key: 'parent_id'
+  has_one :child, through: :edge
 
   def in_reply_to_status
     Tweet.find_by(twitter_id: in_reply_to_status_str)

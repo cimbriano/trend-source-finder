@@ -281,9 +281,12 @@ function visualizeit(fromTime, upToTime){
       $("#day").text(d3.time.format('%a %b-%d, %Y')(new Date(date)));
       $("#time").text(d3.time.format('%I:%M:%S %p')(new Date(date)));
 
-      $("#replyid").text(json.in_reply_to_status_str);
-  //console.log(d.retweeted_id==null);
-      
+      if(json.in_reply_to_status_str==null){
+        $("#replyid").text('None');
+      }else{
+        $("#replyid").text(json.in_reply_to_status_str);
+      }
+            
       if(json.retweeted_id==null){
         console.log('no');
       	$("#retweet").text('No');

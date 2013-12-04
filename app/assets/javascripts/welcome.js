@@ -34,7 +34,7 @@ $(function () {
 
 $(function() {
   $( "#slider" ).slider({
-       range: false,
+       range: true,
        min: 1,
        max: 100,
        step: 1,
@@ -204,7 +204,7 @@ function visualizeit(fromTime, upToTime){
 
   var linearScale = d3.scale.linear()
     .domain([d3.min(initialScaleData), d3.max(initialScaleData)])
-    .range([padding, 100/upToTime*(width - padding)]);
+    .range([(fromTime/10)*(padding - width), (100/upToTime)*(width - padding)]);
 
   function getDate(d){return new Date(d.jsonDate);}
 
@@ -213,7 +213,7 @@ function visualizeit(fromTime, upToTime){
 
   var timeScale = d3.time.scale()
                 .domain([minDate,maxDate])
-                .range([padding, 100/upToTime*(width - padding)]);
+                .range([(fromTime/10)*(padding - width), (100/upToTime)*(width - padding)]);
   
   var xAxis = d3.svg.axis()
     .scale(timeScale)

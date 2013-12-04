@@ -1,6 +1,6 @@
 var data;
 var currentdata;
-var radius = 5;
+var radius = 10;
 var scaledvalue_start = 1;
 var scaledvalue = 100;
 var singleton = -1;
@@ -89,8 +89,8 @@ $(function() {
 		}
 		visualizeit(scaledvalue_start, scaledvalue);
 	});
-	
-	$(".action-group").click(function(){
+
+  $(".action-group").click(function(){
     	check_actiontype();
     	visualizeit(scaledvalue_start, scaledvalue);
    });
@@ -119,7 +119,9 @@ function get_radius(d){
   }
   if(singleton==1){
     if(get_nodetype(d)=='s'){
+    //if(d.in_reply_to_status_str==null && d.retweeted_id==null){
       return check_reply(d);
+      //return radius;
     }else{
       return 0;
     }
@@ -130,6 +132,12 @@ function get_radius(d){
     }else{
       return 0;
     }
+    /*if(d.in_reply_to_status_str==null && d.retweeted_id==null){
+      return 0;
+    }else{
+      //return check_reply(d);
+      return radius;
+    }*/
   }
 }
 
@@ -145,7 +153,7 @@ function check_reply(d){
     }
   }
   if(reply==0){
-    if(d.in_reply_to_status_str!=null){
+    if(d.retweeted_id!=null){
       return radius;
     }else{
       return 0;

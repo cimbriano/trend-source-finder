@@ -1,5 +1,7 @@
 var data;
 var currentdata;
+var radius = 5;
+var scaledvalue_start = 1;
 var scaledvalue = 100;
 var singleton = -1;
 var reply = -1;
@@ -41,6 +43,7 @@ $(function() {
        values: [ 1, 100],
        slide: function( event, ui ) {
            $('#slider-value').text(ui.values[ 0 ] + " to " + ui.values[ 1 ]);
+           scaledvalue_start = ui.values[0];
            scaledvalue = ui.values[1];
            visualizeit(ui.values[0], ui.values[1]);
        },
@@ -70,26 +73,26 @@ function check_tweettype(){
 }
 
 $(function() {
-  $("#nodetype").removeAttr('checked');
-  $("#show").attr("disabled",true);
-  $("#hide").attr("disabled",true);
-  $('#nodetype').click(function (){
-    if ($(this).is (':checked')){
-      $("#show").removeAttr("disabled");
-      $("#hide").removeAttr("disabled");
-      check_actiontype();
-    }else{
-      singleton = -1;
-      $("#show").attr("disabled",true);
-      $("#hide").attr("disabled",true);
-      currentdata = jQuery.extend(true, {}, data);
-    }
-    visualizeit(1, scaledvalue);
-  });
-  
-  $(".action-group").click(function(){
-      check_actiontype();
-      visualizeit(1, scaledvalue);
+	$("#nodetype").removeAttr('checked');
+	$("#show").attr("disabled",true);
+	$("#hide").attr("disabled",true);
+	$('#nodetype').click(function (){
+		if ($(this).is (':checked')){
+			$("#show").removeAttr("disabled");
+			$("#hide").removeAttr("disabled");
+			check_actiontype();
+		}else{
+		  singleton = -1;
+			$("#show").attr("disabled",true);
+			$("#hide").attr("disabled",true);
+			currentdata = jQuery.extend(true, {}, data);
+		}
+		visualizeit(scaledvalue_start, scaledvalue);
+	});
+	
+	$(".action-group").click(function(){
+    	check_actiontype();
+    	visualizeit(scaledvalue_start, scaledvalue);
    });
 });
 
@@ -132,18 +135,18 @@ function get_radius(d){
 
 function check_reply(d){
   if(reply==-1){
-    return 12;
+    return radius;
   }
   if(reply==1){
     if(d.in_reply_to_status_str!=null){
-      return 12;
+      return radius;
     }else{
       return 0;
     }
   }
   if(reply==0){
     if(d.in_reply_to_status_str!=null){
-      return 12;
+      return radius;
     }else{
       return 0;
     }
@@ -165,12 +168,12 @@ $(function() {
       $("#retweet").attr("disabled",true);
       currentdata = jQuery.extend(true, {}, data);
     }
-    visualizeit(1, scaledvalue);
+    visualizeit(scaledvalue_start, scaledvalue);
   });
   
   $(".tweet-group").click(function(){
       check_tweettype();
-      visualizeit(1, scaledvalue);
+      visualizeit(scaledvalue_start, scaledvalue);
    });
 });
 

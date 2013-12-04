@@ -178,10 +178,8 @@ function visualizeit(upToTime){
       .attr("transform", "translate(0," + (height - padding) + ")")
       .call(xAxis);
     
-    
-    // console.log("data.tweets.length: " + data.tweets.length);
-
     force
+      .theta(10)  // Removes "jiggle"
       .nodes(currentdata.tweets)
       .links(currentdata.edges)
       .start();
@@ -216,29 +214,14 @@ function visualizeit(upToTime){
 
     // Get the specific tweet data
     d3.json(d.url, function(error, json) {
-      //$("#tweet-details").text(json.created_at);
-      /*var desc = json.text;
-      var linktext = '';
-      var vals = desc.split(' ');
-      var i = 0, found = 0;
-      for(;i<vals.length;i++){
-      	if(vals[i].indexOf('http')!=-1){
-      		found = 1;
-      		break;
-      	}
-      }
-      if(found==1){
-      	console.log(vals[i]);
-      	linktext = vals[i];
-      }*/
-      
-      $("#text").text('Description: '+json.text);
-      $("#time").text('Time of Tweet: '+json.created_at);
-      if(d.retweeted_id==null){
-      //if(typeof(json.retweeted_id)=='string'){
-      	$("#retweet").text('Retweet?: Yes');
+
+      $("#text").text(json.text);
+      $("#time").text(json.created_at);
+
+      if(json.retweeted_id==null){
+      	$("#retweet").text('Yes');
       }else{
-      	$("#retweet").text('Retweet?: No');
+      	$("#retweet").text('No');
       }
       $("#tweetid").text(json.id);
     });

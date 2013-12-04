@@ -183,7 +183,7 @@ function visualizeit(fromTime, upToTime){
   
   var force = d3.layout.force()
     .size([width, height])
-    .charge(-400)
+    .charge(-20)
     .linkDistance(40)
     .on("tick", tick);
   
@@ -204,7 +204,13 @@ function visualizeit(fromTime, upToTime){
 
   var linearScale = d3.scale.linear()
     .domain([d3.min(initialScaleData), d3.max(initialScaleData)])
-    .range([(fromTime/10)*(padding - width), (100/upToTime)*(width - padding)]);
+    //.range([padding, (width - padding)]);
+    .range([padding - (fromTime/100)*(width), (100/upToTime)*(width - padding)]);
+    
+    var linearScaleY = d3.scale.linear()
+    .domain([d3.min(initialScaleData), d3.max(initialScaleData)])
+    //.range([padding, (width - padding)]);
+    .range([padding - (fromTime/100)*(width), (100/upToTime)*(width - padding)]);
 
   function getDate(d){return new Date(d.jsonDate);}
 
@@ -213,7 +219,8 @@ function visualizeit(fromTime, upToTime){
 
   var timeScale = d3.time.scale()
                 .domain([minDate,maxDate])
-                .range([(fromTime/10)*(padding - width), (100/upToTime)*(width - padding)]);
+                //.range([padding, (width - padding)]);
+                .range([padding - (fromTime/100)*(width), (100/upToTime)*(width - padding)]);
   
   var xAxis = d3.svg.axis()
     .scale(timeScale)
@@ -261,7 +268,7 @@ function visualizeit(fromTime, upToTime){
   }
 
   function tick() {
-    node.attr("cy", function(d) { return d.y; });
+      node.attr("cy", function(d) { return d.y; });
     
     if(singleton==1){
       return;

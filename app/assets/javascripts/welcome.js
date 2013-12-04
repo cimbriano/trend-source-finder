@@ -192,6 +192,7 @@ function visualizeit(upToTime){
 
   function tick() {
     node.attr("cy", function(d) { return d.y; });
+    
     if(singleton==1){
       return;
     }

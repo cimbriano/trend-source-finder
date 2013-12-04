@@ -49,7 +49,7 @@ $(function() {
     $('#slider-value').text(1);
 });
 
-function filter_nodes(singletone){
+function filter_nodes(singleton){
 	//console.log(data.tweets.length);
 	var nodes = new Array();
 	var k = 0;
@@ -59,14 +59,16 @@ function filter_nodes(singletone){
         for(var j = 0; j < data.edges.length; j++) {
         	if(data.edges[j].parent_id==tweetid | data.edges[j].child_id==tweetid){
         		found = 1;
-        		break;
+        		if(singleton==1){
+        			break;
+        		}
         	}
         }
-        if(found==0 && singletone==1){
+        if(found==0 && singleton==1){
         	nodes[k] = data.tweets[i];
         	k++;
         }
-        if(found==1 && singletone==0){
+        if(found==1 && singleton==0){
         	nodes[k] = data.tweets[i];
         	k++;
         }
@@ -74,17 +76,26 @@ function filter_nodes(singletone){
     return nodes;
 }
 
+function take_edges(){
+	
+}
+
 function check_actiontype(){
 	
 	if($('input[name=action-group]:radio:checked').val()=='show'){
-		var singletone = 1;
-		currentdata.tweets = filter_nodes(singletone);
+		var singleton = 1;
+		currentdata.tweets = filter_nodes(singleton);
 		currentdata.edges = new Array();
 	}
 	else if($('input[name=action-group]:radio:checked').val()=='hide'){
-		var singletone = 0;
-		currentdata.tweets = filter_nodes(singletone);
-		currentdata.edges = data.edges;
+		var singleton = 0;
+		//currentdata.edges = take_edges();
+		currentdata.tweets = filter_nodes(singleton);
+		/*currentdata.edges = new Array();
+		for(var i=0;i<data.edges.length;i++){
+			currentdata.edges[i] = new Object(data.edges[i]);
+		}*/
+		//currentdata.edges = jQuery.extend(true, {}, data.edges);
 	}
 }
 
@@ -104,7 +115,6 @@ $(function() {
 			$("#show").attr("disabled",true);
 			$("#hide").attr("disabled",true);
 			
-			singletone = -1;
 			currentdata = jQuery.extend(true, {}, data);
 		}
 		visualizeit(scaledvalue);

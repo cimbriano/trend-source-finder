@@ -14,10 +14,21 @@
 
 class Tweet < ActiveRecord::Base
   belongs_to :user
-  has_one :edge, foreign_key: 'parent_id'
-  has_one :child, through: :edge
+  has_many :edges, foreign_key: 'parent_id'
+  has_many :children, through: :edges
 
   def in_reply_to_status
     Tweet.find_by(twitter_id: in_reply_to_status_str)
+  end
+
+  def singleton?
+    # This did not retweet
+    # This is not in reply to another tweet
+    # This has no children
+    retweeted_id.blank? && in_reply_to_status_str.blank? && children.nil?
+  end
+
+  def root?
+    retweeted_id.blank? && in_reply_to_status_str.blank? && children.any?
   end
 end

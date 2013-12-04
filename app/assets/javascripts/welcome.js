@@ -233,16 +233,31 @@ function visualizeit(upToTime){
 
   link = link.data(currentdata.edges)
              .enter().append("line")
-             .attr("class", "link");
+             .attr("class", "link")
+             .on('mouseover', function(d, i){ return 'link test'; });
 
   node = node.data(currentdata.tweets);
              
   node = node.enter().append("circle")
+                .attr('id', function(d){ return d.id; })
                 .attr("class", "node")
                 .attr("cx", function(d) { x = linearScale(d.created_at_numeric); return x; })
                 // .attr("cy", function(d) { return height / 2; } )
                 .attr("r", function(d) { return get_radius(d); })
+                .on('mouseover', mouseover_node)
                 .on("click", nodeClick);
+
+  function mouseover_node(d){
+    d3.selectAll(".node").classed('hovered', false);
+    d3.select(this).classed('hovered', true);
+    var info = '';
+    d3.json(d.url, function(error, json){
+      info = info+json.id;
+    });
+    
+    d3.select(this).append("title")
+          .text(info);
+  }
 
   function tick() {
     node.attr("cy", function(d) { return d.y; });
@@ -257,7 +272,7 @@ function visualizeit(upToTime){
     // .attr("cx", function(d) { return d.x; })
   }
 
-  function nodeClick(d) {
+  function nodeClick(d, i) {
     d3.selectAll(".node").classed('selected', false);
     d3.select(this).classed('selected', true);
 
@@ -270,11 +285,14 @@ function visualizeit(upToTime){
       $("#time").text(d3.time.format('%I:%M:%S %p')(new Date(date)));
 
       $("#replyid").text(json.in_reply_to_status_str);
-
+  //console.log(d.retweeted_id==null);
+      
       if(json.retweeted_id==null){
-      	$("#retweet").text('Yes');
-      }else{
+        console.log('no');
       	$("#retweet").text('No');
+      }else{
+        console.log('yes');
+      	$("#retweet").text('Yes');
       }
       $("#tweetid").text(json.id);
     });

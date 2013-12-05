@@ -9,6 +9,7 @@ TrendSourceFinder::Application.routes.draw do
   root 'welcome#index'
   resources :tweets, :edges
   get 'graph' => 'graph#make'
+  get 'tree' => 'tree#make'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

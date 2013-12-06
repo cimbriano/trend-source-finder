@@ -197,10 +197,22 @@ function visualizeit(fromTime, upToTime){
   // Make a linear scale for the x-postion
   var initialScaleData = [];
   var stringDate = [];
+    var parent = [];
+    var mark = [];
+    var a = new Array(currentdata.tweets.length);
+    
   for(var i = 0; i < currentdata.tweets.length; i++) {
       initialScaleData[i] = currentdata.tweets[i].created_at_numeric;
       stringDate[i] = currentdata.tweets[i].created_at;
+      a[i] = [];
+      parent[i] = -1;
+      mark[i] = 0;
   }
+    
+    for(var i = 0; i < currentdata.edges.length; i++) {
+        parent[currentdata.edges[i].child_id] = currentdata.edges[i].parent_id;
+        a[currentdata.edges[i].parent_id].push(currentdata.edges[i].child_id);
+    }
 
   var linearScale = d3.scale.linear()
     .domain([d3.min(initialScaleData), d3.max(initialScaleData)])
@@ -247,8 +259,9 @@ function visualizeit(fromTime, upToTime){
   node = node.data(currentdata.tweets);
              
   node = node.enter().append("circle")
-                .attr('id', function(d){ return d.id; })
+                .attr("id", function(d){ return d.id; })
                 .attr("class", "node")
+                //.attr("class", function(d){ return d.id; })
                 .attr("cx", function(d) { x = linearScale(d.created_at_numeric); return x; })
                 // .attr("cy", function(d) { return height / 2; } )
                 .attr("r", function(d) { return get_radius(d); })
@@ -275,9 +288,34 @@ function visualizeit(fromTime, upToTime){
         .attr("y2", function(d) { return d.target.y; });
     // .attr("cx", function(d) { return d.x; })
   }
+    
+    function dfs(x) {
+        mark[x] = 1;
+        for(var i = 0;i<a[x].length;i++) {
+            if(mark[a[x][i]] == 0) {
+                dfs(a[x][i]);
+            }
+        }
+        
+    }
 
   function nodeClick(d, i) {
     d3.selectAll(".node").classed('selected', false);
+      var x = d3.select(this);
+      dfs(x.attr("id"));
+      var y = x.attr("id");
+      while(y != -1){
+          mark[y] = 1;
+          y = parent[y];
+      }
+      for(var i=0;i<currentdata.tweets.length;i++) {
+          if(mark[i] == 1){
+              d3.select("[id='" + i + "']").classed('selected', true);
+          }
+          mark[i] = 0;
+      }
+      
+      
     d3.select(this).classed('selected', true);
 
     // Get the specific tweet data

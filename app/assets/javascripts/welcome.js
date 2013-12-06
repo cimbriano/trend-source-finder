@@ -1,6 +1,6 @@
 var data;
 var currentdata;
-var radius = 10;
+var radius = 5;
 var scaledvalue_start = 1;
 var scaledvalue = 100;
 var singleton = -1;
@@ -219,7 +219,9 @@ function visualizeit(fromTime, upToTime){
       parent[i] = -1;
       mark[i] = 0;
   }
-    
+    for(var i = 0; i < currentdata.edges.length; i++) {
+        a[currentdata.edges[i].parent_id] = [];
+    }
     for(var i = 0; i < currentdata.edges.length; i++) {
         parent[currentdata.edges[i].child_id] = currentdata.edges[i].parent_id;
         a[currentdata.edges[i].parent_id].push(currentdata.edges[i].child_id);
@@ -312,22 +314,35 @@ function visualizeit(fromTime, upToTime){
 
   function nodeClick(d, i) {
     d3.selectAll(".node").classed('selected', false);
-      var x = d3.select(this);
+            var x = d3.select(this);
       dfs(x.attr("id"));
       var y = x.attr("id");
       while(y != -1){
           mark[y] = 1;
           y = parent[y];
       }
+      d3.selectAll(".node").sort(function (a, b) { // select the parent and sort the path's
+                                 if(mark[a.id]) {
+                                 return 1;
+                                 }
+                                 else {
+                                 return -1;
+                                 }
+                                 });
+
       for(var i=0;i<currentdata.tweets.length;i++) {
           if(mark[i] == 1){
-              d3.select("[id='" + i + "']").classed('selected', true);
+              d3.select("[id='" + i + "']")
+              .classed('selected', true)
+              .sort(function (a, b) {return 10;});
           }
           mark[i] = 0;
       }
       
       
-    d3.select(this).classed('selected', true);
+    d3.select(this).classed('selected', true).sort(function (a, b) {return 10;});
+      
+     
 
     // Get the specific tweet data
     d3.json(d.url, function(error, json){

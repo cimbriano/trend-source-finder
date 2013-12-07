@@ -63,6 +63,10 @@ gem "bullet", "~> 4.7.1", group: :development
 # Quiet down asset pipeline logs in dev mode
 gem "quiet_assets", "~> 1.0.2", group: :development
 
+group :production do
+  gem 'rails_12factor'
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

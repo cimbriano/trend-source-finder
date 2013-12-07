@@ -74,3 +74,5 @@ gem "quiet_assets", "~> 1.0.2", group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+ruby '2.0.0'

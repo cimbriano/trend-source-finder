@@ -211,20 +211,51 @@ function visualizeit(fromTime, upToTime){
     var parent = [];
     var mark = [];
     var a = new Array(currentdata.tweets.length);
+    var path = new Array(currentdata.tweets.length);
     
   for(var i = 0; i < currentdata.tweets.length; i++) {
       initialScaleData[i] = currentdata.tweets[i].created_at_numeric;
       stringDate[i] = currentdata.tweets[i].created_at;
       a[i] = [];
+      path[i] = [];
       parent[i] = -1;
       mark[i] = 0;
   }
     for(var i = 0; i < currentdata.edges.length; i++) {
         a[currentdata.edges[i].parent_id] = [];
+        path[currentdata.edges[i].parent_id] = [];
+        path[currentdata.edges[i].child_id] = [];
+        parent[currentdata.edges[i].parent_id] = -1;
     }
     for(var i = 0; i < currentdata.edges.length; i++) {
         parent[currentdata.edges[i].child_id] = currentdata.edges[i].parent_id;
         a[currentdata.edges[i].parent_id].push(currentdata.edges[i].child_id);
+    }
+    
+    function dfs(x) {
+        mark[x] = 1;
+        for(var i = 0;i<a[x].length;i++) {
+            if(mark[a[x][i]] == 0) {
+                dfs(a[x][i]);
+            }
+        }
+        
+    }
+    
+    for(var i = 0; i < currentdata.tweets.length; i++) {
+        var y = i;
+        //alert(i);
+        while(y != -1){
+             mark[y] = 1;
+             y = parent[y];
+        }
+        dfs(i);
+        for(var j=0;j<currentdata.tweets.length; j++) {
+            if(mark[j] == 1){
+                path[i].push(j);
+                mark[j] = 0;
+            }
+        }
     }
 
   var linearScale = d3.scale.linear()
@@ -302,46 +333,45 @@ function visualizeit(fromTime, upToTime){
     // .attr("cx", function(d) { return d.x; })
   }
     
-    function dfs(x) {
-        mark[x] = 1;
-        for(var i = 0;i<a[x].length;i++) {
-            if(mark[a[x][i]] == 0) {
-                dfs(a[x][i]);
-            }
-        }
-        
-    }
 
   function nodeClick(d, i) {
     d3.selectAll(".node").classed('selected', false);
 
-      // var x = d3.select(this);
-      // dfs(x.attr("id"));
-      // var y = x.attr("id");
-      // while(y != -1){
-      //     mark[y] = 1;
-      //     y = parent[y];
-      // }
-      // d3.selectAll(".node").sort(function (a, b) { // select the parent and sort the path's
-      //                            if(mark[a.id]) {
-      //                            return 1;
-      //                            }
-      //                            else {
-      //                            return -1;
-      //                            }
-      //                            });
+      var x = d3.select(this);
+      var id = x.attr("id");
+      for(var i=0;i<path[id].length;i++) {
+          mark[path[id][i]] = 1;
+      }
+      /*dfs(x.attr("id"));
+      var y = x.attr("id");
+      while(y != -1){
+           mark[y] = 1;
+          y = parent[y];
+      }*/
+       d3.selectAll(".node").sort(function (a, b) { // select the parent and sort the path's
+                                  if(mark[a.id]) {
+                                  return 1;
+                                  }
+                                  else {
+                                  return -1;
+                                  }
+                                  });
 
-      // for(var i=0;i<currentdata.tweets.length;i++) {
-      //     if(mark[i] == 1){
-      //         d3.select("[id='" + i + "']")
-      //         .classed('selected', true)
+      /*for(var i=0;i<currentdata.tweets.length;i++) {
+           if(mark[i] == 1){
+               d3.select("[id='" + i + "']")
+               .classed('selected', true);
       //         .sort(function (a, b) {return 10;});
-      //     }
-      //     mark[i] = 0;
-      // }
+           }
+           mark[i] = 0;
+    }*/
+      for(var i=0;i<path[id].length;i++) {
+          d3.select("[id='" + path[id][i] + "']")
+            .classed('selected', true);
+               mark[path[id][i]] = 0;
+      }
       
-      
-    d3.select(this).classed('selected', true).sort(function (a, b) {return 10;});
+      d3.select(this).classed('selected', true);//.sort(function (a, b) {return 10;});
       
      
 

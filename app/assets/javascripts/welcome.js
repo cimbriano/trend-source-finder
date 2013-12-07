@@ -314,30 +314,31 @@ function visualizeit(fromTime, upToTime){
 
   function nodeClick(d, i) {
     d3.selectAll(".node").classed('selected', false);
-            var x = d3.select(this);
-      dfs(x.attr("id"));
-      var y = x.attr("id");
-      while(y != -1){
-          mark[y] = 1;
-          y = parent[y];
-      }
-      d3.selectAll(".node").sort(function (a, b) { // select the parent and sort the path's
-                                 if(mark[a.id]) {
-                                 return 1;
-                                 }
-                                 else {
-                                 return -1;
-                                 }
-                                 });
 
-      for(var i=0;i<currentdata.tweets.length;i++) {
-          if(mark[i] == 1){
-              d3.select("[id='" + i + "']")
-              .classed('selected', true)
-              .sort(function (a, b) {return 10;});
-          }
-          mark[i] = 0;
-      }
+      // var x = d3.select(this);
+      // dfs(x.attr("id"));
+      // var y = x.attr("id");
+      // while(y != -1){
+      //     mark[y] = 1;
+      //     y = parent[y];
+      // }
+      // d3.selectAll(".node").sort(function (a, b) { // select the parent and sort the path's
+      //                            if(mark[a.id]) {
+      //                            return 1;
+      //                            }
+      //                            else {
+      //                            return -1;
+      //                            }
+      //                            });
+
+      // for(var i=0;i<currentdata.tweets.length;i++) {
+      //     if(mark[i] == 1){
+      //         d3.select("[id='" + i + "']")
+      //         .classed('selected', true)
+      //         .sort(function (a, b) {return 10;});
+      //     }
+      //     mark[i] = 0;
+      // }
       
       
     d3.select(this).classed('selected', true).sort(function (a, b) {return 10;});

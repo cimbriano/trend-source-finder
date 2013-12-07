@@ -8,6 +8,10 @@ Bundler.require(:default, Rails.env)
 
 module TrendSourceFinder
   class Application < Rails::Application
+    # Disable assets pipeline
+    config.assets.enabled = false
+
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

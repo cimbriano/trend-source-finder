@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20131204143757) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "edges", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -20,8 +23,8 @@ ActiveRecord::Schema.define(version: 20131204143757) do
     t.integer  "parent_id"
   end
 
-  add_index "edges", ["child_id"], name: "index_edges_on_child_id"
-  add_index "edges", ["parent_id"], name: "index_edges_on_parent_id"
+  add_index "edges", ["child_id"], name: "index_edges_on_child_id", using: :btree
+  add_index "edges", ["parent_id"], name: "index_edges_on_parent_id", using: :btree
 
   create_table "tweets", force: true do |t|
     t.string   "text"
@@ -33,8 +36,8 @@ ActiveRecord::Schema.define(version: 20131204143757) do
     t.string   "in_reply_to_status_str"
   end
 
-  add_index "tweets", ["in_reply_to_status_str"], name: "index_tweets_on_in_reply_to_status_str"
-  add_index "tweets", ["user_id"], name: "index_tweets_on_user_id"
+  add_index "tweets", ["in_reply_to_status_str"], name: "index_tweets_on_in_reply_to_status_str", using: :btree
+  add_index "tweets", ["user_id"], name: "index_tweets_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"

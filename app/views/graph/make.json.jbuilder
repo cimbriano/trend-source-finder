@@ -12,3 +12,7 @@ json.edges @edges do |edge|
   json.source edge.parent.id - 1
   json.target edge.child.id - 1
 end
+
+json.users @users do |user|
+  json.extract! user, :id, :name, :user_name, :location, :followers, :friends
+end

@@ -1,11 +1,4 @@
 require 'json'
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
 
 puts "ENV['dataset'] = #{ENV['dataset']}"
 
@@ -23,12 +16,16 @@ puts "Reading data from: #{filename}"
 json = File.read(filename)
 tweets = JSON.parse(json)
 
+
+
 tweets.each do |id, tweet_json|
 
   # Child Tweet
   puts "Making Child Tweet: #{id}"
   child_user_json = tweet_json['user']
   child_user = User.find_or_create_by(twitter_id: child_user_json['id_str'])
+  child_user.add_user_info(child_user_json)
+  child_user.save!
 
   child = Tweet.create!(
     twitter_id: tweet_json['id_str'], # Twitter's ID for this tweet
@@ -48,6 +45,9 @@ tweets.each do |id, tweet_json|
     parent_json = tweet_json['retweeted_status']
     parent_user_json = parent_json['user']
     parent_user = User.find_or_create_by(twitter_id: parent_user_json['id_str'])
+    parent_user.add_user_info(parent_user_json)
+    parent_user.save!
+
 
     parent = Tweet.create!(
       twitter_id: parent_json['id_str'],

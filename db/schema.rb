@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131204143757) do
+ActiveRecord::Schema.define(version: 20131208225511) do
 
   create_table "edges", force: true do |t|
     t.datetime "created_at"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20131204143757) do
     t.integer  "friends"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "twitter_id"
   end
 
 end

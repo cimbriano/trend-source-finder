@@ -364,15 +364,6 @@ function visualizeit(fromTime, upToTime){
     // .attr("cx", function(d) { return d.x; })
   }
     
-    function dfs(x) {
-        mark[x] = 1;
-        for(var i = 0;i<a[x].length;i++) {
-            if(mark[a[x][i]] == 0) {
-                dfs(a[x][i]);
-            }
-        }
-        
-    }
 
   function nodeClick(d, i) {
     d3.selectAll(".node").classed('selected', false);
@@ -380,6 +371,7 @@ function visualizeit(fromTime, upToTime){
       var id = x.attr("id");
       for(var i=0;i<path[id].length;i++) {
           mark[path[id][i]] = 1;
+      }
       /*var x = d3.select(this);
             var x = d3.select(this);
       dfs(x.attr("id"));

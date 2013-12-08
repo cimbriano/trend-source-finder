@@ -5,7 +5,6 @@ var scaledvalue_start = 1;
 var scaledvalue = 100;
 var singleton = -1;
 var reply = -1;
-var edgevisible = [];
 var nodevisible = [];
 d3.json("/graph.json", function(error, json){
   if(error) return console.warn(error);
@@ -13,9 +12,6 @@ d3.json("/graph.json", function(error, json){
   currentdata = jQuery.extend(true, {}, data);
   for(var i = 0; i < currentdata.tweets.length; i++){
     nodevisible[i] = radius;
-  }
-  for(var i = 0; i < currentdata.edges.length; i++){
-    edgevisible[i] = 1;
   }
   visualizeit(1, 100);
 });
@@ -66,12 +62,10 @@ function check_tweettype(){
   if($('input[name=tweet-group]:radio:checked').val()=='reply'){
     reply = 1;
     nodevisibility();
-    edgevisibility();
   }
   else if($('input[name=tweet-group]:radio:checked').val()=='retweet'){
     reply = 0;
     nodevisibility();
-    edgevisibility();
   }
 }
 
@@ -87,7 +81,6 @@ $(function() {//reply-retweet
     }else{
       reply = -1;
       nodevisibility();
-      edgevisibility();
       $("#reply").attr("disabled",true);
       $("#retweet").attr("disabled",true);
       currentdata = jQuery.extend(true, {}, data);
@@ -105,12 +98,10 @@ function check_actiontype(){
   if($('input[name=action-group]:radio:checked').val()=='show'){
     singleton = 0;
     nodevisibility();
-    edgevisibility();
   }
   else if($('input[name=action-group]:radio:checked').val()=='hide'){
     singleton = 1;
     nodevisibility();
-    edgevisibility();
   }
 }
 
@@ -126,7 +117,6 @@ $(function() { //show-hide edges
     }else{
       singleton = -1;
       nodevisibility();
-      edgevisibility();
       $("#show").attr("disabled",true);
       $("#hide").attr("disabled",true);
       currentdata = jQuery.extend(true, {}, data);
@@ -139,16 +129,6 @@ $(function() { //show-hide edges
       visualizeit(scaledvalue_start, scaledvalue);
    });
 });
-
-function edgevisibility(){
-  for(var j = 0; j < data.edges.length; j++) {
-    if(nodevisible[data.edges[j].parent_id-1]==0 | nodevisible[data.edges[j].child_id-1]==0){
-      edgevisible[j] = 0;
-    }else{
-      edgevisible[j] = 1;
-    }
-  }
-}
 
 function get_nodetype(d){
   var tweetid = d.id;
@@ -210,28 +190,6 @@ function nodevisibility(){
       }else{
         nodevisible[currentdata.tweets[i].id-1] = 0;
       }
-    }
-  }
-}
-
-function get_radius(d){
-  if(singleton==-1){
-    return check_reply(d);
-  }
-  if(singleton==0){
-    if(get_nodetype(d)=='ns'){
-      return check_reply(d);
-    }else{
-      nodevisible[d.id-1] = 0;
-      return 0;
-    }
-  }
-  if(singleton==1){
-    if(get_nodetype(d)=='s'){
-      return check_reply(d);
-    }else{
-      nodevisible[d.id-1] = 0;
-      return 0;
     }
   }
 }
@@ -351,10 +309,26 @@ function visualizeit(fromTime, upToTime){
       return;
     }
     
-    link.attr("x1", function(d) { return linearScale(d.source.created_at_numeric); })
-        .attr("y1", function(d) { return d.source.y; })
-        .attr("x2", function(d) { return linearScale(d.target.created_at_numeric); })
-        .attr("y2", function(d) { return d.target.y; });
+    link.attr("x1", function(d) { 
+          if(nodevisible[d.parent_id-1]==0 || nodevisible[d.child_id-1]==0){
+            return 0;
+          }
+          return linearScale(d.source.created_at_numeric); })
+        .attr("y1", function(d) { 
+          if(nodevisible[d.parent_id-1]==0 || nodevisible[d.child_id-1]==0){
+            return 0;
+          }
+          return d.source.y; })
+        .attr("x2", function(d) { 
+          if(nodevisible[d.parent_id-1]==0 || nodevisible[d.child_id-1]==0){
+            return 0;
+          }
+          return linearScale(d.target.created_at_numeric); })
+        .attr("y2", function(d) { 
+          if(nodevisible[d.parent_id-1]==0 || nodevisible[d.child_id-1]==0){
+            return 0;
+          }
+          return d.target.y; });
     // .attr("cx", function(d) { return d.x; })
   }
     
@@ -370,7 +344,7 @@ function visualizeit(fromTime, upToTime){
 
   function nodeClick(d, i) {
     d3.selectAll(".node").classed('selected', false);
-      var x = d3.select(this);
+      /*var x = d3.select(this);
             var x = d3.select(this);
       dfs(x.attr("id"));
       var y = x.attr("id");
@@ -394,7 +368,7 @@ function visualizeit(fromTime, upToTime){
               .sort(function (a, b) {return 10;});
           }
           mark[i] = 0;
-      }
+      }*/
       
       
     d3.select(this).classed('selected', true).sort(function (a, b) {return 10;});

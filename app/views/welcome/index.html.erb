@@ -1,3 +1,51 @@
+<div id="paneNorth" class="ui-layout-north">
+  
+  <div id="edgecontrol" style='float: left'>
+    <form>
+      <label><input type="checkbox" id="nodetype">Tweets with Edges:<br></label>
+      <label><input type="radio" id="show" class="action-group" name="action-group" value="show" checked>Show</label>
+      <label><input type="radio" id="hide" class="action-group" name="action-group" value="hide">Hide</label>
+      <span class="separator" style="VISIBILITY:hidden;"> | </span>
+      <span class="separator" style="VISIBILITY:hidden;"> | </span>
+    </form>
+  </div>
+  
+  <div id="repy-retweet" style='float: left'>
+    <form>
+      <label><input type="checkbox" id="tweettype">Tweet Type<br></label>
+      <label><input type="radio" id="reply" class="tweet-group" name="tweet-group" value="reply" checked>Reply</label>
+      <label><input type="radio" id="retweet" class="tweet-group" name="tweet-group" value="retweet"> Retweet</label>
+      <span class="separator" style="VISIBILITY:hidden;"> | </span>
+      <span class="separator" style="VISIBILITY:hidden;"> | </span>
+    </form>
+  </div>
+  
+  <!-- <span class="separator">|</span>
+  
+  <div id='toolbar' style='float: left'>
+  <label> <input type="checkbox" id="without-edges" checked>Without Edges </label>
+  <label> <input type="checkbox" id="with-edges" checked>With Edges </label>
+  
+  <span class="separator">|</span>
+  
+  <label> <input type="checkbox" id="reply-north" checked>Reply</label>
+  <label> <input type="checkbox" id="retweet-north" checked>Retweet </label> -->
+  
+  <span class="separator">|</span>
+  
+  <input id="search-box" class="ui-widget-content ui-corner-all ui-autocomplete-input" type="text" autocomplete="off" placeholder="Search Name">
+  <label for="search-box"></label>
+  
+  <span class="separator">|</span>
+  
+  <select>
+    <option value="topic-selection">Select Topic</option>
+    <option value="obamacare">Obamacare</option>
+    <option value="shutdown">Shutdown</option>
+  </select>
+  </div>
+</div>
+
 <div id="paneCenter" class="ui-layout-center">
     <div class="container">
         <div class="row">
@@ -12,7 +60,7 @@
 </div>
 
 <div id="paneEast" class="ui-layout-east"> 
-	<div id="singlecontrol">
+	<!-- <div id="singlecontrol">
 		<form>
 			<input type="checkbox" id="nodetype">Singleton<br>
 			<input type="radio" id="show" class="action-group" name="action-group" value="show" checked>Show
@@ -26,8 +74,23 @@
       <input type="radio" id="reply" class="tweet-group" name="tweet-group" value="reply" checked>Reply
       <input type="radio" id="retweet" class="tweet-group" name="tweet-group" value="retweet"> Retweet
     </form>
-  </div>
+  </div> -->
 
-    <%= render 'tweet_info' %>
+  <div>
+  <ul style="list-style-type: none; padding: 0px; margin: 0px">
+  <li><div>  <%= render 'tweet_info' %> </div></li>
+  <!-- <span class="separator" style="VISIBILITY:hidden;"> | </span> -->
+  
+  <li><div>  <%= render 'user_info' %> </div></li>
+  
+  <li>
+    <h4 id="topic" style='background-color:#D8D8D8;'>Select Topic</h4>
+    <div>
+      
+    </div>
+  </li>
+  
+  </ul>
+  </div>
 
 </div>

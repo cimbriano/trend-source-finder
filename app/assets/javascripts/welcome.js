@@ -5,14 +5,22 @@ var scaledvalue_start = 1;
 var scaledvalue = 100;
 var singleton = -1;
 var reply = -1;
+var edgevisible = [];
+var nodevisible = [];
 d3.json("/graph.json", function(error, json){
   if(error) return console.warn(error);
   data = json;
   currentdata = jQuery.extend(true, {}, data);
+  for(var i = 0; i < currentdata.tweets.length; i++){
+    nodevisible[i] = radius;
+  }
+  for(var i = 0; i < currentdata.edges.length; i++){
+    edgevisible[i] = 1;
+  }
   visualizeit(1, 100);
 });
 
-$(function () {
+$(function () { //body layout
   $('body').layout({
     applyDemoStyles: true,
     east__size:    250,
@@ -34,7 +42,7 @@ $(function () {
   
 });
 
-$(function() {
+$(function() {//slider
   $( "#slider" ).slider({
        range: true,
        min: 1,
@@ -54,47 +62,93 @@ $(function() {
     $('#slider-value').text(1);
 });
 
-function check_actiontype(){
-  if($('input[name=action-group]:radio:checked').val()=='show'){
-    singleton = 1;
-  }
-  else if($('input[name=action-group]:radio:checked').val()=='hide'){
-    singleton = 0;
-  }
-}
-
 function check_tweettype(){
   if($('input[name=tweet-group]:radio:checked').val()=='reply'){
     reply = 1;
+    nodevisibility();
+    edgevisibility();
   }
   else if($('input[name=tweet-group]:radio:checked').val()=='retweet'){
     reply = 0;
+    nodevisibility();
+    edgevisibility();
   }
 }
 
-$(function() {
-	$("#nodetype").removeAttr('checked');
-	$("#show").attr("disabled",true);
-	$("#hide").attr("disabled",true);
-	$('#nodetype').click(function (){
-		if ($(this).is (':checked')){
-			$("#show").removeAttr("disabled");
-			$("#hide").removeAttr("disabled");
-			check_actiontype();
-		}else{
-		  singleton = -1;
-			$("#show").attr("disabled",true);
-			$("#hide").attr("disabled",true);
-			currentdata = jQuery.extend(true, {}, data);
-		}
-		visualizeit(scaledvalue_start, scaledvalue);
-	});
-
-  $(".action-group").click(function(){
-    	check_actiontype();
-    	visualizeit(scaledvalue_start, scaledvalue);
+$(function() {//reply-retweet
+  $("#tweettype").removeAttr('checked');
+  $("#reply").attr("disabled",true);
+  $("#retweet").attr("disabled",true);
+  $('#tweettype').click(function (){
+    if ($(this).is (':checked')){
+      $("#reply").removeAttr("disabled");
+      $("#retweet").removeAttr("disabled");
+      check_tweettype();
+    }else{
+      reply = -1;
+      nodevisibility();
+      edgevisibility();
+      $("#reply").attr("disabled",true);
+      $("#retweet").attr("disabled",true);
+      currentdata = jQuery.extend(true, {}, data);
+    }
+    visualizeit(scaledvalue_start, scaledvalue);
+  });
+  
+  $(".tweet-group").click(function(){
+      check_tweettype();
+      visualizeit(scaledvalue_start, scaledvalue);
    });
 });
+
+function check_actiontype(){
+  if($('input[name=action-group]:radio:checked').val()=='show'){
+    singleton = 0;
+    nodevisibility();
+    edgevisibility();
+  }
+  else if($('input[name=action-group]:radio:checked').val()=='hide'){
+    singleton = 1;
+    nodevisibility();
+    edgevisibility();
+  }
+}
+
+$(function() { //show-hide edges
+  $("#nodetype").removeAttr('checked');
+  $("#show").attr("disabled",true);
+  $("#hide").attr("disabled",true);
+  $('#nodetype').click(function (){
+    if ($(this).is (':checked')){
+      $("#show").removeAttr("disabled");
+      $("#hide").removeAttr("disabled");
+      check_actiontype();
+    }else{
+      singleton = -1;
+      nodevisibility();
+      edgevisibility();
+      $("#show").attr("disabled",true);
+      $("#hide").attr("disabled",true);
+      currentdata = jQuery.extend(true, {}, data);
+    }
+    visualizeit(scaledvalue_start, scaledvalue);
+  });
+
+  $(".action-group").click(function(){
+      check_actiontype();
+      visualizeit(scaledvalue_start, scaledvalue);
+   });
+});
+
+function edgevisibility(){
+  for(var j = 0; j < data.edges.length; j++) {
+    if(nodevisible[data.edges[j].parent_id-1]==0 | nodevisible[data.edges[j].child_id-1]==0){
+      edgevisible[j] = 0;
+    }else{
+      edgevisible[j] = 1;
+    }
+  }
+}
 
 function get_nodetype(d){
   var tweetid = d.id;
@@ -113,77 +167,74 @@ function get_nodetype(d){
   }
 }
 
-function get_radius(d){
-  if(singleton==-1){
-    return check_reply(d);
-  }
-  if(singleton==1){
-    if(get_nodetype(d)=='s'){
-    //if(d.in_reply_to_status_str==null && d.retweeted_id==null){
-      return check_reply(d);
-      //return radius;
-    }else{
-      return 0;
-    }
-  }
-  if(singleton==0){
-    if(get_nodetype(d)=='ns'){
-      return check_reply(d);
-    }else{
-      return 0;
-    }
-    /*if(d.in_reply_to_status_str==null && d.retweeted_id==null){
-      return 0;
-    }else{
-      //return check_reply(d);
-      return radius;
-    }*/
-  }
-}
-
 function check_reply(d){
   if(reply==-1){
+    nodevisible[d.id-1] = radius;
     return radius;
   }
   if(reply==1){
     if(d.in_reply_to_status_str!=null){
+      nodevisible[d.id-1] = radius;
       return radius;
     }else{
+      nodevisible[d.id-1] = 0;
       return 0;
     }
   }
   if(reply==0){
     if(d.retweeted_id!=null){
+      nodevisible[d.id-1] = radius;
       return radius;
     }else{
+      nodevisible[d.id-1] = 0;
       return 0;
     }
   }
 }
 
-$(function() {
-  $("#tweettype").removeAttr('checked');
-  $("#reply").attr("disabled",true);
-  $("#retweet").attr("disabled",true);
-  $('#tweettype').click(function (){
-    if ($(this).is (':checked')){
-      $("#reply").removeAttr("disabled");
-      $("#retweet").removeAttr("disabled");
-      check_tweettype();
-    }else{
-      reply = -1;
-      $("#reply").attr("disabled",true);
-      $("#retweet").attr("disabled",true);
-      currentdata = jQuery.extend(true, {}, data);
+function nodevisibility(){
+  for(var i = 0; i < currentdata.tweets.length; i++){
+    if(singleton==-1){
+      check_reply(currentdata.tweets[i]);
     }
-    visualizeit(scaledvalue_start, scaledvalue);
-  });
-  
-  $(".tweet-group").click(function(){
-      check_tweettype();
-      visualizeit(scaledvalue_start, scaledvalue);
-   });
-});
+    if(singleton==0){
+      if(get_nodetype(currentdata.tweets[i])=='ns'){
+        check_reply(currentdata.tweets[i]);
+      }else{
+        nodevisible[currentdata.tweets[i].id-1] = 0;
+      }
+    }
+    if(singleton==1){
+      if(get_nodetype(currentdata.tweets[i])=='s'){
+        check_reply(currentdata.tweets[i]);
+      }else{
+        nodevisible[currentdata.tweets[i].id-1] = 0;
+      }
+    }
+  }
+}
+
+function get_radius(d){
+  if(singleton==-1){
+    return check_reply(d);
+  }
+  if(singleton==0){
+    if(get_nodetype(d)=='ns'){
+      return check_reply(d);
+    }else{
+      nodevisible[d.id-1] = 0;
+      return 0;
+    }
+  }
+  if(singleton==1){
+    if(get_nodetype(d)=='s'){
+      return check_reply(d);
+    }else{
+      nodevisible[d.id-1] = 0;
+      return 0;
+    }
+  }
+}
 
 //upToTime show time scale from 0 to 100. If 100, will show 100% time scale.
 function visualizeit(fromTime, upToTime){
@@ -218,6 +269,10 @@ function visualizeit(fromTime, upToTime){
       a[i] = [];
       parent[i] = -1;
       mark[i] = 0;
+  }
+  
+  for(var i = 0; i < currentdata.edges.length; i++) {
+    a[currentdata.edges[i].parent_id] = [];
   }
     
     for(var i = 0; i < currentdata.edges.length; i++) {
@@ -275,7 +330,10 @@ function visualizeit(fromTime, upToTime){
                 //.attr("class", function(d){ return d.id; })
                 .attr("cx", function(d) { x = linearScale(d.created_at_numeric); return x; })
                 // .attr("cy", function(d) { return height / 2; } )
-                .attr("r", function(d) { return get_radius(d); })
+                .attr("r", function(d) { 
+                  //return get_radius(d); 
+                  return nodevisible[d.id-1];
+                  })
                 .on('mouseover', mouseover_node)
                 .on("click", nodeClick);
 
@@ -293,6 +351,7 @@ function visualizeit(fromTime, upToTime){
     if(singleton==1){
       return;
     }
+    
     link.attr("x1", function(d) { return linearScale(d.source.created_at_numeric); })
         .attr("y1", function(d) { return d.source.y; })
         .attr("x2", function(d) { return linearScale(d.target.created_at_numeric); })
@@ -312,7 +371,7 @@ function visualizeit(fromTime, upToTime){
 
   function nodeClick(d, i) {
     d3.selectAll(".node").classed('selected', false);
-      var x = d3.select(this);
+      /*var x = d3.select(this);
       dfs(x.attr("id"));
       var y = x.attr("id");
       while(y != -1){
@@ -324,7 +383,7 @@ function visualizeit(fromTime, upToTime){
               d3.select("[id='" + i + "']").classed('selected', true);
           }
           mark[i] = 0;
-      }
+      }*/
       
       
     d3.select(this).classed('selected', true);

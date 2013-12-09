@@ -1,12 +1,5 @@
 require 'json'
 
-# def remove_all_data
-#   puts 'Purging database'
-#   Edge.delete_all
-#   User.delete_all
-#   Tweet.delete_all
-# end
-
 def load_synthetic_data
   puts 'Loading synthetic data'
 
@@ -112,9 +105,6 @@ def load_data_from_source(filename)
   end
 end
 
-
-
-# remove_all_data
 
 case ENV['dataset']
 when 'small'

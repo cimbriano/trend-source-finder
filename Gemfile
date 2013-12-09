@@ -60,6 +60,9 @@ gem "bullet", "~> 4.7.1", group: :development
 # Quiet down asset pipeline logs in dev mode
 gem "quiet_assets", "~> 1.0.2", group: :development
 
+# For producing fake data
+gem "faker", "~> 1.2.0"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

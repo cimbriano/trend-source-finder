@@ -9,16 +9,32 @@ require 'json'
 
 def load_synthetic_data
   puts 'Loading synthetic data'
-  u = make_user
-  t = make_tweet(u)
-  make_retweet(t)
+
+  9.times do
+    make_retweet_tree
+  end
+
 end
 
-def make_tweet_tree(kind)
+def make_retweet_tree
+  singleton_probability = 0.7
+
+
+  u = make_user
+  t = make_tweet(u)
+
+  if rand > singleton_probability # This will not be a singleton
+    # How many retweets?
+    num_of_retweets = rand(9) + 1 # At least 1, up to 10
+
+    num_of_retweets.times do
+      make_retweet(t)
+    end
+  end
 end
 
 def make_user
-  User.create(
+  User.create!(
     name: Faker::Name.name,
     user_name: Faker::Internet.user_name,
     location: Faker::Address.city,
@@ -42,7 +58,7 @@ def make_retweet(original_tweet)
     text: Faker::Lorem.sentences(1).first,
     created_at: ((original_tweet.created_at.to_time + (rand 600).minutes)).to_datetime, # Adds up to 600 minutes
     retweeted_id: original_tweet.id,
-    user: original_tweet.user
+    user: make_user
   )
 
   Edge.create!(child: t, parent: original_tweet)

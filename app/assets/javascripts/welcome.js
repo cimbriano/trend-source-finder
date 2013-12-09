@@ -7,67 +7,67 @@ var singleton = -1;
 var reply = -1;
 var nodevisible = [];
 d3.json("/graph.json", function(error, json){
-  if(error) return console.warn(error);
-  data = json;
-  currentdata = jQuery.extend(true, {}, data);
-  for(var i = 0; i < currentdata.tweets.length; i++){
-    nodevisible[i] = radius;
-  }
-       // alert(currentdata.users.length);
-  visualizeit(1, 100);
-});
+        if(error) return console.warn(error);
+        data = json;
+        currentdata = jQuery.extend(true, {}, data);
+        for(var i = 0; i < currentdata.tweets.length; i++){
+        nodevisible[i] = radius;
+        }
+        // alert(currentdata.users.length);
+        visualizeit(1, 100);
+        });
 
 $(function () { //body layout
   $('body').layout({
-    applyDemoStyles: true,
-    east__size:    250,
-      east__minSize: 250,
-      east__initClosed: false,
-      east__resizable: true,
-      east__initHidden: false,
-      center__initClosed: false,
-      center__resizable: true,
-      center__initHidden: false,
-      //south__initHidden: false,
-      center__onresize:   $.layout.callbacks.resizePaneAccordions,
-    center__paneSelector: "#paneCenter",
-    west__paneSelector: "#paneWest",
-    north__paneSelector: "#paneNorth",
-    east__paneSelector: "#paneEast",
-    south__paneSelector: "#paneSouth"
-  });
+                   applyDemoStyles: true,
+                   east__size:    250,
+                   east__minSize: 250,
+                   east__initClosed: false,
+                   east__resizable: true,
+                   east__initHidden: false,
+                   center__initClosed: false,
+                   center__resizable: true,
+                   center__initHidden: false,
+                   //south__initHidden: false,
+                   center__onresize:   $.layout.callbacks.resizePaneAccordions,
+                   center__paneSelector: "#paneCenter",
+                   west__paneSelector: "#paneWest",
+                   north__paneSelector: "#paneNorth",
+                   east__paneSelector: "#paneEast",
+                   south__paneSelector: "#paneSouth"
+                   });
   
-});
+  });
 
 $(function() {//slider
   $( "#slider" ).slider({
-       range: true,
-       min: 1,
-       max: 100,
-       step: 1,
-       values: [ 1, 100],
-       slide: function( event, ui ) {
-           $('#slider-value').text(ui.values[ 0 ] + " to " + ui.values[ 1 ]);
-           scaledvalue_start = ui.values[0];
-           scaledvalue = ui.values[1];
-           visualizeit(ui.values[0], ui.values[1]);
-       },
-       //stop: function(event, ui) {
-       //    visualizeit(ui.values[0]);
-       //}
-    });
-    $('#slider-value').text(1);
-});
+                        range: true,
+                        min: 1,
+                        max: 100,
+                        step: 1,
+                        values: [ 1, 100],
+                        slide: function( event, ui ) {
+                        $('#slider-value').text(ui.values[ 0 ] + " to " + ui.values[ 1 ]);
+                        scaledvalue_start = ui.values[0];
+                        scaledvalue = ui.values[1];
+                        visualizeit(ui.values[0], ui.values[1]);
+                        },
+                        //stop: function(event, ui) {
+                        //    visualizeit(ui.values[0]);
+                        //}
+                        });
+  $('#slider-value').text(1);
+  });
 
 function check_tweettype(){
-  if($('input[name=tweet-group]:radio:checked').val()=='reply'){
-    reply = 1;
-    nodevisibility();
-  }
-  else if($('input[name=tweet-group]:radio:checked').val()=='retweet'){
-    reply = 0;
-    nodevisibility();
-  }
+    if($('input[name=tweet-group]:radio:checked').val()=='reply'){
+        reply = 1;
+        nodevisibility();
+    }
+    else if($('input[name=tweet-group]:radio:checked').val()=='retweet'){
+        reply = 0;
+        nodevisibility();
+    }
 }
 
 $(function() {//reply-retweet
@@ -75,35 +75,39 @@ $(function() {//reply-retweet
   $("#reply").attr("disabled",true);
   $("#retweet").attr("disabled",true);
   $('#tweettype').click(function (){
-    if ($(this).is (':checked')){
-      $("#reply").removeAttr("disabled");
-      $("#retweet").removeAttr("disabled");
-      check_tweettype();
-    }else{
-      reply = -1;
-      nodevisibility();
-      $("#reply").attr("disabled",true);
-      $("#retweet").attr("disabled",true);
-      currentdata = jQuery.extend(true, {}, data);
-    }
-    visualizeit(scaledvalue_start, scaledvalue);
-  });
+                        if ($(this).is (':checked')){
+                        $("#search-box").attr("disabled", true);
+                        $("#reply").removeAttr("disabled");
+                        $("#retweet").removeAttr("disabled");
+                        check_tweettype();
+                        }else{
+                        if(singleton == -1) {
+                        $("#search-box").attr("disabled", false);
+                        }
+                        reply = -1;
+                        nodevisibility();
+                        $("#reply").attr("disabled",true);
+                        $("#retweet").attr("disabled",true);
+                        currentdata = jQuery.extend(true, {}, data);
+                        }
+                        visualizeit(scaledvalue_start, scaledvalue);
+                        });
   
   $(".tweet-group").click(function(){
-      check_tweettype();
-      visualizeit(scaledvalue_start, scaledvalue);
-   });
-});
+                          check_tweettype();
+                          visualizeit(scaledvalue_start, scaledvalue);
+                          });
+  });
 
 function check_actiontype(){
-  if($('input[name=action-group]:radio:checked').val()=='show'){
-    singleton = 0;
-    nodevisibility();
-  }
-  else if($('input[name=action-group]:radio:checked').val()=='hide'){
-    singleton = 1;
-    nodevisibility();
-  }
+    if($('input[name=action-group]:radio:checked').val()=='show'){
+        singleton = 0;
+        nodevisibility();
+    }
+    else if($('input[name=action-group]:radio:checked').val()=='hide'){
+        singleton = 1;
+        nodevisibility();
+    }
 }
 
 $(function() { //show-hide edges
@@ -111,161 +115,165 @@ $(function() { //show-hide edges
   $("#show").attr("disabled",true);
   $("#hide").attr("disabled",true);
   $('#nodetype').click(function (){
-    if ($(this).is (':checked')){
-      $("#show").removeAttr("disabled");
-      $("#hide").removeAttr("disabled");
-      check_actiontype();
-    }else{
-      singleton = -1;
-      nodevisibility();
-      $("#show").attr("disabled",true);
-      $("#hide").attr("disabled",true);
-      currentdata = jQuery.extend(true, {}, data);
-    }
-    visualizeit(scaledvalue_start, scaledvalue);
+                       if ($(this).is (':checked')){
+                       $("#search-box").attr("disabled", true);
+                       $("#show").removeAttr("disabled");
+                       $("#hide").removeAttr("disabled");
+                       check_actiontype();
+                       }else{
+                       if(reply == -1) {
+                       $("#search-box").attr("disabled", false);
+                       }
+                       singleton = -1;
+                       nodevisibility();
+                       $("#show").attr("disabled",true);
+                       $("#hide").attr("disabled",true);
+                       currentdata = jQuery.extend(true, {}, data);
+                       }
+                       visualizeit(scaledvalue_start, scaledvalue);
+                       });
+  
+  $(".action-group").click(function(){
+                           check_actiontype();
+                           visualizeit(scaledvalue_start, scaledvalue);
+                           });
   });
 
-  $(".action-group").click(function(){
-      check_actiontype();
-      visualizeit(scaledvalue_start, scaledvalue);
-   });
-});
-
 function get_nodetype(d){
-  var tweetid = d.id;
-  var found = 0;
-  for(var j = 0; j < data.edges.length; j++) {
-    if(data.edges[j].parent_id==tweetid | data.edges[j].child_id==tweetid){
-      found = 1;
-      break;
+    var tweetid = d.id;
+    var found = 0;
+    for(var j = 0; j < data.edges.length; j++) {
+        if(data.edges[j].parent_id==tweetid | data.edges[j].child_id==tweetid){
+            found = 1;
+            break;
+        }
     }
-  }
-  if(found==0){
-    return 's';
-  }
-  else{
-    return 'ns';
-  }
+    if(found==0){
+        return 's';
+    }
+    else{
+        return 'ns';
+    }
 }
 
 function check_reply(d){
-  if(reply==-1){
-    nodevisible[d.id-1] = radius;
-    return radius;
-  }
-  if(reply==1){
-    if(d.in_reply_to_status_str!=null){
-      nodevisible[d.id-1] = radius;
-      return radius;
-    }else{
-      nodevisible[d.id-1] = 0;
-      return 0;
+    if(reply==-1){
+        nodevisible[d.id-1] = radius;
+        return radius;
     }
-  }
-  if(reply==0){
-    if(d.retweeted_id!=null){
-      nodevisible[d.id-1] = radius;
-      return radius;
-    }else{
-      nodevisible[d.id-1] = 0;
-      return 0;
+    if(reply==1){
+        if(d.in_reply_to_status_str!=null){
+            nodevisible[d.id-1] = radius;
+            return radius;
+        }else{
+            nodevisible[d.id-1] = 0;
+            return 0;
+        }
     }
-  }
+    if(reply==0){
+        if(d.retweeted_id!=null){
+            nodevisible[d.id-1] = radius;
+            return radius;
+        }else{
+            nodevisible[d.id-1] = 0;
+            return 0;
+        }
+    }
 }
 
 function nodevisibility(){
-  for(var i = 0; i < currentdata.tweets.length; i++){
-    if(singleton==-1){
-      check_reply(currentdata.tweets[i]);
+    for(var i = 0; i < currentdata.tweets.length; i++){
+        if(singleton==-1){
+            check_reply(currentdata.tweets[i]);
+        }
+        if(singleton==0){
+            if(get_nodetype(currentdata.tweets[i])=='ns'){
+                check_reply(currentdata.tweets[i]);
+            }else{
+                nodevisible[currentdata.tweets[i].id-1] = 0;
+            }
+        }
+        if(singleton==1){
+            if(get_nodetype(currentdata.tweets[i])=='s'){
+                check_reply(currentdata.tweets[i]);
+            }else{
+                nodevisible[currentdata.tweets[i].id-1] = 0;
+            }
+        }
     }
-    if(singleton==0){
-      if(get_nodetype(currentdata.tweets[i])=='ns'){
-        check_reply(currentdata.tweets[i]);
-      }else{
-        nodevisible[currentdata.tweets[i].id-1] = 0;
-      }
-    }
-    if(singleton==1){
-      if(get_nodetype(currentdata.tweets[i])=='s'){
-        check_reply(currentdata.tweets[i]);
-      }else{
-        nodevisible[currentdata.tweets[i].id-1] = 0;
-      }
-    }
-  }
 }
 
 $(function() {
-$("#search-box").keyup(function(){
-                       //alert($(this).val());
-                       //alert("salam");
-                       var val = $(this).val();
-                       if(reply != -1 || singleton != -1) {
-                        return;
-                       }
-                       if(val == "") {
-                            for(var i = 0; i < currentdata.tweets.length; i++) {
-                                nodevisible[i] = radius;
-                            }
-                       }
-                       else {
-                            for(var i = 0; i < currentdata.tweets.length; i++) {
-                       var id = i;//currentdata.tweets[i].id;
-                       //console.log(i);
-                               d3.json(currentdata.tweets[i].url, function(error, json){
-                                           nodevisible[json.id - 1] = 0;
-                                       //console.log(val + " " + json.user.user_name);
-                                           if(val == json.user.user_name) {
-                                       //alert(id);
-                                       //console.log("found at: " + json.id);
-                                                nodevisible[json.id - 1] = radius;
-                                           }
-                                        }
-                                    )
-                       
-                            }
-                       }
-                       visualizeit(scaledvalue_start, scaledvalue);
-});
-});
-  
+  $("#search-box").keyup(function(){
+                         //alert($(this).val());
+                         //alert("salam");
+                         var val = $(this).val();
+                         if(reply != -1 || singleton != -1) {
+                         return;
+                         }
+                         if(val == "") {
+                         for(var i = 0; i < currentdata.tweets.length; i++) {
+                         nodevisible[i] = radius;
+                         }
+                         }
+                         else {
+                         for(var i = 0; i < currentdata.tweets.length; i++) {
+                         var id = i;//currentdata.tweets[i].id;
+                         //console.log(i);
+                         d3.json(currentdata.tweets[i].url, function(error, json){
+                                 nodevisible[json.id - 1] = 0;
+                                 //console.log(val + " " + json.user.user_name);
+                                 if(val == json.user.user_name) {
+                                 //alert(id);
+                                 //console.log("found at: " + json.id);
+                                 nodevisible[json.id - 1] = radius;
+                                 }
+                                 }
+                                 )
+                         
+                         }
+                         }
+                         visualizeit(scaledvalue_start, scaledvalue);
+                         });
+  });
+
 //upToTime show time scale from 0 to 100. If 100, will show 100% time scale.
 function visualizeit(fromTime, upToTime){
-  d3.select("svg").remove();
-  var width = $('#paneCenter').width();
-  var height = $('#paneCenter').height()-120;
-  var padding = 20;
-  
-  var force = d3.layout.force()
+    d3.select("svg").remove();
+    var width = $('#paneCenter').width();
+    var height = $('#paneCenter').height()-120;
+    var padding = 20;
+    
+    var force = d3.layout.force()
     .size([width, height])
     // .charge(-20)
     .linkDistance(40)
     .on("tick", tick);
-  
-  var svg = d3.select("#canvas").append("svg")
+    
+    var svg = d3.select("#canvas").append("svg")
     .attr("width", width)
     .attr("height", height);
     
-  var link = svg.selectAll(".link");
-  var node = svg.selectAll(".node");
-  
-  // Make a linear scale for the x-postion
-  var initialScaleData = [];
-  var stringDate = [];
+    var link = svg.selectAll(".link");
+    var node = svg.selectAll(".node");
+    
+    // Make a linear scale for the x-postion
+    var initialScaleData = [];
+    var stringDate = [];
     var parent = [];
     var mark = [];
     var a = new Array(currentdata.tweets.length);
     var path = new Array(currentdata.tweets.length);
     
-  for(var i = 0; i < currentdata.tweets.length; i++) {
-      initialScaleData[i] = currentdata.tweets[i].created_at_numeric;
-      stringDate[i] = currentdata.tweets[i].created_at;
-      a[i] = [];
-      parent[i] = -1;
-      mark[i] = 0;
-      path[i] = [];
-  }
-
+    for(var i = 0; i < currentdata.tweets.length; i++) {
+        initialScaleData[i] = currentdata.tweets[i].created_at_numeric;
+        stringDate[i] = currentdata.tweets[i].created_at;
+        a[i] = [];
+        parent[i] = -1;
+        mark[i] = 0;
+        path[i] = [];
+    }
+    
     for(var i = 0; i < currentdata.edges.length; i++) {
         a[currentdata.edges[i].parent_id] = [];
         path[currentdata.edges[i].parent_id] = [];
@@ -302,8 +310,8 @@ function visualizeit(fromTime, upToTime){
             }
         }
     }
-
-  var linearScale = d3.scale.linear()
+    
+    var linearScale = d3.scale.linear()
     .domain([d3.min(initialScaleData), d3.max(initialScaleData)])
     //.range([padding, (width - padding)]);
     .range([padding - (fromTime/100)*(width), (100/upToTime)*(width - padding)]);
@@ -312,173 +320,173 @@ function visualizeit(fromTime, upToTime){
     .domain([d3.min(initialScaleData), d3.max(initialScaleData)])
     //.range([padding, (width - padding)]);
     .range([padding - (fromTime/100)*(width), (100/upToTime)*(width - padding)]);
-
-  function getDate(d){return new Date(d.jsonDate);}
-
-  var minDate = new Date(stringDate[initialScaleData.indexOf(d3.min(initialScaleData))]),
-      maxDate = new Date(stringDate[initialScaleData.indexOf(d3.max(initialScaleData))]);
-
-  var timeScale = d3.time.scale()
-                .domain([minDate,maxDate])
-                //.range([padding, (width - padding)]);
-                .range([padding - (fromTime/100)*(width), (100/upToTime)*(width - padding)]);
-  
-  var xAxis = d3.svg.axis()
+    
+    function getDate(d){return new Date(d.jsonDate);}
+    
+    var minDate = new Date(stringDate[initialScaleData.indexOf(d3.min(initialScaleData))]),
+    maxDate = new Date(stringDate[initialScaleData.indexOf(d3.max(initialScaleData))]);
+    
+    var timeScale = d3.time.scale()
+    .domain([minDate,maxDate])
+    //.range([padding, (width - padding)]);
+    .range([padding - (fromTime/100)*(width), (100/upToTime)*(width - padding)]);
+    
+    var xAxis = d3.svg.axis()
     .scale(timeScale)
     .orient("bottom")
     .ticks(5)
-    .tickFormat(d3.time.format("%b-%d"));  
-  
-  svg.append("g")
+    .tickFormat(d3.time.format("%b-%d"));
+    
+    svg.append("g")
     .attr("class", "axis")
     .attr("transform", "translate(0," + (height - padding) + ")")
     .call(xAxis);
-  
-  force
+    
+    force
     .theta(10)  // Removes "jiggle"
     .nodes(currentdata.tweets)
     .links(currentdata.edges)
     .start();
-
-  link = link.data(currentdata.edges)
-             .enter().append("line")
-             .attr("class", "link")
-             .on('mouseover', function(d, i){ return 'link test'; });
-
-  node = node.data(currentdata.tweets);
+    
+    link = link.data(currentdata.edges)
+    .enter().append("line")
+    .attr("class", "link")
+    .on('mouseover', function(d, i){ return 'link test'; });
+    
+    node = node.data(currentdata.tweets);
     
     node.attr("r", function(d) {
               //return get_radius(d);
               return nodevisible[d.id-1]});
-             
-  node = node.enter().append("circle")
-                .attr("id", function(d){ return d.id; })
-                .attr("class", "node")
-                //.attr("class", function(d){ return d.id; })
-                .attr("cx", function(d) { x = linearScale(d.created_at_numeric); return x; })
-                // .attr("cy", function(d) { return height / 2; } )
-                .attr("r", function(d) { 
-                  //return get_radius(d); 
-                  return nodevisible[d.id-1];
-                  })
-                .on('mouseover', mouseover_node)
-                .on("click", nodeClick);
-
-  function mouseover_node(d){
-    d3.selectAll(".node").classed('hovered', false);
-    d3.select(this).classed('hovered', true);
     
-    d3.select(this).append("title")
-          .text(d.id);
-  }
-
-  function tick() {
-      node.attr("cy", function(d) { return d.y; });
+    node = node.enter().append("circle")
+    .attr("id", function(d){ return d.id; })
+    .attr("class", "node")
+    //.attr("class", function(d){ return d.id; })
+    .attr("cx", function(d) { x = linearScale(d.created_at_numeric); return x; })
+    // .attr("cy", function(d) { return height / 2; } )
+    .attr("r", function(d) {
+          //return get_radius(d);
+          return nodevisible[d.id-1];
+          })
+    .on('mouseover', mouseover_node)
+    .on("click", nodeClick);
     
-    if(singleton==1){
-      return;
+    function mouseover_node(d){
+        d3.selectAll(".node").classed('hovered', false);
+        d3.select(this).classed('hovered', true);
+        
+        d3.select(this).append("title")
+        .text(d.id);
     }
     
-
-    link.attr("x1", function(d) { 
-          if(nodevisible[d.parent_id-1]==0 || nodevisible[d.child_id-1]==0){
-            return 0;
-          }
-          return linearScale(d.source.created_at_numeric); })
-        .attr("y1", function(d) { 
-          if(nodevisible[d.parent_id-1]==0 || nodevisible[d.child_id-1]==0){
-            return 0;
-          }
-          return d.source.y; })
-        .attr("x2", function(d) { 
-          if(nodevisible[d.parent_id-1]==0 || nodevisible[d.child_id-1]==0){
-            return 0;
-          }
-          return linearScale(d.target.created_at_numeric); })
-        .attr("y2", function(d) { 
-          if(nodevisible[d.parent_id-1]==0 || nodevisible[d.child_id-1]==0){
-            return 0;
-          }
-          return d.target.y; });
-    // .attr("cx", function(d) { return d.x; })
-  }
+    function tick() {
+        node.attr("cy", function(d) { return d.y; });
+        
+        if(singleton==1){
+            return;
+        }
+        
+        
+        link.attr("x1", function(d) {
+                  if(nodevisible[d.parent_id-1]==0 || nodevisible[d.child_id-1]==0){
+                  return 0;
+                  }
+                  return linearScale(d.source.created_at_numeric); })
+        .attr("y1", function(d) {
+              if(nodevisible[d.parent_id-1]==0 || nodevisible[d.child_id-1]==0){
+              return 0;
+              }
+              return d.source.y; })
+        .attr("x2", function(d) {
+              if(nodevisible[d.parent_id-1]==0 || nodevisible[d.child_id-1]==0){
+              return 0;
+              }
+              return linearScale(d.target.created_at_numeric); })
+        .attr("y2", function(d) {
+              if(nodevisible[d.parent_id-1]==0 || nodevisible[d.child_id-1]==0){
+              return 0;
+              }
+              return d.target.y; });
+        // .attr("cx", function(d) { return d.x; })
+    }
     
-
-  function nodeClick(d, i) {
-    d3.selectAll(".node").classed('selected', false);
-      var x = d3.select(this);
-      var id = x.attr("id");
-      for(var i=0;i<path[id].length;i++) {
-          mark[path[id][i]] = 1;
-      }
-      /*var x = d3.select(this);
-            var x = d3.select(this);
-      dfs(x.attr("id"));
-      var y = x.attr("id");
-      while(y != -1){
-          mark[y] = 1;
-          y = parent[y];
-      }
-      /*dfs(x.attr("id"));
-       var y = x.attr("id");
-       while(y != -1){
-       mark[y] = 1;
-       y = parent[y];
-       }*/
-      d3.selectAll(".node").sort(function (a, b) { // select the parent and sort the path's
-                                 if(mark[a.id]) {
-                                 return 1;
-                                 }
-                                 else {
-                                 return -1;
-                                 }
-                                 });
-      
-      /*for(var i=0;i<currentdata.tweets.length;i++) {
-       if(mark[i] == 1){
-       d3.select("[id='" + i + "']")
-       .classed('selected', true);
-       // .sort(function (a, b) {return 10;});
-       }
-       mark[i] = 0;
-       }*/
-      for(var i=0;i<path[id].length;i++) {
-          d3.select("[id='" + path[id][i] + "']")
-          .classed('selected', true);
-          mark[path[id][i]] = 0;
-      }
-      
-    d3.select(this).classed('selected', true).sort(function (a, b) {return 10;});
-      
-     
-
-    // Get the specific tweet data
-    d3.json(d.url, function(error, json){
-            $("#user-details-name").text(json.user.user_name);
-            $("#user-details-followers").text(json.user.followers);
-            $("#user-details-friends").text(json.user.friends);
-            $("#user-details-location").text(json.user.location);
-            $("#user-details-description").text(json.user.description);
-      $("#tweet-details-text").text(json.text);
-            //alert(json.user.user_name);
-
-      var date = d3.time.format('%Y-%m-%dT%H:%M:%S.000Z').parse(json.created_at);
-      $("#tweet-details-day").text(d3.time.format('%a %b-%d, %Y')(new Date(date)));
-      $("#tweet-details-time").text(d3.time.format('%I:%M:%S %p')(new Date(date)));
-
-      if(json.in_reply_to_status_str==null){
-        $("#tweet-details-replyto-id").text('None');
-      }else{
-        $("#tweet-details-replyto-id").text(json.in_reply_to_status_str);
-      }
-
-      if(json.retweeted_id==null){
-        $("#tweet-details-retweet").text('No');
-      }else{
-        $("#tweet-details-retweet").text('Yes');
-      }
-
-      $("#tweet-details-id").text(json.id);
-    });
-  }
+    
+    function nodeClick(d, i) {
+        d3.selectAll(".node").classed('selected', false);
+        var x = d3.select(this);
+        var id = x.attr("id");
+        for(var i=0;i<path[id].length;i++) {
+            mark[path[id][i]] = 1;
+        }
+        /*var x = d3.select(this);
+         var x = d3.select(this);
+         dfs(x.attr("id"));
+         var y = x.attr("id");
+         while(y != -1){
+         mark[y] = 1;
+         y = parent[y];
+         }
+         /*dfs(x.attr("id"));
+         var y = x.attr("id");
+         while(y != -1){
+         mark[y] = 1;
+         y = parent[y];
+         }*/
+        d3.selectAll(".node").sort(function (a, b) { // select the parent and sort the path's
+                                   if(mark[a.id]) {
+                                   return 1;
+                                   }
+                                   else {
+                                   return -1;
+                                   }
+                                   });
+        
+        /*for(var i=0;i<currentdata.tweets.length;i++) {
+         if(mark[i] == 1){
+         d3.select("[id='" + i + "']")
+         .classed('selected', true);
+         // .sort(function (a, b) {return 10;});
+         }
+         mark[i] = 0;
+         }*/
+        for(var i=0;i<path[id].length;i++) {
+            d3.select("[id='" + path[id][i] + "']")
+            .classed('selected', true);
+            mark[path[id][i]] = 0;
+        }
+        
+        d3.select(this).classed('selected', true).sort(function (a, b) {return 10;});
+        
+        
+        
+        // Get the specific tweet data
+        d3.json(d.url, function(error, json){
+                $("#user-details-name").text(json.user.user_name);
+                $("#user-details-followers").text(json.user.followers);
+                $("#user-details-friends").text(json.user.friends);
+                $("#user-details-location").text(json.user.location);
+                $("#user-details-description").text(json.user.description);
+                $("#tweet-details-text").text(json.text);
+                //alert(json.user.user_name);
+                
+                var date = d3.time.format('%Y-%m-%dT%H:%M:%S.000Z').parse(json.created_at);
+                $("#tweet-details-day").text(d3.time.format('%a %b-%d, %Y')(new Date(date)));
+                $("#tweet-details-time").text(d3.time.format('%I:%M:%S %p')(new Date(date)));
+                
+                if(json.in_reply_to_status_str==null){
+                $("#tweet-details-replyto-id").text('None');
+                }else{
+                $("#tweet-details-replyto-id").text(json.in_reply_to_status_str);
+                }
+                
+                if(json.retweeted_id==null){
+                $("#tweet-details-retweet").text('No');
+                }else{
+                $("#tweet-details-retweet").text('Yes');
+                }
+                
+                $("#tweet-details-id").text(json.id);
+                });
+    }
 }

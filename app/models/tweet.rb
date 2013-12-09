@@ -50,4 +50,12 @@ class Tweet < ActiveRecord::Base
   def root?
     retweeted_id.blank? && in_reply_to_status_str.blank?
   end
+
+  def retweet?
+    retweeted_id.blank?
+  end
+
+  def reply?
+    in_reply_to_status_str.blank?
+  end
 end

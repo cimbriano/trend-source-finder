@@ -9,6 +9,16 @@ def load_synthetic_data
 
 end
 
+def make_reply_tree(parent=nil, singleton_probability=0.8)
+  u = make_user
+  t = parent || make_tweet(u)
+
+  if rand > singleton_probability
+    reply = make_reply(parent, replying_user)
+    make_reply_tree(reply, singleton_probability + 0.01)
+  end
+end
+
 def make_retweet_tree(parent=nil, singleton_probability=0.6)
   u = make_user
   t = parent || make_tweet(u)
@@ -37,10 +47,12 @@ def make_user
 end
 
 def make_tweet(user)
-    Tweet.create!(
+  date_range = (7.day.ago...1.hour.ago)
+  Tweet.create!(
     twitter_id: Faker::Number.number(10).to_str, # Twitter's ID for this tweet
     text: Faker::Lorem.sentences(1).first,
-    user: user
+    user: user,
+    created_at: rand(date_range)
   )
 end
 
@@ -51,6 +63,20 @@ def make_retweet(original_tweet)
     created_at: ((original_tweet.created_at.to_time + (rand 600).minutes)).to_datetime, # Adds up to 600 minutes
     retweeted_id: original_tweet.id,
     user: make_user
+  )
+
+  Edge.create!(child: t, parent: original_tweet)
+
+  return t
+end
+
+def make_reply(original_tweet, replying_user)
+  t = Tweet.create!(
+    twitter_id: Faker::Number.number(10).to_str, # Twitter's ID for this tweet
+    text: Faker::Lorem.sentences(1).first,
+    created_at: ((original_tweet.created_at.to_time + (rand 600).minutes)).to_datetime, # Adds up to 600 minutes
+    in_reply_to_status_str: original_tweet.id,
+    user: replying_user
   )
 
   Edge.create!(child: t, parent: original_tweet)

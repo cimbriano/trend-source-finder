@@ -1,11 +1,11 @@
 require 'json'
 
-def remove_all_data
-  puts 'Purging database'
-  Edge.delete_all
-  User.delete_all
-  Tweet.delete_all
-end
+# def remove_all_data
+#   puts 'Purging database'
+#   Edge.delete_all
+#   User.delete_all
+#   Tweet.delete_all
+# end
 
 def load_synthetic_data
   puts 'Loading synthetic data'
@@ -98,7 +98,7 @@ end
 
 
 
-remove_all_data
+# remove_all_data
 
 case ENV['dataset']
 when 'small'

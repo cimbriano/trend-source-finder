@@ -195,6 +195,40 @@ function nodevisibility(){
   }
 }
 
+$(function() {
+$("#search-box").keyup(function(){
+                       //alert($(this).val());
+                       //alert("salam");
+                       var val = $(this).val();
+                       if(reply != -1 || singleton != -1) {
+                        return;
+                       }
+                       if(val == "") {
+                            for(var i = 0; i < currentdata.tweets.length; i++) {
+                                nodevisible[i] = radius;
+                            }
+                       }
+                       else {
+                            for(var i = 0; i < currentdata.tweets.length; i++) {
+                       var id = i;//currentdata.tweets[i].id;
+                       //console.log(i);
+                               d3.json(currentdata.tweets[i].url, function(error, json){
+                                           nodevisible[json.id - 1] = 0;
+                                       //console.log(val + " " + json.user.user_name);
+                                           if(val == json.user.user_name) {
+                                       //alert(id);
+                                       //console.log("found at: " + json.id);
+                                                nodevisible[json.id - 1] = radius;
+                                           }
+                                        }
+                                    )
+                       
+                            }
+                       }
+                       visualizeit(scaledvalue_start, scaledvalue);
+});
+});
+  
 //upToTime show time scale from 0 to 100. If 100, will show 100% time scale.
 function visualizeit(fromTime, upToTime){
   d3.select("svg").remove();
@@ -312,6 +346,10 @@ function visualizeit(fromTime, upToTime){
              .on('mouseover', function(d, i){ return 'link test'; });
 
   node = node.data(currentdata.tweets);
+    
+    node.attr("r", function(d) {
+              //return get_radius(d);
+              return nodevisible[d.id-1]});
              
   node = node.enter().append("circle")
                 .attr("id", function(d){ return d.id; })

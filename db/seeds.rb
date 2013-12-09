@@ -9,22 +9,21 @@ def load_synthetic_data
 
 end
 
-def make_retweet_tree
-  singleton_probability = 0.7
-
-
+def make_retweet_tree(parent=nil, singleton_probability=0.6)
   u = make_user
-  t = make_tweet(u)
+  t = parent || make_tweet(u)
 
   if rand > singleton_probability # This will not be a singleton
     # How many retweets?
-    num_of_retweets = rand(9) + 1 # At least 1, up to 10
+    num_of_retweets = rand(9) + 1 # At least 1, up to 3
 
     num_of_retweets.times do
-      make_retweet(t)
+      rt = make_retweet(t)
+      make_retweet_tree(rt, singleton_probability + 0.07 )
     end
   end
 end
+
 
 def make_user
   User.create!(
@@ -55,6 +54,8 @@ def make_retweet(original_tweet)
   )
 
   Edge.create!(child: t, parent: original_tweet)
+
+  return t
 end
 
 

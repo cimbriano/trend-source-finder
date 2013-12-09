@@ -419,6 +419,8 @@ function visualizeit(fromTime, upToTime){
             $("#user-details-name").text(json.user.user_name);
             $("#user-details-followers").text(json.user.followers);
             $("#user-details-friends").text(json.user.friends);
+            $("#user-details-location").text(json.user.location);
+            $("#user-details-description").text(json.user.description);
       $("#tweet-details-text").text(json.text);
             //alert(json.user.user_name);
 

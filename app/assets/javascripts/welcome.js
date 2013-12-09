@@ -13,6 +13,7 @@ d3.json("/graph.json", function(error, json){
   for(var i = 0; i < currentdata.tweets.length; i++){
     nodevisible[i] = radius;
   }
+       // alert(currentdata.users.length);
   visualizeit(1, 100);
 });
 
@@ -415,7 +416,11 @@ function visualizeit(fromTime, upToTime){
 
     // Get the specific tweet data
     d3.json(d.url, function(error, json){
+            $("#user-details-name").text(json.user.user_name);
+            $("#user-details-followers").text(json.user.followers);
+            $("#user-details-friends").text(json.user.friends);
       $("#tweet-details-text").text(json.text);
+            //alert(json.user.user_name);
 
       var date = d3.time.format('%Y-%m-%dT%H:%M:%S.000Z').parse(json.created_at);
       $("#tweet-details-day").text(d3.time.format('%a %b-%d, %Y')(new Date(date)));

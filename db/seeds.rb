@@ -3,29 +3,35 @@ require 'json'
 def load_synthetic_data
   puts 'Loading synthetic data'
 
-  9.times do
+  ((rand 10) + 8).times do
     make_retweet_tree
   end
 
+  ((rand 10) + 7).times do
+    make_reply_tree
+  end
+
 end
 
-def make_reply_tree(parent=nil, singleton_probability=0.8)
-  u = make_user
-  t = parent || make_tweet(u)
+def make_reply_tree(parent_tweet=nil, replying_user=nil, singleton_probability=0.4)
+  u1 = parent_tweet.try(:user) || make_user
+  t = parent_tweet || make_tweet(u1)
+
+  u2 = replying_user || make_user
 
   if rand > singleton_probability
-    reply = make_reply(parent, replying_user)
-    make_reply_tree(reply, singleton_probability + 0.01)
+    reply = make_reply(t, u2)
+    make_reply_tree(reply, u1, singleton_probability + 0.01)
   end
 end
 
-def make_retweet_tree(parent=nil, singleton_probability=0.6)
+def make_retweet_tree(parent_tweet=nil, singleton_probability=0.6)
   u = make_user
-  t = parent || make_tweet(u)
+  t = parent_tweet || make_tweet(u)
 
   if rand > singleton_probability # This will not be a singleton
     # How many retweets?
-    num_of_retweets = rand(9) + 1 # At least 1, up to 3
+    num_of_retweets = rand(4) + 1 # At least 1, up to 4
 
     num_of_retweets.times do
       rt = make_retweet(t)

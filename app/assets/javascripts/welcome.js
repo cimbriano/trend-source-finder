@@ -310,7 +310,7 @@ function visualizeit(){
     .scale(timeScale)
     .orient("bottom")
     .ticks(5)
-    .tickFormat(d3.time.format("%b-%d"));
+    .tickFormat(d3.time.format("%x"));
     
     svg.append("g")
     .attr("class", "axis")
@@ -382,7 +382,9 @@ function visualizeit(){
 
     var context_xAxis = d3.svg.axis()
         .scale(d3.time.scale().domain([new Date(context_x.domain()[0]),new Date(context_x.domain()[1])]).range([padding, width - padding]))
-      .orient("bottom");
+        .orient("bottom")
+        .ticks(5)
+        .tickFormat(d3.time.format("%x"));
       
     // context axis
     svg.append("g")

@@ -67,7 +67,7 @@ def make_retweet(original_tweet)
     twitter_id: Faker::Number.number(10).to_str, # Twitter's ID for this tweet
     text: Faker::Lorem.sentences(1).first,
     created_at: ((original_tweet.created_at.to_time + (rand 600).minutes)).to_datetime, # Adds up to 600 minutes
-    retweeted_id: original_tweet.id,
+    retweeted_id: original_tweet.twitter_id,
     user: make_user
   )
 
@@ -81,7 +81,7 @@ def make_reply(original_tweet, replying_user)
     twitter_id: Faker::Number.number(10).to_str, # Twitter's ID for this tweet
     text: Faker::Lorem.sentences(1).first,
     created_at: ((original_tweet.created_at.to_time + (rand 600).minutes)).to_datetime, # Adds up to 600 minutes
-    in_reply_to_status_str: original_tweet.id,
+    in_reply_to_status_str: original_tweet.twitter_id,
     user: replying_user
   )
 

@@ -52,10 +52,18 @@ class Tweet < ActiveRecord::Base
   end
 
   def retweet?
-    retweeted_id.blank?
+    retweeted_id.present?
   end
 
   def reply?
-    in_reply_to_status_str.blank?
+    in_reply_to_status_str.present?
+  end
+
+  def in_reply_chain?
+    children.any? {|t| t.reply? } || self.reply?
+  end
+
+  def in_retweet_chain?
+    children.any? {|t| t.retweet?} || self.retweet?
   end
 end

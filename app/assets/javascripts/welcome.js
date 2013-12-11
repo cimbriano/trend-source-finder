@@ -558,7 +558,8 @@ function visualizeit(){
                 $("#tweet-details-retweet").text('Yes');
                 }
                 
-                $("#tweet-details-id").text(json.id);
+                $('#tweet-details-in-reply-chain').text(json.in_reply_chain);
+                $('#tweet-details-in-retweet-chain').text(json.in_retweet_chain)
                 });
     }
 }

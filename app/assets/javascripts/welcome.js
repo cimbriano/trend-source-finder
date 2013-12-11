@@ -39,25 +39,6 @@ $(function () { //body layout
   
   });
 
-$(function() {//slider
-  $( "#slider" ).slider({
-                        range: true,
-                        min: 1,
-                        max: 100,
-                        step: 1,
-                        values: [ 1, 100],
-                        slide: function( event, ui ) {
-                        $('#slider-value').text(ui.values[ 0 ] + " to " + ui.values[ 1 ]);
-                        scaledvalue_start = ui.values[0];
-                        scaledvalue = ui.values[1];
-                        visualizeit(ui.values[0], ui.values[1]);
-                        },
-                        //stop: function(event, ui) {
-                        //    visualizeit(ui.values[0]);
-                        //}
-                        });
-  $('#slider-value').text(1);
-  });
 
 function check_tweettype(){
     if($('input[name=tweet-group]:radio:checked').val()=='reply'){
@@ -90,12 +71,12 @@ $(function() {//reply-retweet
                         $("#retweet").attr("disabled",true);
                         currentdata = jQuery.extend(true, {}, data);
                         }
-                        visualizeit(scaledvalue_start, scaledvalue);
+                        visualizeit();
                         });
   
   $(".tweet-group").click(function(){
                           check_tweettype();
-                          visualizeit(scaledvalue_start, scaledvalue);
+                          visualizeit();
                           });
   });
 
@@ -130,12 +111,12 @@ $(function() { //show-hide edges
                        $("#hide").attr("disabled",true);
                        currentdata = jQuery.extend(true, {}, data);
                        }
-                       visualizeit(scaledvalue_start, scaledvalue);
+                       visualizeit();
                        });
   
   $(".action-group").click(function(){
                            check_actiontype();
-                           visualizeit(scaledvalue_start, scaledvalue);
+                           visualizeit();
                            });
   });
 
@@ -233,12 +214,11 @@ $(function() {
                          
                          }
                          }
-                         visualizeit(scaledvalue_start, scaledvalue);
+                         visualizeit();
                          });
   });
 
-//upToTime show time scale from 0 to 100. If 100, will show 100% time scale.
-function visualizeit(fromTime, upToTime){
+function visualizeit(){
     d3.select("svg").remove();
     var width = $('#paneCenter').width();
     var height = $('#paneCenter').height()-120;
@@ -252,7 +232,7 @@ function visualizeit(fromTime, upToTime){
     
     var svg = d3.select("#canvas").append("svg")
     .attr("width", width)
-    .attr("height", height+1000);
+    .attr("height", height+50);
     
     var link = svg.selectAll(".link");
     var node = svg.selectAll(".node");
@@ -313,23 +293,18 @@ function visualizeit(fromTime, upToTime){
     
     var linearScale = d3.scale.linear()
     .domain([d3.min(initialScaleData), d3.max(initialScaleData)])
-    //.range([padding, (width - padding)]);
-    .range([padding - (fromTime/100)*(width), (100/upToTime)*(width - padding)]);
+    .range([padding, (width - padding)]);
     
     var linearScaleY = d3.scale.linear()
     .domain([d3.min(initialScaleData), d3.max(initialScaleData)])
-    //.range([padding, (width - padding)]);
-    .range([padding - (fromTime/100)*(width), (100/upToTime)*(width - padding)]);
-    
-    function getDate(d){return new Date(d.jsonDate);}
+    .range([padding, (width - padding)]);
     
     var minDate = new Date(stringDate[initialScaleData.indexOf(d3.min(initialScaleData))]),
     maxDate = new Date(stringDate[initialScaleData.indexOf(d3.max(initialScaleData))]);
     
     var timeScale = d3.time.scale()
     .domain([minDate,maxDate])
-    //.range([padding, (width - padding)]);
-    .range([padding - (fromTime/100)*(width), (100/upToTime)*(width - padding)]);
+    .range([padding, (width - padding)]);
     
     var xAxis = d3.svg.axis()
     .scale(timeScale)
@@ -344,14 +319,6 @@ function visualizeit(fromTime, upToTime){
     
 
     // histogram of volume
-    var scaleDataRange = d3.max(initialScaleData) - d3.min(initialScaleData)+1;
-    // var domainStart = (fromTime/sliderRange)*scaleDataRange+d3.min(initialScaleData),domainEnd = (upToTime/sliderRange)*scaleDataRange+d3.min(initialScaleData);
-    
-
-
-    // Generate an Irwin–Hall distribution of 10 random variables.
-    // var values = d3.range(1000).map(d3.random.irwinHall(10));
-    // var values = initialScaleData.map(function(d){return d*1000;});
     var values = initialScaleData.map(function(d){return d*1000;});
 
     var focus_height = 360, context_height = 30, axis_height = 20;
@@ -365,7 +332,7 @@ function visualizeit(fromTime, upToTime){
 
     var focus_x = d3.scale.linear()
         .domain([minDate_raw, maxDate_raw])
-        .range([0, all_width]);
+        .range([padding, width - padding]);
 
 
     var context_x = d3.scale.linear()
@@ -414,7 +381,7 @@ function visualizeit(fromTime, upToTime){
           .attr("height", context_height + 7);
 
     var context_xAxis = d3.svg.axis()
-        .scale(d3.time.scale().domain([new Date(context_x.domain()[0]),new Date(context_x.domain()[1])]).range([0, all_width]))
+        .scale(d3.time.scale().domain([new Date(context_x.domain()[0]),new Date(context_x.domain()[1])]).range([padding, width - padding]))
       .orient("bottom");
       
     // context axis
@@ -428,10 +395,10 @@ function visualizeit(fromTime, upToTime){
     function brushed() {
       focus_x.domain(brush.empty() ? context_x.domain() : brush.extent());
       xAxis = d3.svg.axis()
-        .scale(d3.time.scale().domain([new Date(focus_x.domain()[0]),new Date(focus_x.domain()[1])]).range([0, all_width]))
+        .scale(d3.time.scale().domain([new Date(focus_x.domain()[0]),new Date(focus_x.domain()[1])]).range([padding, width - padding]))
         .orient("bottom");
       svg.select(".axis").call(xAxis);
-      newLinearScale = d3.scale.linear().domain([focus_x.domain()[0]/1000,focus_x.domain()[1]/1000]).range([0, all_width]);
+      newLinearScale = d3.scale.linear().domain([focus_x.domain()[0]/1000,focus_x.domain()[1]/1000]).range([padding, width - padding]);
 
       d3.selectAll("line").remove();
       d3.selectAll("circle").remove();

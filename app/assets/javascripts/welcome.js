@@ -252,7 +252,7 @@ function visualizeit(fromTime, upToTime){
     
     var svg = d3.select("#canvas").append("svg")
     .attr("width", width)
-    .attr("height", height);
+    .attr("height", height+1000);
     
     var link = svg.selectAll(".link");
     var node = svg.selectAll(".node");
@@ -342,6 +342,109 @@ function visualizeit(fromTime, upToTime){
     .attr("transform", "translate(0," + (height - padding) + ")")
     .call(xAxis);
     
+
+    // histogram of volume
+    var scaleDataRange = d3.max(initialScaleData) - d3.min(initialScaleData)+1;
+    // var domainStart = (fromTime/sliderRange)*scaleDataRange+d3.min(initialScaleData),domainEnd = (upToTime/sliderRange)*scaleDataRange+d3.min(initialScaleData);
+    
+
+
+    // Generate an Irwin–Hall distribution of 10 random variables.
+    // var values = d3.range(1000).map(d3.random.irwinHall(10));
+    // var values = initialScaleData.map(function(d){return d*1000;});
+    var values = initialScaleData.map(function(d){return d*1000;});
+
+    var focus_height = 360, context_height = 30, axis_height = 20;
+    var all_width = 900, all_height = focus_height+context_height+axis_height+axis_height;
+
+    var minDate_raw = d3.min(values), maxDate_raw = d3.max(values);
+
+
+    var parseDate = d3.time.format('%Y-%m-%dT%H:%M:%S.000Z').parse;
+
+
+    var focus_x = d3.scale.linear()
+        .domain([minDate_raw, maxDate_raw])
+        .range([0, all_width]);
+
+
+    var context_x = d3.scale.linear()
+        .domain(focus_x.domain())
+        .range(focus_x.range());
+
+
+    // Generate a histogram using twenty uniformly-spaced bins.
+    var data = d3.layout.histogram()
+        .bins(focus_x.ticks(20))
+        (values);
+
+
+    var brush = d3.svg.brush()
+        .x(context_x)
+        .on("brush", brushed);
+
+    var context_y = d3.scale.linear()
+        .domain([0, d3.max(data, function(d) { return d.y; })])
+        .range([context_height, 0]);
+
+    var hist = data;
+    var context_area = d3.svg.area()
+        .interpolate("monotone")
+        .x(function(d) { return context_x(d.x); })
+        .y0(context_height)
+        .y1(function(d) { return context_y(d.y); });
+
+
+        
+    var context = svg.append("g")
+        .attr("height", 20)
+        .attr("transform", "translate(" + 0 + "," + (height+axis_height) + ")");
+
+
+      context.append("path")
+          .datum(hist)
+          .attr("d", context_area);
+
+
+      context.append("g")
+          .attr("class", "x brush")
+          .call(brush)
+        .selectAll("rect")
+          .attr("y", -6)
+          .attr("height", context_height + 7);
+
+    var context_xAxis = d3.svg.axis()
+        .scale(d3.time.scale().domain([new Date(context_x.domain()[0]),new Date(context_x.domain()[1])]).range([0, all_width]))
+      .orient("bottom");
+      
+    // context axis
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + (height+context_height+axis_height) + ")")
+        .call(context_xAxis);
+    var newLinearScale = linearScale;
+    drawGraph(newLinearScale);
+
+    function brushed() {
+      focus_x.domain(brush.empty() ? context_x.domain() : brush.extent());
+      xAxis = d3.svg.axis()
+        .scale(d3.time.scale().domain([new Date(focus_x.domain()[0]),new Date(focus_x.domain()[1])]).range([0, all_width]))
+        .orient("bottom");
+      svg.select(".axis").call(xAxis);
+      newLinearScale = d3.scale.linear().domain([focus_x.domain()[0]/1000,focus_x.domain()[1]/1000]).range([0, all_width]);
+
+      d3.selectAll("line").remove();
+      d3.selectAll("circle").remove();
+
+      drawGraph(newLinearScale);
+    }
+
+
+
+    // end of histogram
+
+    function drawGraph(newLinearScale) {
+
     force
     .theta(10)  // Removes "jiggle"
     .nodes(currentdata.tweets)
@@ -363,7 +466,7 @@ function visualizeit(fromTime, upToTime){
     .attr("id", function(d){ return d.id; })
     .attr("class", "node")
     //.attr("class", function(d){ return d.id; })
-    .attr("cx", function(d) { x = linearScale(d.created_at_numeric); return x; })
+    .attr("cx", function(d) { x = newLinearScale(d.created_at_numeric); return x; })
     // .attr("cy", function(d) { return height / 2; } )
     .attr("r", function(d) {
           //return get_radius(d);
@@ -371,6 +474,8 @@ function visualizeit(fromTime, upToTime){
           })
     .on('mouseover', mouseover_node)
     .on("click", nodeClick);
+
+  }
     
     function mouseover_node(d){
         d3.selectAll(".node").classed('hovered', false);
@@ -392,7 +497,7 @@ function visualizeit(fromTime, upToTime){
                   if(nodevisible[d.parent_id-1]==0 || nodevisible[d.child_id-1]==0){
                   return 0;
                   }
-                  return linearScale(d.source.created_at_numeric); })
+                  return newLinearScale(d.source.created_at_numeric); })
         .attr("y1", function(d) {
               if(nodevisible[d.parent_id-1]==0 || nodevisible[d.child_id-1]==0){
               return 0;
@@ -402,7 +507,7 @@ function visualizeit(fromTime, upToTime){
               if(nodevisible[d.parent_id-1]==0 || nodevisible[d.child_id-1]==0){
               return 0;
               }
-              return linearScale(d.target.created_at_numeric); })
+              return newLinearScale(d.target.created_at_numeric); })
         .attr("y2", function(d) {
               if(nodevisible[d.parent_id-1]==0 || nodevisible[d.child_id-1]==0){
               return 0;

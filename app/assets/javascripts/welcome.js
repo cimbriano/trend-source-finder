@@ -1,6 +1,6 @@
 var data;
 var currentdata;
-var radius = 5;
+var radius = 8;
 var scaledvalue_start = 1;
 var scaledvalue = 100;
 var singleton = -1;
@@ -223,6 +223,9 @@ function visualizeit(){
     var width = $('#paneCenter').width();
     var height = $('#paneCenter').height()-120;
     var padding = 20;
+
+    var color = d3.scale.category10()
+                  .domain(d3.range(2))
     
     var force = d3.layout.force()
     .size([width, height])
@@ -370,7 +373,9 @@ function visualizeit(){
 
       context.append("path")
           .datum(hist)
-          .attr("d", context_area);
+          .attr("d", context_area)
+          .attr('class', 'histogram');
+
 
 
       context.append("g")
@@ -441,6 +446,7 @@ function visualizeit(){
           //return get_radius(d);
           return nodevisible[d.id-1];
           })
+    .style('fill', function(d) {return color(d.in_reply_chain); } )
     .on('mouseover', mouseover_node)
     .on("click", nodeClick);
 

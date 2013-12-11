@@ -3,6 +3,12 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 svg
     border: 1px solid
+
+path
+    fill: #ccc
+
+path.histogram
+    fill: steelBlue
     
 #canvas
     float: left
@@ -31,18 +37,20 @@ svg
 
 .node
     cursor: crosshair
+    opacity: 0.7
     fill: #ccc
-    stroke: #000
+    stroke: #fff
     stroke-width: 1.5px
     z-index: 10
 
 .node.selected
-    fill: #f00
+    opacity: 1
+    stroke: #000
     z-index: 100
 
 .node.hovered
-    fill: #0f0
-    stroke: #f00
+    // opacity: 0.9
+    // stroke: #CCC
 
 .link
     stroke: #000

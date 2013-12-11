@@ -143,19 +143,19 @@ function check_reply(d){
         return radius;
     }
     if(reply==1){
-        if(d.in_reply_to_status_str!=null){
+        if(d.in_reply_chain == 1){
             nodevisible[d.id-1] = radius;
             return radius;
-        }else if(d.retweeted_id != null) {
+        }else {
             nodevisible[d.id-1] = 0;
             return 0;
-            }
+        }
     }
     if(reply==0){
-        if(d.retweeted_id!=null){
+        if(d.in_retweet_chain == 1){
             nodevisible[d.id-1] = radius;
             return radius;
-        }else if(d.in_reply_to_status_str != null) {
+        }else {
             nodevisible[d.id-1] = 0;
             return 0;
             }

@@ -146,19 +146,19 @@ function check_reply(d){
         if(d.in_reply_to_status_str!=null){
             nodevisible[d.id-1] = radius;
             return radius;
-        }else{
+        }else if(d.retweeted_id != null) {
             nodevisible[d.id-1] = 0;
             return 0;
-        }
+            }
     }
     if(reply==0){
         if(d.retweeted_id!=null){
             nodevisible[d.id-1] = radius;
             return radius;
-        }else{
+        }else if(d.in_reply_to_status_str != null) {
             nodevisible[d.id-1] = 0;
             return 0;
-        }
+            }
     }
 }
 
@@ -232,7 +232,7 @@ function visualizeit(){
     
     var svg = d3.select("#canvas").append("svg")
     .attr("width", width)
-    .attr("height", height+50);
+    .attr("height", height+80);
     
     var link = svg.selectAll(".link");
     var node = svg.selectAll(".node");
@@ -310,7 +310,7 @@ function visualizeit(){
     .scale(timeScale)
     .orient("bottom")
     .ticks(5)
-    .tickFormat(d3.time.format("%b-%d"));
+    .tickFormat(d3.time.format("%x"));
     
     svg.append("g")
     .attr("class", "axis")
@@ -321,8 +321,8 @@ function visualizeit(){
     // histogram of volume
     var values = initialScaleData.map(function(d){return d*1000;});
 
-    var focus_height = 360, context_height = 30, axis_height = 20;
-    var all_width = 900, all_height = focus_height+context_height+axis_height+axis_height;
+    var context_height = 30, axis_height = 20;
+    var all_height = height+context_height+axis_height+axis_height;
 
     var minDate_raw = d3.min(values), maxDate_raw = d3.max(values);
 
@@ -342,7 +342,7 @@ function visualizeit(){
 
     // Generate a histogram using twenty uniformly-spaced bins.
     var data = d3.layout.histogram()
-        .bins(focus_x.ticks(20))
+        .bins(focus_x.ticks(100))
         (values);
 
 
@@ -382,7 +382,9 @@ function visualizeit(){
 
     var context_xAxis = d3.svg.axis()
         .scale(d3.time.scale().domain([new Date(context_x.domain()[0]),new Date(context_x.domain()[1])]).range([padding, width - padding]))
-      .orient("bottom");
+        .orient("bottom")
+        .ticks(5)
+        .tickFormat(d3.time.format("%x"));
       
     // context axis
     svg.append("g")

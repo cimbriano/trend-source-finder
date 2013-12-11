@@ -232,7 +232,7 @@ function visualizeit(){
     
     var svg = d3.select("#canvas").append("svg")
     .attr("width", width)
-    .attr("height", height+50);
+    .attr("height", height+80);
     
     var link = svg.selectAll(".link");
     var node = svg.selectAll(".node");
@@ -321,8 +321,8 @@ function visualizeit(){
     // histogram of volume
     var values = initialScaleData.map(function(d){return d*1000;});
 
-    var focus_height = 360, context_height = 30, axis_height = 20;
-    var all_width = 900, all_height = focus_height+context_height+axis_height+axis_height;
+    var context_height = 30, axis_height = 20;
+    var all_height = height+context_height+axis_height+axis_height;
 
     var minDate_raw = d3.min(values), maxDate_raw = d3.max(values);
 
@@ -342,7 +342,7 @@ function visualizeit(){
 
     // Generate a histogram using twenty uniformly-spaced bins.
     var data = d3.layout.histogram()
-        .bins(focus_x.ticks(20))
+        .bins(focus_x.ticks(100))
         (values);
 
 

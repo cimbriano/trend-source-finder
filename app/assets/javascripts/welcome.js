@@ -390,11 +390,9 @@ function visualizeit(){
         .y0(context_height)
         .y1(function(d) { return context_y(d.y); });
 
-
-        
     var context = svg.append("g")
         .attr("height", 20)
-        .attr("transform", "translate(" + 0 + "," + (height+axis_height) + ")");
+        .attr("transform", "translate(" + 0 + "," + height + ")");
 
 
       context.append("path")
@@ -420,19 +418,20 @@ function visualizeit(){
     // context axis
     svg.append("g")
         .attr("class", "x axis")
-        .attr("transform", "translate(0," + (height+context_height+axis_height) + ")")
+        .attr("transform", "translate(0," + (height + context_height) + ")")
         .call(context_xAxis);
 
 
     // y brush
-    var ybrush_scale = d3.scale.linear().domain([0,height]).range([0,height]);
+    var ybrush_scale = d3.scale.linear().domain([0,height]).range([(2 * padding), height - (2 * padding)]);
     var ybrush = d3.svg.brush()
         .y(ybrush_scale)
         .on("brush", ybrushed);
 
     var yAxis = d3.svg.axis()
-                .scale(d3.scale.linear().domain([1,10]).range([0,height]))
+                .scale(d3.scale.linear().domain([1,10]).range([(2 * padding) ,height - (2 * padding)]))
                 .orient("left")
+                .tickFormat('');
 
     var yAxis_region = svg.append("g")
         .attr("class", "y axis")

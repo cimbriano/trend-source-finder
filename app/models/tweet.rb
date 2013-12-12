@@ -40,6 +40,18 @@ class Tweet < ActiveRecord::Base
     retweeted_id.present? || in_reply_to_status_str.present?
   end
 
+  def type_code
+    if singleton?
+      1
+    elsif in_retweet_chain?
+      2
+    elsif in_reply_chain?
+      3
+    else
+      0
+    end
+  end
+
   def singleton?
     # This did not retweet
     # This is not in reply to another tweet

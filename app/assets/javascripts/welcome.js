@@ -225,7 +225,7 @@ function visualizeit(){
     var padding = 20;
 
     var color = d3.scale.category10()
-                  .domain(d3.range(2))
+                  .domain(d3.range(4))
     
     var force = d3.layout.force()
     .size([width, height])
@@ -438,7 +438,13 @@ function visualizeit(){
     
     node = node.enter().append("circle")
     .attr("id", function(d){ return d.id; })
-    .attr("class", "node")
+    .attr("class", function (d) {
+      classes = 'node'
+      classes += ' ' + d.user_name
+      classes += d.in_reply_chain ? ' reply' : '';
+      classes += d.in_retweet_chain ? ' retweet' : '';
+      return classes
+    })
     //.attr("class", function(d){ return d.id; })
     .attr("cx", function(d) { x = newLinearScale(d.created_at_numeric); return x; })
     // .attr("cy", function(d) { return height / 2; } )
@@ -446,7 +452,7 @@ function visualizeit(){
           //return get_radius(d);
           return nodevisible[d.id-1];
           })
-    .style('fill', function(d) {return color(d.in_reply_chain); } )
+    .style('fill', function(d) {return color(d.type); } )
     .on('mouseover', mouseover_node)
     .on("click", nodeClick);
 

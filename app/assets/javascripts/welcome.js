@@ -502,7 +502,8 @@ function visualizeit(){
     .attr("id", function(d){ return d.id; })
     .attr("class", function (d) {
       classes = 'node'
-      classes += ' ' + d.user_name
+      classes += ' ' + d.user_name;
+      classes += ' n' + d.twitter_id;
       classes += d.in_reply_chain ? ' reply' : '';
       classes += d.in_retweet_chain ? ' retweet' : '';
       return classes

@@ -14,7 +14,7 @@ d3.json("/graph.json", function(error, json){
         nodevisible[i] = radius;
         }
         // alert(currentdata.users.length);
-        visualizeit(1, 100);
+        visualizeit();
         });
 
 $(function () { //body layout
@@ -422,8 +422,33 @@ function visualizeit(){
         .attr("class", "x axis")
         .attr("transform", "translate(0," + (height+context_height+axis_height) + ")")
         .call(context_xAxis);
+
+
+    // y brush
+    var ybrush_scale = d3.scale.linear().domain([0,height]).range([0,height]);
+    var ybrush = d3.svg.brush()
+        .y(ybrush_scale)
+        .on("brush", ybrushed);
+
+    var yAxis = d3.svg.axis()
+                .scale(d3.scale.linear().domain([1,10]).range([0,height]))
+                .orient("left")
+
+    var yAxis_region = svg.append("g")
+        .attr("class", "y axis")
+        .attr("transform","translate(20,0)")
+        .call(yAxis);
+
+    yAxis_region.append("g")
+        .attr("class", "y brush")
+        .call(ybrush)
+      .selectAll("rect")
+        .attr("x", -6)
+        .attr("width", 20);
+
+
     var newLinearScale = linearScale;
-    drawGraph(newLinearScale);
+    drawGraph(newLinearScale,ybrush_scale);
 
     function brushed() {
       focus_x.domain(brush.empty() ? context_x.domain() : brush.extent());
@@ -436,14 +461,26 @@ function visualizeit(){
       d3.selectAll("line").remove();
       d3.selectAll("circle").remove();
 
-      drawGraph(newLinearScale);
+      drawGraph(newLinearScale,ybrush_scale);
     }
 
+    function ybrushed() {
+        xAxis = d3.svg.axis()
+          .scale(d3.time.scale().domain([new Date(focus_x.domain()[0]),new Date(focus_x.domain()[1])]).range([padding, width - padding]))
+          .orient("bottom");
+        svg.select(".axis").call(xAxis);
+        newLinearScale = d3.scale.linear().domain([focus_x.domain()[0]/1000,focus_x.domain()[1]/1000]).range([padding, width - padding]);
+        ybrush_scale = d3.scale.linear().domain(ybrush.empty()?[0,height]:ybrush.extent()).range([0,height]);
+        d3.selectAll("line").remove();
+        d3.selectAll("circle").remove();
+        drawGraph(newLinearScale,ybrush_scale);
+
+    }
 
 
     // end of histogram
 
-    function drawGraph(newLinearScale) {
+    function drawGraph(newLinearScale,ybrush_scale) {
 
     force
     .theta(10)  // Removes "jiggle"
@@ -473,7 +510,7 @@ function visualizeit(){
     })
     //.attr("class", function(d){ return d.id; })
     .attr("cx", function(d) { x = newLinearScale(d.created_at_numeric); return x; })
-    // .attr("cy", function(d) { return height / 2; } )
+    .attr("cy", function(d) { y = ybrush_scale(d.y); return y; } )
     .attr("r", function(d) {
           //return get_radius(d);
           return nodevisible[d.id-1];
@@ -493,7 +530,7 @@ function visualizeit(){
     }
     
     function tick() {
-        node.attr("cy", function(d) { return d.y; });
+        node.attr("cy", function(d) { return ybrush_scale(d.y); });
         
         if(singleton==1){
             return;
@@ -509,7 +546,7 @@ function visualizeit(){
               if(nodevisible[d.parent_id-1]==0 || nodevisible[d.child_id-1]==0){
               return 0;
               }
-              return d.source.y; })
+              return ybrush_scale(d.source.y); })
         .attr("x2", function(d) {
               if(nodevisible[d.parent_id-1]==0 || nodevisible[d.child_id-1]==0){
               return 0;
@@ -519,7 +556,7 @@ function visualizeit(){
               if(nodevisible[d.parent_id-1]==0 || nodevisible[d.child_id-1]==0){
               return 0;
               }
-              return d.target.y; });
+              return ybrush_scale(d.target.y); });
         // .attr("cx", function(d) { return d.x; })
     }
     

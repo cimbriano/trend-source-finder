@@ -4,6 +4,9 @@ json.tweets @tweets do |tweet|
   json.url tweet_url(tweet, format: :json)
   json.in_reply_chain tweet.in_reply_chain?
   json.in_retweet_chain tweet.in_retweet_chain?
+  json.user_name tweet.user.user_name
+
+  json.type tweet.type_code
 end
 
 json.edges @edges do |edge|

@@ -58,7 +58,7 @@ def make_tweet(user)
     twitter_id: Faker::Number.number(10).to_str, # Twitter's ID for this tweet
     text: Faker::Lorem.sentences(1).first,
     user: user,
-    created_at: rand(date_range)
+    created_at: rand(date_range).to_datetime
   )
 end
 

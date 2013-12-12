@@ -246,6 +246,7 @@ function visualizeit(){
     var parent = [];
     var mark = [];
     var a = new Array(currentdata.tweets.length);
+    var sortable = [];
     var path = new Array(currentdata.tweets.length);
     
     for(var i = 0; i < currentdata.tweets.length; i++) {
@@ -257,8 +258,11 @@ function visualizeit(){
         path[i] = [];
     }
     
+
+    
     for(var i = 0; i < currentdata.edges.length; i++) {
         a[currentdata.edges[i].parent_id] = [];
+        a[currentdata.edges[i].child_id] = [];
         path[currentdata.edges[i].parent_id] = [];
         path[currentdata.edges[i].child_id] = [];
         parent[currentdata.edges[i].parent_id] = -1;
@@ -267,6 +271,28 @@ function visualizeit(){
         parent[currentdata.edges[i].child_id] = currentdata.edges[i].parent_id;
         a[currentdata.edges[i].parent_id].push(currentdata.edges[i].child_id);
     }
+
+    for(var i = 0; i < currentdata.tweets.length; i++) {
+        //console.log(a[i].length);
+        sortable.push([i, a[currentdata.tweets[i].id].length]);
+    }
+    sortable.sort(function(a, b) {return b[1] - a[1];});
+    
+    
+    d3.json(currentdata.tweets[sortable[0][0]].url, function(error, json){
+           // $("#user-details-name").text(json.user.user_name);
+            //alert(json.user.user_name + " " + sortable[0][1]);
+
+            
+    }
+            );
+    
+        //for(var i = 0; i < currentdata.tweets.length; i++) {
+     //   console.log(sortable[i][0] + " " + sortable[i][1]);
+    //}
+    
+    //console.log(sortable[0][0] + " " + sortable[0][1]);
+    //console.log(sortable[1][0] + " " + sortable[1][1]);
     
     function dfs(x) {
         mark[x] = 1;

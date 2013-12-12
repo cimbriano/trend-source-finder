@@ -1,0 +1,20 @@
+<h4 style='background-color:#D8D8D8;'>Top Tweets</h4>
+<div id="top-tweet-list">
+
+    <ul>
+        <% @topTweets.each do |top_tweet| %>
+            <li class='top-tweet-item' data-id=<%= top_tweet.twitter_id %>>
+                <%= content_tag :span, class: 'top-tweet-text' do %>
+                    <%= top_tweet.text %>
+                <% end -%>
+
+                by
+
+                <%= content_tag :span, class: 'top-tweet-user-name' do %>
+                    <%= top_tweet.user.user_name %>
+                <% end -%>
+                
+            </li>
+        <% end %>
+    </ul>
+</div>

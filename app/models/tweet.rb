@@ -19,10 +19,10 @@ class Tweet < ActiveRecord::Base
   has_many :children, through: :edges
 
   def self.top10
-    top_tweet_id_count_pairs = Edge.group('edges.parent_id').count('edges.child_id').sort_by &:first
-    top_tweet_ids = top_tweet_id_count_pairs.last(10).map {|id, count| id}
+    top_tweet_id_count_pairs = Edge.group('edges.parent_id').count('edges.child_id').sort_by &:last
+    top_tweet_ids = top_tweet_id_count_pairs.last(10).reverse.map {|id, count| id}
 
-    Tweet.find(top_tweet_ids)
+    Tweet.includes(:user).find(top_tweet_ids)
   end
 
   # Class Methods

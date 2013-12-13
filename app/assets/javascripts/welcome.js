@@ -448,6 +448,7 @@ function visualizeit(){
 
     var newLinearScale = linearScale;
     drawGraph(newLinearScale,ybrush_scale);
+    force.start();
 
     function brushed() {
       focus_x.domain(brush.empty() ? context_x.domain() : brush.extent());

@@ -457,10 +457,7 @@ function visualizeit(){
       svg.select(".axis").call(xAxis);
       newLinearScale = d3.scale.linear().domain([focus_x.domain()[0]/1000,focus_x.domain()[1]/1000]).range([padding, width - padding]);
 
-      d3.selectAll("line").remove();
-      d3.selectAll("circle").remove();
-
-      drawGraph(newLinearScale,ybrush_scale);
+      force.start();
     }
 
     function ybrushed() {
@@ -470,10 +467,8 @@ function visualizeit(){
         svg.select(".axis").call(xAxis);
         newLinearScale = d3.scale.linear().domain([focus_x.domain()[0]/1000,focus_x.domain()[1]/1000]).range([padding, width - padding]);
         ybrush_scale = d3.scale.linear().domain(ybrush.empty()?[0,height]:ybrush.extent()).range([0,height]);
-        d3.selectAll("line").remove();
-        d3.selectAll("circle").remove();
-        drawGraph(newLinearScale,ybrush_scale);
 
+        force.start();
     }
 
 
@@ -485,7 +480,6 @@ function visualizeit(){
     .theta(10)  // Removes "jiggle"
     .nodes(currentdata.tweets)
     .links(currentdata.edges)
-    .start();
     
     link = link.data(currentdata.edges)
     .enter().append("line")
@@ -519,6 +513,8 @@ function visualizeit(){
     .on('mouseover', mouseover_node)
     .on("click", nodeClick);
 
+
+
   }
     
     function mouseover_node(d){
@@ -530,6 +526,7 @@ function visualizeit(){
     }
     
     function tick() {
+        node.attr("cx", function(d) {return newLinearScale(d.created_at_numeric);})
         node.attr("cy", function(d) { return ybrush_scale(d.y); });
         
         if(singleton==1){

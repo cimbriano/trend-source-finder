@@ -63,6 +63,9 @@ gem "quiet_assets", "~> 1.0.2", group: :development
 # For producing fake data
 gem "faker", "~> 1.2.0"
 
+# For making erd diagram
+gem "rails-erd", "~> 1.1.0", group: :development
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
